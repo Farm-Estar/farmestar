@@ -176,7 +176,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("var path = __webpack_require__(/*! path */ \"path\");\n\nvar webpack = __webpack_require__(/*! webpack */ \"webpack\");\n\nvar HtmlWebPackPlugin = __webpack_require__(/*! html-webpack-plugin */ \"html-webpack-plugin\");\n\nvar WebpackPwaManifest = __webpack_require__(/*! webpack-pwa-manifest */ \"webpack-pwa-manifest\");\n\nvar WorkboxPlugin = __webpack_require__(/*! workbox-webpack-plugin */ \"workbox-webpack-plugin\");\n\nmodule.exports = {\n  entry: {\n    main: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/index.js'],\n    'OneSignalSDKUpdaterWorker': path.resolve('./src/OneSignalSDKUpdaterWorker.js'),\n    'OneSignalSDKWorker': path.resolve('./src/OneSignalSDKWorker.js')\n  },\n  output: {\n    path: path.join(__dirname, 'dist'),\n    publicPath: '/',\n    filename: '[name].js'\n  },\n  mode: 'development',\n  target: 'web',\n  devtool: 'source-map',\n  module: {\n    rules: [{\n      enforce: \"pre\",\n      test: /\\.js$/,\n      exclude: /node_modules/,\n      loader: \"eslint-loader\",\n      options: {\n        emitWarning: true,\n        failOnError: false,\n        failOnWarning: false\n      }\n    }, {\n      test: /\\.(js|jsx)$/,\n      exclude: /node_modules/,\n      use: {\n        loader: \"babel-loader\"\n      }\n    }, {\n      test: /\\.css$/,\n      use: 'css-loader'\n    }, {\n      test: /\\.html$/,\n      use: [{\n        loader: \"html-loader\"\n      }]\n    }, {\n      test: /\\.(png|svg|jpg|gif)$/,\n      use: ['file-loader']\n    }]\n  },\n  plugins: [new HtmlWebPackPlugin({\n    template: \"./src/index.html\",\n    filename: \"./index.html\",\n    excludeChunks: ['server'],\n    favicon: \"./src/favicon.ico\"\n  }), new WorkboxPlugin.GenerateSW({\n    clientsClaim: true,\n    skipWaiting: true\n  }), new webpack.HotModuleReplacementPlugin(), new webpack.NoEmitOnErrorsPlugin(), new WebpackPwaManifest({\n    name: 'App Name',\n    short_name: 'App short Name',\n    description: 'Your Description Here',\n    start_url: '/',\n    background_color: '#ffffff',\n    theme_color: '#ffffff',\n    crossorigin: 'anonymous',\n    //cant be null, use-credentials or anonymous\n    icons: [{\n      src: path.resolve('./src/assets/images/logo.png'),\n      sizes: [96, 128, 192, 256, 384, 512] // multiple sizes\n\n    }, {\n      src: path.resolve('./src/assets/images/large-icon.png'),\n      size: '1024x1024' // you can also use the specifications pattern\n\n    }]\n  })]\n};\n\n//# sourceURL=webpack:///./webpack.dev.config.js?");
+eval("var path = __webpack_require__(/*! path */ \"path\");\n\nvar webpack = __webpack_require__(/*! webpack */ \"webpack\");\n\nvar HtmlWebPackPlugin = __webpack_require__(/*! html-webpack-plugin */ \"html-webpack-plugin\");\n\nvar WebpackPwaManifest = __webpack_require__(/*! webpack-pwa-manifest */ \"webpack-pwa-manifest\");\n\nvar WorkboxPlugin = __webpack_require__(/*! workbox-webpack-plugin */ \"workbox-webpack-plugin\");\n\nvar MiniCssExtractPlugin = __webpack_require__(/*! mini-css-extract-plugin */ \"mini-css-extract-plugin\");\n\nvar OptimizeCSSAssetsPlugin = __webpack_require__(/*! optimize-css-assets-webpack-plugin */ \"optimize-css-assets-webpack-plugin\");\n\nmodule.exports = {\n  entry: {\n    main: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/index.js'],\n    'OneSignalSDKUpdaterWorker': path.resolve('./src/OneSignalSDKUpdaterWorker.js'),\n    'OneSignalSDKWorker': path.resolve('./src/OneSignalSDKWorker.js')\n  },\n  output: {\n    path: path.join(__dirname, 'dist'),\n    publicPath: '/',\n    filename: '[name].js'\n  },\n  resolve: {\n    alias: {\n      Assets: path.resolve(__dirname, 'src/assets/images/')\n    }\n  },\n  mode: 'development',\n  target: 'web',\n  devtool: 'source-map',\n  // Webpack 4 does not have a CSS minifier, although\n  // Webpack 5 will likely come with one\n  optimization: {\n    splitChunks: {\n      chunks: 'async',\n      minSize: 30000,\n      maxSize: 0,\n      minChunks: 1,\n      maxAsyncRequests: 5,\n      maxInitialRequests: 3,\n      automaticNameDelimiter: '~',\n      automaticNameMaxLength: 30,\n      name: true,\n      cacheGroups: {\n        vendors: {\n          test: /[\\\\/]node_modules[\\\\/]/,\n          priority: -10\n        },\n        default: {\n          minChunks: 2,\n          priority: -20,\n          reuseExistingChunk: true\n        }\n      }\n    },\n    minimizer: [new OptimizeCSSAssetsPlugin({})]\n  },\n  module: {\n    rules: [{\n      enforce: \"pre\",\n      test: /\\.js$/,\n      exclude: /node_modules/,\n      loader: \"eslint-loader\",\n      options: {\n        emitWarning: true,\n        failOnError: false,\n        failOnWarning: false\n      }\n    }, {\n      test: /\\.(js|jsx)$/,\n      exclude: /node_modules/,\n      use: {\n        loader: \"babel-loader\"\n      }\n    }, {\n      test: /\\.css$/,\n      use: [MiniCssExtractPlugin.loader, 'css-loader']\n    }, {\n      test: /\\.html$/,\n      use: [{\n        loader: \"html-loader\"\n      }]\n    }, {\n      test: /\\.(png|svg|jpg|gif)$/,\n      use: ['file-loader']\n    }]\n  },\n  plugins: [new HtmlWebPackPlugin({\n    template: \"./src/index.html\",\n    filename: \"./index.html\",\n    excludeChunks: ['server'],\n    favicon: \"./src/favicon.ico\"\n  }), new WorkboxPlugin.GenerateSW({\n    clientsClaim: true,\n    skipWaiting: true\n  }), new MiniCssExtractPlugin({\n    filename: \"[name].css\",\n    chunkFilename: \"[id].css\"\n  }), new webpack.HotModuleReplacementPlugin(), new webpack.NoEmitOnErrorsPlugin(), new WebpackPwaManifest({\n    name: 'Farmestar',\n    short_name: 'Farmestar',\n    description: 'Bringing farmers and consumers together.',\n    start_url: '/',\n    background_color: '#ffffff',\n    theme_color: '#ffffff',\n    crossorigin: 'anonymous',\n    //cant be null, use-credentials or anonymous\n    icons: [{\n      src: path.resolve('./src/assets/images/logo.png'),\n      sizes: [96, 128, 192, 256, 384, 512] // multiple sizes\n\n    }, {\n      src: path.resolve('./src/assets/images/large-icon.png'),\n      size: '1024x1024' // you can also use the specifications pattern\n\n    }]\n  })]\n};\n\n//# sourceURL=webpack:///./webpack.dev.config.js?");
 
 /***/ }),
 
@@ -257,6 +257,17 @@ eval("module.exports = require(\"jsonwebtoken\");\n\n//# sourceURL=webpack:///ex
 
 /***/ }),
 
+/***/ "mini-css-extract-plugin":
+/*!******************************************!*\
+  !*** external "mini-css-extract-plugin" ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"mini-css-extract-plugin\");\n\n//# sourceURL=webpack:///external_%22mini-css-extract-plugin%22?");
+
+/***/ }),
+
 /***/ "mongoose":
 /*!***************************!*\
   !*** external "mongoose" ***!
@@ -276,6 +287,17 @@ eval("module.exports = require(\"mongoose\");\n\n//# sourceURL=webpack:///extern
 /***/ (function(module, exports) {
 
 eval("module.exports = require(\"onesignal-node\");\n\n//# sourceURL=webpack:///external_%22onesignal-node%22?");
+
+/***/ }),
+
+/***/ "optimize-css-assets-webpack-plugin":
+/*!*****************************************************!*\
+  !*** external "optimize-css-assets-webpack-plugin" ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"optimize-css-assets-webpack-plugin\");\n\n//# sourceURL=webpack:///external_%22optimize-css-assets-webpack-plugin%22?");
 
 /***/ }),
 

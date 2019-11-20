@@ -1,29 +1,54 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
+import { createMuiTheme } from '@material-ui/core/styles'
+import { ThemeProvider } from '@material-ui/styles'
 import Button from '@material-ui/core/Button'
+import blue from '@material-ui/core/colors/blue'
 
-export default class landing extends Component {
-    render() {
-        return (
-            <div className="container valign-wrapper">
-                <div className="row">
-                    <div className="col s12 center-align">
-                        <h4>This will be our application homepages</h4>
-                        <p className="flow-text grey-text text-darken-1">
-                            If you are a returning user please login below, if you are a new user please register.
-                        </p>
-                        <br />
-                        <Button varient="contained" color="primary">
-                            <Link to="/register">Register</Link>
-                        </Button>
-                        <Button varient="contained" color="primary">
-                            <Link to="/login">Log In</Link>
-                        </Button>
-                    </div>
+
+const theme = createMuiTheme({
+    palette: {
+        primary: blue
+    }
+})
+
+function landing() {
+    return (
+        <ThemeProvider theme={theme}>
+            <div className="button-container">
+                <div className="login-button-container">
+                    <Button 
+                        component={Link}
+                        style={{
+                            width: "85%",
+                            height: "48px",
+                            borderRadius: "3px",
+                            letterSpacing: "1.5px"
+                        }}
+                        to="/login"
+                        variant="contained"
+                        color="primary">
+                        LOG IN
+                    </Button>
+                </div>
+                <div className="signup-button-container">
+                    <Button
+                        component={Link}
+                        style={{
+                            width: "85%",
+                            height: "48px",
+                            borderRadius: "3px",
+                            letterSpacing: "1.5px"
+                        }}
+                        to="/register"
+                        variant="contained"
+                        color="primary">
+                        SIGN UP
+                    </Button>
                 </div>
             </div>
-        )
-    }
+        </ThemeProvider>
+    )
 }
 
 export { landing }

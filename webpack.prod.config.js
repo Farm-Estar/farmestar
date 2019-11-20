@@ -16,6 +16,11 @@ module.exports = {
     publicPath: '/',
     filename: '[name].js'
   },
+  resolve: {
+    alias: {
+      Assets: path.resolve(__dirname, 'src/assets/images/')
+    }
+  },
   target: 'web',
   devtool: 'source-map',
   // Webpack 4 does not have a CSS minifier, although
@@ -78,6 +83,7 @@ module.exports = {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
+      { test: /\.(png|svg|jpg|gif)$/, use: ['file-loader'] }
     ]
   },
   plugins: [
@@ -95,9 +101,9 @@ module.exports = {
       chunkFilename: "[id].css"
     }),
     new WebpackPwaManifest({
-      name: 'App Name',
-      short_name: 'App Short Name',
-      description: 'Your Description Here',
+      name: 'Farmestar',
+      short_name: 'Farmestar',
+      description: 'Bringing farmers and consumers together.',
       start_url: '/',
       background_color: '#ffffff',
       theme_color: '#ffffff',

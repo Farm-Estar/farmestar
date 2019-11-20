@@ -2,9 +2,6 @@ import React, { } from 'react';
 import './App.css';
 import FarmLaunch from '../../assets/images/Farm Launch.png'
 
-//Bit Components
-import HeroBanner from '@bit/limio.landing.hero-banner'
-
 //Component Imports
 //Using the "layout" folder because this is root app
 import { header as Header } from '../layout/header'

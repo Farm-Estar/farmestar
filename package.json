@@ -6,8 +6,6 @@
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
-    "@bit/grommet.grommet.responsive-context": "^2.6.5",
-    "@bit/limio.landing.hero-banner": "0.0.12",
     "@material-ui/core": "^4.6.0",
     "@material-ui/icons": "^4.5.1",
     "axios": "^0.19.0",

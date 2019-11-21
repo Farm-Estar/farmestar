@@ -10,7 +10,7 @@ import { footer as Footer } from '../layout/footer'
 
 function App() {
   return (
-    <div className="App">
+    <div className="container">
       {/* Header */}
       <div className="header-container">
         <Header />

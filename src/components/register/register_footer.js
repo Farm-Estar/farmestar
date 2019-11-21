@@ -1,17 +1,17 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
-function LoginFooter() {
+function SignupFooter() {
     return (
         <div>
-            <span className="footer_text">
-                Still need an account?
+            <span className="signup_footer_text">
+                Already have an account?
             </span>
             <div className="container footer">
-            <Link to="/register">SIGN UP</Link>
+                <Link to="/login">LOGIN</Link>
             </div>
         </div>
     )
 }
 
-export { LoginFooter }
+export default SignupFooter 

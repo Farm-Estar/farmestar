@@ -142,7 +142,7 @@ export class login extends Component {
                                     invalid: errors.email || errors.emailnotfound
                                 })}
                             />
-                            <span style={{color:theme.palette.error.main}}>
+                            <span style={{ color: theme.palette.error.main }}>
                                 {errors.email}
                                 {errors.emailnotfound}
                             </span>
@@ -163,11 +163,11 @@ export class login extends Component {
                                         </InputAdornment>
                                     )
                                 }}
-                                className={classnames("password_textfield", {
+                                className={classnames("login_textfield", {
                                     invalid: errors.password || errors.passwordincorrect
                                 })}
                             />
-                            <span style={{color: theme.palette.error.main}}>
+                            <span style={{ color: theme.palette.error.main }}>
                                 {errors.password}
                                 {errors.passwordincorrect}
                             </span>
@@ -192,6 +192,7 @@ export class login extends Component {
                     </form>
                     <div className="container">
                         <Button
+                            component={Link}
                             to="/dashboard"
                             style={{
                                 width: "90%",
@@ -199,7 +200,7 @@ export class login extends Component {
                                 borderRadius: "3px",
                                 letterSpacing: "1.5px",
                                 marginTop: "1rem",
-                                color:"grey"
+                                color: "grey"
                             }}
                         >Login as Guest</Button>
                     </div>

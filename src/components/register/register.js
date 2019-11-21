@@ -3,24 +3,11 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import { makeStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import propTypes from 'prop-types'
 import { registerUser } from '../../actions/authActions'
 import classnames from 'classnames'
 import { withRouter } from 'react-router-dom'
-
-// const useStyles = makeStyles(theme => ({
-//     container: {
-//       display: 'flex',
-//       flexWrap: 'wrap',
-//     },
-//     textField: {
-//       marginLeft: theme.spacing(1),
-//       marginRight: theme.spacing(1),
-//       width: 200,
-//     },
-//   }));
 
 
 class register extends React.Component {
@@ -69,7 +56,6 @@ class register extends React.Component {
 
     render() {
         const { errors } = this.state;
-        // const classes = useStyles()
 
         return (
             <div className="container">

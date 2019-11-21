@@ -38,15 +38,9 @@ if (localStorage.jwtToken) {
     }
 }
 
-//Material UI Theme
-const theme = {
-    color: '#2699FB',
-};
-
 
 const routing = (
     <Provider store={store}>
-        <ThemeProvider theme={theme}>
             <Router>
                 <div>
                     <Switch>
@@ -58,8 +52,7 @@ const routing = (
                         <Route component={NotFound} />
                     </Switch>
                 </div>
-            </Router></ThemeProvider>
-
+            </Router>
     </Provider>
 )
 

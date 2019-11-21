@@ -41,18 +41,18 @@ if (localStorage.jwtToken) {
 
 const routing = (
     <Provider store={store}>
-            <Router>
-                <div>
-                    <Switch>
-                        <Route exact path="/" component={App} />
-                        <Route exact path="/login" component={login} />
-                        <Route exact path="/register" component={register} />
-                        <Route exact path="/dashboard" component={dashboard} />
-                        <PrivateRoute exact path="/dashboard" component={dashboard} />
-                        <Route component={NotFound} />
-                    </Switch>
-                </div>
-            </Router>
+        <Router>
+            <div>
+                <Switch>
+                    <Route exact path="/" component={App} />
+                    <Route exact path="/login" component={login} />
+                    <Route exact path="/register" component={register} />
+                    <Route exact path="/dashboard" component={dashboard} />
+                    <PrivateRoute exact path="/dashboard" component={dashboard} />
+                    <Route component={NotFound} />
+                </Switch>
+            </div>
+        </Router>
     </Provider>
 )
 

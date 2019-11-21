@@ -13,7 +13,7 @@ const theme = createMuiTheme({
     }
 })
 
-function LoginHeader() {
+function SignupHeader() {
     return (
         <ThemeProvider theme={theme}>
             <div className="backbutton">
@@ -27,15 +27,15 @@ function LoginHeader() {
                         marginTop: "1rem"
                     }}
                 >
-                    <ArrowBackIcon color="primary" fontSize="large"/>
+                    <ArrowBackIcon color="primary" fontSize="large" />
                 </Button>
             </div>
-            <div className="container login_header">
-                LOGIN
+            <div className="container signup_header">
+                SIGNUP
             </div>
 
         </ThemeProvider>
     )
 }
 
-export { LoginHeader }
+export default SignupHeader

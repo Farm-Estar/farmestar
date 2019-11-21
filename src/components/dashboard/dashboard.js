@@ -27,7 +27,7 @@ class dashboard extends Component {
               <b>Hey there,</b> {user.name}
               <p className="flow-text grey-text text-darken-1">
                 You are logged into{" "}
-                <span style={{ fontFamily: "monospace" }}>app name</span> app 👏
+                <span style={{ fontFamily: "monospace" }}>Farm Estar</span> app 👏
               </p>
             </h4>
             <button

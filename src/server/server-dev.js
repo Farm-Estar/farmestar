@@ -55,12 +55,15 @@ app.listen(PORT, () => {
     console.log(`***Server running on Port:${PORT}***`)
 })
 
+//Igedla API Routes
+app.use('/api/users', users)
+
+
 app.all('*', (req, res) => {
     res.sendFile('/index.html', { root: __dirname })
 })
 
-//Igedla API Routes
-app.use('/api/users', users)
+
 
 //OneSignal Test Function
 function testNotification() {

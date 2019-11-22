@@ -17,15 +17,13 @@ const _appAuthKey = require("../config/keys").appAuthKey;
 const _appId = require("../config/keys").appId;
 
 //Setup Database
-mongoose.connect(mongoURI, { useNewUrlParser: true, autoIndex: false, useUnifiedTopology: true})
-.then(() => console.log("MongoDB Successfully Connected"))
-.catch(err => console.log(err));
+mongoose.connect(mongoURI, { useNewUrlParser: true, autoIndex: false, useUnifiedTopology: true })
+    .then(() => console.log("MongoDB Successfully Connected"))
+    .catch(err => console.log(err));
 
-const app = express(),
-            DIST_DIR = __dirname,
-            HTML_FILE = path.join(DIST_DIR, 'index.html')
+const app = express()
 
-app.use(express.static(DIST_DIR))
+app.use(express.static(__dirname))
 
 //Cookie Parser Middleware
 app.use(cookieParser())
@@ -38,11 +36,11 @@ app.use(bodyParser())
 //OneSignal Client
 var notificationClient = new OneSignal.Client({
     userAuthKey: _userAuthKey,
-    app: { appAuthKey: _appAuthKey, appId: _appId}
+    app: { appAuthKey: _appAuthKey, appId: _appId }
 })
 
-app.get('*', (req, res) => {
-    res.sendFile(HTML_FILE)
+app.all('*', (req, res) => {
+    res.sendFile('/index.html', { root: __dirname })
 })
 
 const PORT = process.env.PORT || 8080
@@ -64,10 +62,10 @@ function testNotification() {
     })
 
     notificationClient.sendNotification(test)
-    .then((response) => {
-        console.log(response.data, response.httpResponse.statusCode)
-    })
-    .catch((err) => {
-        console.log('Something went wrong...', err)
-    })
+        .then((response) => {
+            console.log(response.data, response.httpResponse.statusCode)
+        })
+        .catch((err) => {
+            console.log('Something went wrong...', err)
+        })
 }

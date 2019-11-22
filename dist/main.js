@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "75e2e756b09366661653";
+/******/ 	var hotCurrentHash = "5619a07414e50813357d";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -63663,7 +63663,7 @@ function (_Component) {
         style: {
           fontFamily: "monospace"
         }
-      }, "app name"), " app \uD83D\uDC4F")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "Farm Estar"), " app \uD83D\uDC4F")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         style: {
           width: "150px",
           borderRadius: "3px",
@@ -64128,6 +64128,7 @@ function (_Component) {
       }, "CONTINUE"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        component: react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"],
         to: "/dashboard",
         style: {
           width: "90%",
@@ -64341,6 +64342,17 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /***/ }),
 
+/***/ "./src/components/register/register.css":
+/*!**********************************************!*\
+  !*** ./src/components/register/register.css ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "./src/components/register/register.js":
 /*!*********************************************!*\
   !*** ./src/components/register/register.js ***!
@@ -64352,26 +64364,28 @@ var mapStateToProps = function mapStateToProps(state) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
-/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/index.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _actions_authActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions/authActions */ "./src/actions/authActions.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/styles */ "./node_modules/@material-ui/styles/esm/index.js");
-/* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/InputAdornment */ "./node_modules/@material-ui/core/esm/InputAdornment/index.js");
-/* harmony import */ var _material_ui_icons_Person__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/icons/Person */ "./node_modules/@material-ui/icons/Person.js");
-/* harmony import */ var _material_ui_icons_Person__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Person__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/icons/Lock */ "./node_modules/@material-ui/icons/Lock.js");
-/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/icons/Email */ "./node_modules/@material-ui/icons/Email.js");
-/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _register_header__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./register_header */ "./src/components/register/register_header.js");
-/* harmony import */ var _register_footer__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./register_footer */ "./src/components/register/register_footer.js");
+/* harmony import */ var _register_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./register.css */ "./src/components/register/register.css");
+/* harmony import */ var _register_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_register_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _actions_authActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../actions/authActions */ "./src/actions/authActions.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/styles */ "./node_modules/@material-ui/styles/esm/index.js");
+/* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/InputAdornment */ "./node_modules/@material-ui/core/esm/InputAdornment/index.js");
+/* harmony import */ var _material_ui_icons_Person__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/icons/Person */ "./node_modules/@material-ui/icons/Person.js");
+/* harmony import */ var _material_ui_icons_Person__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Person__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/icons/Lock */ "./node_modules/@material-ui/icons/Lock.js");
+/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/icons/Email */ "./node_modules/@material-ui/icons/Email.js");
+/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _register_header__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./register_header */ "./src/components/register/register_header.js");
+/* harmony import */ var _register_footer__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./register_footer */ "./src/components/register/register_footer.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -64407,11 +64421,12 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
  //Import Components
 
 
 
-var theme = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_8__["createMuiTheme"])({
+var theme = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_9__["createMuiTheme"])({
   palette: {
     common: {
       black: 'rgba(38, 153, 251, 1)',
@@ -64521,16 +64536,14 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var errors = this.state.errors;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_styles__WEBPACK_IMPORTED_MODULE_9__["ThemeProvider"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_styles__WEBPACK_IMPORTED_MODULE_10__["ThemeProvider"], {
         theme: theme
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_register_header__WEBPACK_IMPORTED_MODULE_14__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_register_header__WEBPACK_IMPORTED_MODULE_15__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         noValidate: true,
         onSubmit: this.onSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "input-field col s12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__["default"], {
         required: true,
         onChange: this.onChange,
         value: this.state.name,
@@ -64539,20 +64552,18 @@ function (_React$Component) {
         margin: "normal",
         label: "Name",
         InputProps: {
-          startAdornment: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          startAdornment: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_11__["default"], {
             position: "start"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Person__WEBPACK_IMPORTED_MODULE_11___default.a, null))
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Person__WEBPACK_IMPORTED_MODULE_12___default.a, null))
         },
-        className: classnames__WEBPACK_IMPORTED_MODULE_7___default()("signup_textfield", {
+        className: classnames__WEBPACK_IMPORTED_MODULE_8___default()("signup_textfield", {
           invalid: errors.name
         })
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         style: {
           color: theme.palette.error.main
         }
-      }, errors.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "input-field col s12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, errors.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__["default"], {
         required: true,
         onChange: this.onChange,
         value: this.state.email,
@@ -64561,20 +64572,18 @@ function (_React$Component) {
         margin: "normal",
         label: "Email",
         InputProps: {
-          startAdornment: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          startAdornment: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_11__["default"], {
             position: "start"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_13___default.a, null))
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_14___default.a, null))
         },
-        className: classnames__WEBPACK_IMPORTED_MODULE_7___default()("signup_textfield", {
+        className: classnames__WEBPACK_IMPORTED_MODULE_8___default()("signup_textfield", {
           invalid: errors.email
         })
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         style: {
           color: theme.palette.error.main
         }
-      }, errors.email)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "input-field col s12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, errors.email)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__["default"], {
         required: true,
         onChange: this.onChange,
         value: this.state.password,
@@ -64584,20 +64593,18 @@ function (_React$Component) {
         margin: "normal",
         label: "Password",
         InputProps: {
-          startAdornment: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          startAdornment: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_11__["default"], {
             position: "start"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_12___default.a, null))
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_13___default.a, null))
         },
-        className: classnames__WEBPACK_IMPORTED_MODULE_7___default()("signup_textfield", {
+        className: classnames__WEBPACK_IMPORTED_MODULE_8___default()("signup_textfield", {
           invalid: errors.password
         })
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         style: {
           color: theme.palette.error.main
         }
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "input-field col s12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__["default"], {
         required: true,
         onChange: this.onChange,
         value: this.state.password2,
@@ -64607,11 +64614,11 @@ function (_React$Component) {
         margin: "normal",
         label: "Confirm Password",
         InputProps: {
-          startAdornment: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          startAdornment: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_11__["default"], {
             position: "start"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_12___default.a, null))
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_13___default.a, null))
         },
-        className: classnames__WEBPACK_IMPORTED_MODULE_7___default()("signup_textfield", {
+        className: classnames__WEBPACK_IMPORTED_MODULE_8___default()("signup_textfield", {
           invalid: errors.password2
         })
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -64619,13 +64626,14 @@ function (_React$Component) {
           color: theme.palette.error.main
         }
       }, errors.password2)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col s12",
+        className: "signup_button",
         style: {
           paddingLeft: "11.250px"
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
         style: {
           width: "90%",
+          height: "48pt",
           borderRadius: "3px",
           letterSpacing: "1.5px",
           marginTop: "1rem"
@@ -64633,7 +64641,7 @@ function (_React$Component) {
         type: "submit",
         variant: "contained",
         color: "primary"
-      }, "Sign up")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_register_footer__WEBPACK_IMPORTED_MODULE_15__["default"], null));
+      }, "CONTINUE")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_register_footer__WEBPACK_IMPORTED_MODULE_16__["default"], null));
     }
   }]);
 
@@ -64641,9 +64649,9 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 register.protoTypes = {
-  registerUser: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func.isRequired,
-  auth: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.object.isRequired,
-  errors: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.object.isRequired
+  registerUser: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
+  auth: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.object.isRequired,
+  errors: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.object.isRequired
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -64653,9 +64661,9 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps, {
-  registerUser: _actions_authActions__WEBPACK_IMPORTED_MODULE_6__["registerUser"]
-})(Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(register))); // export default withRouter(connect(mapStateToProps, {registerUser})(register))
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(mapStateToProps, {
+  registerUser: _actions_authActions__WEBPACK_IMPORTED_MODULE_7__["registerUser"]
+})(Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(register)));
 
 /***/ }),
 
@@ -64663,12 +64671,11 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!****************************************************!*\
   !*** ./src/components/register/register_footer.js ***!
   \****************************************************/
-/*! exports provided: SignupFooter */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignupFooter", function() { return SignupFooter; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
@@ -64677,7 +64684,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function SignupFooter() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "footer_text"
+    className: "signup_footer_text"
   }, "Already have an account?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container footer"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -64685,7 +64692,7 @@ function SignupFooter() {
   }, "LOGIN")));
 }
 
-
+/* harmony default export */ __webpack_exports__["default"] = (SignupFooter);
 
 /***/ }),
 
@@ -64693,12 +64700,11 @@ function SignupFooter() {
 /*!****************************************************!*\
   !*** ./src/components/register/register_header.js ***!
   \****************************************************/
-/*! exports provided: SignupHeader */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignupHeader", function() { return SignupHeader; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
@@ -64744,7 +64750,7 @@ function SignupHeader() {
   }, "SIGNUP"));
 }
 
-
+/* harmony default export */ __webpack_exports__["default"] = (SignupHeader);
 
 /***/ }),
 

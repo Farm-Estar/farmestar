@@ -2,7 +2,7 @@ import path from 'path'
 import express from 'express'
 import bodyParser from 'body-parser'
 import webpack from 'webpack'
-import mongoose, { mongo } from 'mongoose'
+import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
 import OneSignal from 'onesignal-node'
 import webpackDevMiddleware from 'webpack-dev-middleware'
@@ -33,9 +33,8 @@ var notificationClient = new OneSignal.Client({
 
 
 const app = express(),
-            DIST_DIR = __dirname,
-            HTML_FILE = path.join(DIST_DIR, 'index.html'),
-            compiler = webpack(config)
+           compiler = webpack(config) 
+          
 //Development Only Middleware
 app.use(webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath
@@ -56,15 +55,8 @@ app.listen(PORT, () => {
     console.log(`***Server running on Port:${PORT}***`)
 })
 
-app.get('*', (req, res, next) => {
-    compiler.outputFileSystem.readFile(HTML_FILE, (err, result) => {
-        if(err) {
-            return next(err)
-        }
-        res.set('content-type', 'text/html')
-        res.send(result)
-        res.end()
-    })
+app.all('*', (req, res) => {
+    res.sendFile('/index.html', { root: __dirname })
 })
 
 //Igedla API Routes

@@ -5,7 +5,8 @@ import jwt_decode from 'jwt-decode'
 import {
     GET_ERRORS,
     SET_CURRENT_USER,
-    USER_LOADING
+    USER_LOADING,
+    UPDATE_PASSWORD
 } from './types'
 
 //Register User
@@ -20,6 +21,21 @@ export const registerUser = (userData, history) => dispatch => {
             })
         )
 }
+
+//Update Password
+export const updatePassword = (userData, history) => dispatch => {
+    axios
+        .post("/api/users/updatePassword", userData)
+        .then(res => history.push("/login"))
+        .catch(err =>
+            dispatch({
+                type: UPDATE_PASSWORD,
+                payload: err.response.data
+            }))
+}
+
+//Forgot Password
+
 
 //Login
 export const loginUser = userData => dispatch => {

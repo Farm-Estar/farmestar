@@ -19,24 +19,24 @@ import NotFound from './components/notfound/notfound';
 import PrivateRoute from './components/private-route/private-route'
 
 //Check to keep user logged in
-// if (localStorage.jwtToken) {
-//     //Set Auth Header
-//     const token = localStorage.jwtToken
-//     setAuthToken(token)
-//     //Decode token
-//     const decoded = jwt_decode(token)
-//     //Set User && isAuthenticated
-//     store.dispatch(setCurrentUser(decoded))
+if (localStorage.jwtToken) {
+    //Set Auth Header
+    const token = localStorage.jwtToken
+    setAuthToken(token)
+    //Decode token
+    const decoded = jwt_decode(token)
+    //Set User && isAuthenticated
+    store.dispatch(setCurrentUser(decoded))
 
-//     //Check for expired token
-//     const currentTime = Date.now() / 1000
-//     if (decoded.exp < currentTime) {
-//         //logout user
-//         store.dispatch(logout())
-//         //redirect
-//         window.location.href = "./login"
-//     }
-// }
+    //Check for expired token
+    const currentTime = Date.now() / 1000
+    if (decoded.exp < currentTime) {
+        //logout user
+        store.dispatch(logout())
+        //redirect
+        window.location.href = "./login"
+    }
+}
 
 
 const routing = (

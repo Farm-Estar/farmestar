@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "5619a07414e50813357d";
+/******/ 	var hotCurrentHash = "e8975c58a8ec73cb4fdc";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -63393,12 +63393,13 @@ module.exports = function(module) {
 /*!************************************!*\
   !*** ./src/actions/authActions.js ***!
   \************************************/
-/*! exports provided: registerUser, loginUser, setCurrentUser, setUserLoading, logout */
+/*! exports provided: registerUser, updatePassword, loginUser, setCurrentUser, setUserLoading, logout */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerUser", function() { return registerUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updatePassword", function() { return updatePassword; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loginUser", function() { return loginUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCurrentUser", function() { return setCurrentUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUserLoading", function() { return setUserLoading; });
@@ -63425,7 +63426,21 @@ var registerUser = function registerUser(userData, history) {
       });
     });
   };
-}; //Login
+}; //Update Password
+
+var updatePassword = function updatePassword(userData, history) {
+  return function (dispatch) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/users/updatePassword", userData).then(function (res) {
+      return history.push("/login");
+    }).catch(function (err) {
+      return dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_3__["UPDATE_PASSWORD"],
+        payload: err.response.data
+      });
+    });
+  };
+}; //Forgot Password
+//Login
 
 var loginUser = function loginUser(userData) {
   return function (dispatch) {
@@ -63478,7 +63493,7 @@ var logout = function logout(history) {
 /*!******************************!*\
   !*** ./src/actions/types.js ***!
   \******************************/
-/*! exports provided: GET_ERRORS, USER_LOADING, SET_CURRENT_USER */
+/*! exports provided: GET_ERRORS, USER_LOADING, SET_CURRENT_USER, UPDATE_PASSWORD */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63486,9 +63501,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ERRORS", function() { return GET_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_LOADING", function() { return USER_LOADING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_CURRENT_USER", function() { return SET_CURRENT_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_PASSWORD", function() { return UPDATE_PASSWORD; });
 var GET_ERRORS = "GET_ERRORS";
 var USER_LOADING = "USER_LOADING";
 var SET_CURRENT_USER = "SET_CURRENT_USER";
+var UPDATE_PASSWORD = "UPDATE_PASSWORD";
 
 /***/ }),
 

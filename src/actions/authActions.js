@@ -6,7 +6,8 @@ import {
     GET_ERRORS,
     SET_CURRENT_USER,
     USER_LOADING,
-    UPDATE_PASSWORD
+    UPDATE_PASSWORD,
+    FORGOT_PASSWORD
 } from './types'
 
 //Register User
@@ -35,7 +36,16 @@ export const updatePassword = (userData, history) => dispatch => {
 }
 
 //Forgot Password
-
+export const forgotPasswordPerform = (userData, history) => dispatch => {
+    axios
+        .post("/api/users/forgotPassword", userData)
+        .then(res => history.push("/login"))
+        .catch(err =>
+            dispatch({
+                type: FORGOT_PASSWORD,
+                payload: err.response.data
+            }))
+}
 
 //Login
 export const loginUser = userData => dispatch => {

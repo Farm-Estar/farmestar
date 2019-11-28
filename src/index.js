@@ -15,6 +15,7 @@ import App from './components/app/App';
 import login from './components/login/login';
 import register from './components/register/register';
 import dashboard from './components/dashboard/dashboard'
+import forgotPassword from './components/forgot_password/forgot_password'
 import NotFound from './components/notfound/notfound';
 import PrivateRoute from './components/private-route/private-route'
 
@@ -48,6 +49,7 @@ const routing = (
                     <Route exact path="/login" component={login} />
                     <Route exact path="/register" component={register} />
                     <Route exact path="/dashboard" component={dashboard} />
+                    <Route exact path="/forgotPassword" component={forgotPassword} />
                     <PrivateRoute exact path="/dashboard" component={dashboard} />
                     <Route component={NotFound} />
                 </Switch>

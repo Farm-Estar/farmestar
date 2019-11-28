@@ -25,11 +25,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/favicon.ico"
   },
   {
-    "revision": "2a3ed9f75ce3f0581da6",
+    "revision": "41f72a3ef43254c8eb06",
     "url": "/main.css"
   },
   {
-    "revision": "2a3ed9f75ce3f0581da6",
+    "revision": "41f72a3ef43254c8eb06",
     "url": "/main.js"
   }
 ]);

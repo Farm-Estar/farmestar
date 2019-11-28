@@ -190,7 +190,7 @@ export class login extends Component {
                             >CONTINUE</Button>
                         </div>
                     </form>
-                    <div className="container">
+                    <div>
                         <Button
                             component={Link}
                             to="/dashboard"

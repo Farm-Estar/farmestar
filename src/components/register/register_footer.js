@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 
 function SignupFooter() {
     return (
-        <div>
-            <span className="signup_footer_text">
+        <div className="footer-container">
+            <div className="footer_about_text">
                 Already have an account?
-            </span>
-            <div className="container footer">
-                <Link to="/login">LOGIN</Link>
+            </div>
+            <div className="footer_action">
+                <div className="footer_action_text">
+                    <Link to="/register">LOGIN</Link>
+                </div>
             </div>
         </div>
     )

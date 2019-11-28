@@ -6,6 +6,7 @@ import keys from '../../config/keys'
 //Validation
 import { validateRegistrationInput } from '../../validation/register'
 import { validateLoginInput } from '../../validation/login'
+import { validateForgotPasswordEmail } from '../../validation/forgot_password'
 
 //Model
 import { User } from '../../models/user'
@@ -98,6 +99,30 @@ users.post("/login", (req, res) => {
                 .json({ passwordincorrect: "Password incorrect" })
             }
         })
+    })
+})
+
+// @route POST api/users/forgotPassword
+// @desc Request a token to reset password
+// @access Public
+users.post("/forgotPassword", (req, res) => {
+    const {errors, isValid} = validateForgotPasswordEmail(req.body)
+
+    //Check Validation
+    if (!isValid) {
+        return res.status(400).json(errors)
+    }
+
+    //Check User Exists
+    User.findOne({email: req.body.email})
+    .then(user => {
+        if (user) {
+            //User True, Handle Password Reset
+            return res.status(400).json({email: "Hit Sender"})
+        } else {
+            //User Error
+            return res.status(400).json({email: "Email does not exist"})
+        }
     })
 })
 

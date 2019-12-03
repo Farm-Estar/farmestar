@@ -14,6 +14,9 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import LockIcon from '@material-ui/icons/Lock';
 import EmailIcon from '@material-ui/icons/Email';
 
+//Import Components
+import UpdatePasswordHeader from './update_password_header'
+
 
 const theme = createMuiTheme({
     palette: {
@@ -122,7 +125,9 @@ class UpdatePassword extends Component {
         let updatePasswordBlock
 
         if (this.state.token != "") {
-           updatePasswordBlock = <ThemeProvider theme={theme}>
+           updatePasswordBlock = 
+           <ThemeProvider theme={theme}>
+               <UpdatePasswordHeader />
             <div className="container">
                 <form noValidate onSubmit={this.onSubmit}>
                     <div>
@@ -205,7 +210,7 @@ class UpdatePassword extends Component {
             </div>
         </ThemeProvider>
         }else {
-          updatePasswordBlock = <p>The verification token provided in this email does not match one in our database. This can be caused from the token expiring. Please navigate back to forgot password in Farm Estar and request a new email. Thank you!</p>
+          updatePasswordBlock = <div><UpdatePasswordHeader /><p>The verification token provided in this email does not match one in our database. This can be caused from the token expiring. Please navigate back to forgot password in Farm Estar and request a new email. Thank you!</p></div>
         }
         return (updatePasswordBlock)
     }

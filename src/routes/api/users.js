@@ -9,7 +9,7 @@ import keys from '../../config/keys'
 //Validation
 import { validateRegistrationInput } from '../../validation/register'
 import { validateLoginInput } from '../../validation/login'
-import { validateForgotPassword } from '../../validation/forgot_password'
+// import { validateForgotPassword } from '../../validation/forgot_password'
 
 //Model
 import { User } from '../../models/user'

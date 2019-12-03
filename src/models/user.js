@@ -5,6 +5,10 @@ const userShema = new mongoose.Schema({
         type: String,
         required: true
     },
+    lastName: {
+        type: String,
+        required: false
+    },
     email: {
         type: String,
         required: true
@@ -12,6 +16,11 @@ const userShema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    isFarmer: {
+        type: String,
+        required: true,
+        default: false
     },
     date: {
         type: Date,

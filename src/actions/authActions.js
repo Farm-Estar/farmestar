@@ -5,10 +5,9 @@ import jwt_decode from 'jwt-decode'
 import {
     GET_ERRORS,
     SET_CURRENT_USER,
-    USER_LOADING,
-    UPDATE_PASSWORD,
-    FORGOT_PASSWORD
+    USER_LOADING
 } from './types'
+import { get } from 'http'
 
 //Register User
 export const registerUser = (userData, history) => dispatch => {
@@ -23,14 +22,28 @@ export const registerUser = (userData, history) => dispatch => {
         )
 }
 
+//Register Farmer
+export const registerFarmer = (userData, history) => dispatch => {
+    axios
+        .post("/api/users/register", userData)
+        .then(res => history.push("/addFarm"))
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        )
+}
+
 //Update Password
 export const updatePassword = (userData, history) => dispatch => {
+    console.log("Call Data: " + toString(userData))
     axios
         .post("/api/users/updatePassword", userData)
         .then(res => history.push("/login"))
         .catch(err =>
             dispatch({
-                type: UPDATE_PASSWORD,
+                type: GET_ERRORS,
                 payload: err.response.data
             }))
 }
@@ -42,7 +55,7 @@ export const forgotPasswordPerform = (userData, history) => dispatch => {
         .then(res => history.push("/login"))
         .catch(err =>
             dispatch({
-                type: FORGOT_PASSWORD,
+                type: GET_ERRORS,
                 payload: err.response.data
             }))
 }

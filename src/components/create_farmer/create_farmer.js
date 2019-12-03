@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import './register.css'
+import './create_farmer.css'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import { connect } from 'react-redux'
 import propTypes from 'prop-types'
-import { registerUser } from '../../actions/authActions'
+import { connect } from 'react-redux'
 import classnames from 'classnames'
 import { withRouter } from 'react-router-dom'
 import { createMuiTheme } from '@material-ui/core/styles'
@@ -15,11 +14,11 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import PersonIcon from '@material-ui/icons/Person';
 import LockIcon from '@material-ui/icons/Lock';
 import EmailIcon from '@material-ui/icons/Email';
+import { registerFarmer } from '../../actions/authActions'
 
 //Import Components
-import SignupHeader from './register_header'
-import SignupFooter from './register_footer'
-
+import CreateFarmerHeader from './create_farmer_header'
+import CreateFarmerFooter from './create_farmer_footer'
 
 const theme = createMuiTheme({
     palette: {
@@ -72,11 +71,13 @@ const theme = createMuiTheme({
     }
 })
 
-class register extends React.Component {
+
+class CreateFarmer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             name: "",
+            lastName: "",
             email: "",
             password: "",
             password2: "",
@@ -108,20 +109,22 @@ class register extends React.Component {
 
         const newUser = {
             name: this.state.name,
+            lastName: this.state.lastName,
             email: this.state.email,
+            isFarmer: true,
             password: this.state.password,
             password2: this.state.password2
         }
 
-        this.props.registerUser(newUser, this.props.history)
+        this.props.registerFarmer(newUser, this.props.history)
     }
 
-    render() {
-        const { errors } = this.state;
 
+    render() {
+        const { errors } = this.state
         return (
             <ThemeProvider theme={theme}>
-                <SignupHeader />
+                <CreateFarmerHeader />
                 <div className="container">
                     <form noValidate onSubmit={this.onSubmit}>
                         <div>
@@ -143,6 +146,26 @@ class register extends React.Component {
                                 className={classnames("signup_textfield", { invalid: errors.name })}
                             />
                             <span style={{ color: theme.palette.error.main }}>{errors.name}</span>
+                        </div>
+                        <div>
+                            <TextField
+                                required
+                                onChange={this.onChange}
+                                value={this.state.lastName}
+                                id="lastName"
+                                type="text"
+                                margin="normal"
+                                label="Last Name"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <PersonIcon />
+                                        </InputAdornment>
+                                    )
+                                }}
+                                className={classnames("signup_textfield", {})}
+                            />
+                            <span style={{ color: theme.palette.error.main }}>{}</span>
                         </div>
                         <div>
                             <TextField
@@ -222,14 +245,15 @@ class register extends React.Component {
                         </div>
                     </form>
                 </div>
-                <SignupFooter />
+                <CreateFarmerFooter />
             </ThemeProvider>
         )
     }
 }
 
-register.protoTypes = {
-    registerUser: propTypes.func.isRequired,
+
+CreateFarmer.propTypes = {
+    registerFarmer: propTypes.func.isRequired,
     auth: propTypes.object.isRequired,
     errors: propTypes.object.isRequired
 }
@@ -239,4 +263,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 })
 
-export default connect(mapStateToProps, { registerUser })(withRouter(register))
+export default connect(mapStateToProps, {registerFarmer})(withRouter(CreateFarmer))

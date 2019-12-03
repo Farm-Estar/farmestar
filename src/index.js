@@ -16,6 +16,8 @@ import login from './components/login/login';
 import register from './components/register/register';
 import dashboard from './components/dashboard/dashboard'
 import forgotPassword from './components/forgot_password/forgot_password'
+import UpdatePassword from './components/update_password/update_password'
+import CreateFarmer from './components/create_farmer/create_farmer'
 import NotFound from './components/notfound/notfound';
 import PrivateRoute from './components/private-route/private-route'
 
@@ -50,6 +52,9 @@ const routing = (
                     <Route exact path="/register" component={register} />
                     <Route exact path="/dashboard" component={dashboard} />
                     <Route exact path="/forgotPassword" component={forgotPassword} />
+                    {/* UpdatePassword is browser only Page */}
+                    <Route exact path="/updatePassword/:token" component={UpdatePassword} />
+                    <Route exact path="/createFarmer" component={CreateFarmer} />
                     <PrivateRoute exact path="/dashboard" component={dashboard} />
                     <Route component={NotFound} />
                 </Switch>

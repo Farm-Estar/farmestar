@@ -155,10 +155,17 @@ a {
 .signup_button {
     margin-top: 35px;
 }
+.menubar {
+    position: fixed;
+    bottom: 0%;
+    color: #2699FB;
+    width: 100%;
+}
 .password_header {
     color: gray;
     font: bold 2em Arial, Helvetica, sans-serif;
 }
+
 
 
 

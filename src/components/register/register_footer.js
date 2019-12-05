@@ -9,7 +9,7 @@ function SignupFooter() {
             </div>
             <div className="footer_action">
                 <div className="footer_action_text">
-                    <Link to="/register">LOGIN</Link>
+                    <Link to="/login">LOGIN</Link>
                 </div>
             </div>
         </div>

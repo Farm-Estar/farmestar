@@ -1,25 +1,21 @@
-/* eslint-disable react/prop-types */
 import React from 'react'
-import './register.css'
-import { Link } from 'react-router-dom'
+import './create_farm_profile.css'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import { connect } from 'react-redux'
 import propTypes from 'prop-types'
-import { registerUser } from '../../actions/authActions'
+import { connect } from 'react-redux'
 import classnames from 'classnames'
 import { withRouter } from 'react-router-dom'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import PersonIcon from '@material-ui/icons/Person';
-import LockIcon from '@material-ui/icons/Lock';
-import EmailIcon from '@material-ui/icons/Email';
+import DescriptionIcon from '@material-ui/icons/Description';
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import { addProfile } from '../../actions/farmActions'
 
 //Import Components
-import SignupHeader from './register_header'
-import SignupFooter from './register_footer'
-
+import CreateFarmProfileHeader from './create_farm_profile_header'
 
 const theme = createMuiTheme({
     palette: {
@@ -68,25 +64,23 @@ const theme = createMuiTheme({
         },
         MuiButtonLabel: {
             color: 'grey'
+        },
+        MuiPaper: {
+            root:{
+                backgroundColor: 'rgba(255, 255, 255, 1)'
+            }
         }
     }
 })
 
-class register extends React.Component {
+class CreateFarmProfile extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
-            name: "",
-            email: "",
-            password: "",
-            password2: "",
+            displayName: "",
+            description: "",
+            image: "",
             errors: {}
-        }
-    }
-
-    componentDidMount() {
-        if (this.props.auth.isAuthenticated) {
-            this.props.history.push("/dashboard")
         }
     }
 
@@ -96,43 +90,46 @@ class register extends React.Component {
             if (this.state.errors !== this.props.errors) {
                 this.setState(this.props)
             }
+            //Perist Form Info
+            //Run console test to see prevProps vs Props on page refrsh against errors
         }
     }
 
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value })
+        console.log(this.state)
     }
 
     onSubmit = e => {
         e.preventDefault()
 
-        const newUser = {
-            name: this.state.name,
-            email: this.state.email,
-            password: this.state.password,
-            password2: this.state.password2
+        const profile = {
+            displayName: this.state.displayName,
+            description: this.state.description,
+            image: this.state.image
         }
 
-        this.props.registerUser(newUser, this.props.history)
+        // eslint-disable-next-line react/prop-types
+        this.props.addProfile(profile, this.props.history)
     }
 
-    render() {
-        const { errors } = this.state;
 
+    render() {
+        const { errors } = this.state
         return (
             <ThemeProvider theme={theme}>
-                <SignupHeader />
+                <CreateFarmProfileHeader />
                 <div className="container">
                     <form noValidate onSubmit={this.onSubmit}>
                         <div>
                             <TextField
                                 required
                                 onChange={this.onChange}
-                                value={this.state.name}
-                                id="name"
+                                value={this.state.displayName}
+                                id="displayName"
                                 type="text"
                                 margin="normal"
-                                label="Name"
+                                label="Display Name"
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -140,71 +137,49 @@ class register extends React.Component {
                                         </InputAdornment>
                                     )
                                 }}
-                                className={classnames("signup_textfield", { invalid: errors.name })}
+                                className={classnames("signup_textfield", { invalid: errors.displayName })}
                             />
-                            <span style={{ color: theme.palette.error.main }}>{errors.name}</span>
+                            <span style={{ color: theme.palette.error.main }}>{errors.displayName}</span>
                         </div>
                         <div>
                             <TextField
                                 required
                                 onChange={this.onChange}
-                                value={this.state.email}
-                                id="email"
-                                type="email"
+                                value={this.state.description}
+                                id="description"
+                                type="text"
                                 margin="normal"
-                                label="Email"
+                                label="Brief Description"
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <EmailIcon />
+                                            <DescriptionIcon />
                                         </InputAdornment>
                                     )
                                 }}
-                                className={classnames("signup_textfield", { invalid: errors.email })}
+                                className={classnames("signup_textfield", { invalid: errors.description })}
                             />
-                            <span style={{ color: theme.palette.error.main }}>{errors.email}</span>
+                            <span style={{ color: theme.palette.error.main }}>{errors.description}</span>
                         </div>
                         <div>
                             <TextField
                                 required
                                 onChange={this.onChange}
-                                value={this.state.password}
-                                id="password"
-                                type="password"
-                                autoComplete="current-password"
+                                value={this.state.image}
+                                id="image"
+                                type="text"
                                 margin="normal"
-                                label="Password"
+                                label="Upload a Picture"
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <LockIcon />
+                                            <AddAPhotoIcon />
                                         </InputAdornment>
                                     )
                                 }}
-                                className={classnames("signup_textfield", { invalid: errors.password })}
+                                className={classnames("signup_textfield", { invalid: errors.image })}
                             />
-                            <span style={{ color: theme.palette.error.main }}></span>
-                        </div>
-                        <div>
-                            <TextField
-                                required
-                                onChange={this.onChange}
-                                value={this.state.password2}
-                                id="password2"
-                                type="password"
-                                autoComplete="current-password"
-                                margin="normal"
-                                label="Confirm Password"
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <LockIcon />
-                                        </InputAdornment>
-                                    )
-                                }}
-                                className={classnames("signup_textfield", { invalid: errors.password2 })}
-                            />
-                            <span style={{ color: theme.palette.error.main }}>{errors.password2}</span>
+                            <span style={{ color: theme.palette.error.main }}>{errors.image}</span>
                         </div>
                         <div className="signup_button" style={{ paddingLeft: "11.250px" }}>
                             <Button
@@ -222,21 +197,18 @@ class register extends React.Component {
                         </div>
                     </form>
                 </div>
-                <SignupFooter />
             </ThemeProvider>
         )
     }
 }
 
-register.protoTypes = {
-    registerUser: propTypes.func.isRequired,
-    auth: propTypes.object.isRequired,
+CreateFarmProfile.propTypes = {
+    addProfile: propTypes.func.isRequired,
     errors: propTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth,
     errors: state.errors
 })
 
-export default connect(mapStateToProps, { registerUser })(withRouter(register))
+export default connect(mapStateToProps, { addProfile })(withRouter(CreateFarmProfile))

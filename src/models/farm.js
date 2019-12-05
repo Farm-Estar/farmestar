@@ -1,31 +1,30 @@
 import mongoose from 'mongoose'
 
-const userSchema = new mongoose.Schema({
-    name: {
+const farmSchema = new mongoose.Schema({
+    farmName: {
         type: String,
         required: true
     },
-    lastName: {
-        type: String,
-        required: false
-    },
-    email: {
+    address: {
         type: String,
         required: true
     },
-    password: {
+    city: {
         type: String,
         required: true
     },
-    isFarmer: {
+    state: {
         type: String,
-        required: true,
-        default: false
+        required: true
+    },
+    farmerType: {
+        type: String,
+        required: true
     },
     date: {
         type: Date,
         default: Date.now
     }
-});
+})
 
-export const User = mongoose.model('users', userSchema);
+export const Farm = mongoose.model('farms', farmSchema)

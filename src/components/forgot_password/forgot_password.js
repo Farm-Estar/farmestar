@@ -1,4 +1,7 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react'
+import './forgot_password.css'
+import { withRouter } from 'react-router-dom'
 import classnames from 'classnames'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
@@ -9,6 +12,7 @@ import TextField from '@material-ui/core/TextField'
 import propTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {forgotPasswordPerform} from '../../actions/authActions'
+import {ForgotPasswordHeader} from './forgot_password_header'
 
 const theme = createMuiTheme({
     palette: {
@@ -90,16 +94,16 @@ class forgotPassword extends Component {
             email: this.state.email
         }
 
-        this.props.forgotPasswordPerform(userData)
+        this.props.forgotPasswordPerform(userData, this.props.history)
     }
 
     render() {
         const { errors } = this.state
         return (
-            <ThemeProvider theme={theme}>
+            <ThemeProvider theme={theme}> 
+            <ForgotPasswordHeader />
                 <div className="container">
-                    <h1>Forgot Password?</h1>
-                    <p>No problem, these things happen. Please enter your email you use for Farm Ester and we will gladly send you an email to reset your password.</p>
+                    <p>No problem, we can send you an email!</p>
                     <form noValidate onSubmit={this.onSubmit}>
                         <div className="email_container">
                             <TextField
@@ -137,7 +141,7 @@ class forgotPassword extends Component {
                                 type="submit"
                                 variant="contained"
                                 color="primary"
-                            >CONTINUE</Button>
+                            >Send Reset Email</Button>
                         </div>
                     </form>
                     </div>
@@ -156,5 +160,5 @@ const mapStateToProps = state => ({
     errors: state.errors
 })
 
-export default connect(mapStateToProps, { forgotPasswordPerform })(forgotPassword)
+export default connect(mapStateToProps, { forgotPasswordPerform })(withRouter(forgotPassword))
 

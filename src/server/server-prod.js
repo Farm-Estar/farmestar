@@ -9,7 +9,7 @@ var passport = require("passport")
 //APi Imports
 import { users } from "../routes/api/users";
 import { version } from "../routes/api/app";
-import { farm } from "../routes/api/farm";
+import { farms } from "../routes/api/farm";
 
 const __dirname = './dist/';
 // const db = require("../config/keys").mongoURI;
@@ -45,7 +45,7 @@ var notificationClient = new OneSignal.Client({
 //Igedla API Routes
 app.use('/api/users', users)
 app.use('/api/app', version)
-app.use('/api/farm', farm)
+app.use('/api/farm', farms)
 
 
 app.all('*', (req, res) => {

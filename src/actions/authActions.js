@@ -22,19 +22,6 @@ export const registerUser = (userData, history) => dispatch => {
         )
 }
 
-//Register Farmer
-export const registerFarmer = (userData, history) => dispatch => {
-    axios
-        .post("/api/users/register", userData)
-        .then(res => history.push("/addFarm"))
-        .catch(err =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
-        )
-}
-
 //Update Password
 export const updatePassword = (userData, history) => dispatch => {
     console.log("Call Data: " + toString(userData))
@@ -63,26 +50,25 @@ export const forgotPasswordPerform = (userData, history) => dispatch => {
 //Login
 export const loginUser = userData => dispatch => {
     axios
-     .post("/api/users/login", userData)
-     .then(res => {
-         //Set token to LocalStorage
-         const { token } = res.data
-         localStorage.setItem("jwtToken", token)
-         //Set token to header
-         setAuthToken(token)
-         //Decode token
-         const decoded = jwt_decode(token)
-         //Set User
-         dispatch(setCurrentUser(decoded))
-     })
-     .catch(err =>
-        dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
+        .post("/api/users/login", userData)
+        .then(res => {
+            //Set token to LocalStorage
+            const { token } = res.data
+            localStorage.setItem("jwtToken", token)
+            //Set token to header
+            setAuthToken(token)
+            //Decode token
+            const decoded = jwt_decode(token)
+            //Set User
+            dispatch(setCurrentUser(decoded))
         })
-    )
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        )
 }
-
 
 //Set Current User
 export const setCurrentUser = decoded => {

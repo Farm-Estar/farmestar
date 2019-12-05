@@ -7,7 +7,7 @@ import setAuthToken from './utils/setAuthToken'
 import { setCurrentUser, logout } from './actions/authActions'
 import { Provider } from 'react-redux'
 import store from './config/store'
-import { ThemeProvider } from '@material-ui/core/styles'
+// import { ThemeProvider } from '@material-ui/core/styles'
 // import * as serviceWorker from './serviceWorker';
 
 //Components
@@ -18,6 +18,8 @@ import dashboard from './components/dashboard/dashboard'
 import forgotPassword from './components/forgot_password/forgot_password'
 import UpdatePassword from './components/update_password/update_password'
 import CreateFarmer from './components/create_farmer/create_farmer'
+import CreateFarmProfile from './components/create_farm_profile/create_farm_profile'
+import AddFarm from './components/add_farm/add_farm'
 import NotFound from './components/notfound/notfound';
 import PrivateRoute from './components/private-route/private-route'
 
@@ -55,6 +57,8 @@ const routing = (
                     {/* UpdatePassword is browser only Page */}
                     <Route exact path="/updatePassword/:token" component={UpdatePassword} />
                     <Route exact path="/createFarmer" component={CreateFarmer} />
+                    <Route exact path="/addFarm" component={AddFarm} />
+                    <Route exact path="/addFarmProfile" component={CreateFarmProfile} />
                     <PrivateRoute exact path="/dashboard" component={dashboard} />
                     <Route component={NotFound} />
                 </Switch>

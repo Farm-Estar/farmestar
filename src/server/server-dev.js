@@ -13,6 +13,7 @@ var passport = require("passport")
 //APi Imports
 import { users } from "../routes/api/users";
 import { version } from "../routes/api/app";
+import { farms } from "../routes/api/farm"; 
 
 
 const __dirname = './dist/';
@@ -59,6 +60,7 @@ app.listen(PORT, () => {
 //Igedla API Routes
 app.use('/api/users', users)
 app.use('/api/app', version)
+app.use('/api/farm', farms)
 
 
 app.all('*', (req, res) => {

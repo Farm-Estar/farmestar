@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react'
-import './create_farmer.css'
+import './create_farm_profile.css'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import propTypes from 'prop-types'
@@ -11,13 +10,12 @@ import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import PersonIcon from '@material-ui/icons/Person';
-import LockIcon from '@material-ui/icons/Lock';
-import EmailIcon from '@material-ui/icons/Email';
-import { registerFarmer } from '../../actions/farmActions'
+import DescriptionIcon from '@material-ui/icons/Description';
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import { addProfile } from '../../actions/farmActions'
 
 //Import Components
-import CreateFarmerHeader from './create_farmer_header'
-import CreateFarmerFooter from './create_farmer_footer'
+import CreateFarmProfileHeader from './create_farm_profile_header'
 
 const theme = createMuiTheme({
     palette: {
@@ -66,27 +64,23 @@ const theme = createMuiTheme({
         },
         MuiButtonLabel: {
             color: 'grey'
+        },
+        MuiPaper: {
+            root:{
+                backgroundColor: 'rgba(255, 255, 255, 1)'
+            }
         }
     }
 })
 
-
-class CreateFarmer extends React.Component {
+class CreateFarmProfile extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
-            name: "",
-            lastName: "",
-            email: "",
-            password: "",
-            password2: "",
+            displayName: "",
+            description: "",
+            image: "",
             errors: {}
-        }
-    }
-
-    componentDidMount() {
-        if (this.props.auth.isAuthenticated) {
-            this.props.history.push("/dashboard")
         }
     }
 
@@ -96,26 +90,27 @@ class CreateFarmer extends React.Component {
             if (this.state.errors !== this.props.errors) {
                 this.setState(this.props)
             }
+            //Perist Form Info
+            //Run console test to see prevProps vs Props on page refrsh against errors
         }
     }
 
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value })
+        console.log(this.state)
     }
 
     onSubmit = e => {
         e.preventDefault()
 
-        const newUser = {
-            name: this.state.name,
-            lastName: this.state.lastName,
-            email: this.state.email,
-            isFarmer: true,
-            password: this.state.password,
-            password2: this.state.password2
+        const profile = {
+            displayName: this.state.displayName,
+            description: this.state.description,
+            image: this.state.image
         }
 
-        this.props.registerFarmer(newUser, this.props.history)
+        // eslint-disable-next-line react/prop-types
+        this.props.addProfile(profile, this.props.history)
     }
 
 
@@ -123,18 +118,18 @@ class CreateFarmer extends React.Component {
         const { errors } = this.state
         return (
             <ThemeProvider theme={theme}>
-                <CreateFarmerHeader />
+                <CreateFarmProfileHeader />
                 <div className="container">
                     <form noValidate onSubmit={this.onSubmit}>
                         <div>
                             <TextField
                                 required
                                 onChange={this.onChange}
-                                value={this.state.name}
-                                id="name"
+                                value={this.state.displayName}
+                                id="displayName"
                                 type="text"
                                 margin="normal"
-                                label="Name"
+                                label="Display Name"
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -142,91 +137,49 @@ class CreateFarmer extends React.Component {
                                         </InputAdornment>
                                     )
                                 }}
-                                className={classnames("signup_textfield", { invalid: errors.name })}
+                                className={classnames("signup_textfield", { invalid: errors.displayName })}
                             />
-                            <span style={{ color: theme.palette.error.main }}>{errors.name}</span>
+                            <span style={{ color: theme.palette.error.main }}>{errors.displayName}</span>
                         </div>
                         <div>
                             <TextField
                                 required
                                 onChange={this.onChange}
-                                value={this.state.lastName}
-                                id="lastName"
+                                value={this.state.description}
+                                id="description"
                                 type="text"
                                 margin="normal"
-                                label="Last Name"
+                                label="Brief Description"
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <PersonIcon />
+                                            <DescriptionIcon />
                                         </InputAdornment>
                                     )
                                 }}
-                                className={classnames("signup_textfield", {})}
+                                className={classnames("signup_textfield", { invalid: errors.description })}
                             />
-                            <span style={{ color: theme.palette.error.main }}>{}</span>
+                            <span style={{ color: theme.palette.error.main }}>{errors.description}</span>
                         </div>
                         <div>
                             <TextField
                                 required
                                 onChange={this.onChange}
-                                value={this.state.email}
-                                id="email"
-                                type="email"
+                                value={this.state.image}
+                                id="image"
+                                type="text"
                                 margin="normal"
-                                label="Email"
+                                label="Upload a Picture"
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <EmailIcon />
+                                            <AddAPhotoIcon />
                                         </InputAdornment>
                                     )
                                 }}
-                                className={classnames("signup_textfield", { invalid: errors.email })}
+                                className={classnames("signup_textfield", { invalid: errors.image })}
                             />
-                            <span style={{ color: theme.palette.error.main }}>{errors.email}</span>
-                        </div>
-                        <div>
-                            <TextField
-                                required
-                                onChange={this.onChange}
-                                value={this.state.password}
-                                id="password"
-                                type="password"
-                                autoComplete="current-password"
-                                margin="normal"
-                                label="Password"
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <LockIcon />
-                                        </InputAdornment>
-                                    )
-                                }}
-                                className={classnames("signup_textfield", { invalid: errors.password })}
-                            />
-                            <span style={{ color: theme.palette.error.main }}></span>
-                        </div>
-                        <div>
-                            <TextField
-                                required
-                                onChange={this.onChange}
-                                value={this.state.password2}
-                                id="password2"
-                                type="password"
-                                autoComplete="current-password"
-                                margin="normal"
-                                label="Confirm Password"
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <LockIcon />
-                                        </InputAdornment>
-                                    )
-                                }}
-                                className={classnames("signup_textfield", { invalid: errors.password2 })}
-                            />
-                            <span style={{ color: theme.palette.error.main }}>{errors.password2}</span>
+                            <span style={{ color: theme.palette.error.main }}>{errors.image}</span>
                         </div>
                         <div className="signup_button" style={{ paddingLeft: "11.250px" }}>
                             <Button
@@ -244,22 +197,18 @@ class CreateFarmer extends React.Component {
                         </div>
                     </form>
                 </div>
-                <CreateFarmerFooter />
             </ThemeProvider>
         )
     }
 }
 
-
-CreateFarmer.propTypes = {
-    registerFarmer: propTypes.func.isRequired,
-    auth: propTypes.object.isRequired,
+CreateFarmProfile.propTypes = {
+    addProfile: propTypes.func.isRequired,
     errors: propTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth,
     errors: state.errors
 })
 
-export default connect(mapStateToProps, {registerFarmer})(withRouter(CreateFarmer))
+export default connect(mapStateToProps, { addProfile })(withRouter(CreateFarmProfile))

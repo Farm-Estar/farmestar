@@ -155,10 +155,122 @@ a {
 .signup_button {
     margin-top: 35px;
 }
+.menubar {
+    position: fixed;
+    bottom: 0%;
+    color: #2699FB;
+    width: 100%;
+}
+
+.tabView {
+    height: 100%;
+}
+.dashboard-container {
+    width: 100%;
+    height: 550px;
+}
+
+.farms-container {
+
+}
+
+.review-container {
+    position: fixed;
+    bottom: 0%;
+}
+
+.section-title {
+    color: gray;
+    font: bold 1em Arial, Helvetica, sans-serif;
+    text-align: left;
+}
+
+.no-reviews {
+    color: black;
+    padding: 0% 1% 19% 1%;
+    font: bold 1em Ariel, Helvetica, sans-serif;
+}
+
+.farm-label {
+    color: grey;
+    height: 20px;
+    background-color: white;
+    width: 100%;
+}
+.market-header {
+    font-size: 2em;
+    color: rgba(38, 153, 251, 1);
+}
+
+.search-bar {
+    width: 100%;
+}
+
+.to-detail-button {
+    position: fixed;
+    bottom: 8%;
+    margin-left: 332px;
+    font-size: large;
+}
+
+.farm-header {
+    font-size: 22px;
+    padding-left: 2%;
+}
+
+.farm-subheader {
+    font-size: 14px;
+    padding-left: 2%;
+}
+
+.farm-results-container {
+    margin-top: 10%;
+}
+.cart-header{
+    font-size: 1em;
+    color: rgba(38, 153, 251, 1);
+}
+
+.header-price-total{
+    text-align: center;
+    color: rgba(38, 153, 251, 1);
+    font-size: 2em;
+}
+
+.total-text{
+    font-size: 1em;
+    color: rgba(38, 153, 251, 1);
+    text-align: center;
+}
+
+.cart-map-container {
+    margin-top: 2%;
+    width: 100%;
+    height: 230px;
+    margin-left: 0;
+    margin-right: 0;
+    color: rgba(38, 153, 251, 1);
+    text-align: left;
+}
+
+.farm-address {
+    margin-left: 12%;
+}
+
+.product-list-item{
+    color: rgba(38, 153, 251, 1);
+    text-align: right;
+}
+
+.cart-list-container{
+    margin-top: 5%;
+}
+
 .password_header {
     color: gray;
     font: bold 2em Arial, Helvetica, sans-serif;
 }
+
 
 
 

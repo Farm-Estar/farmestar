@@ -5,7 +5,9 @@ import jwt_decode from 'jwt-decode'
 import {
     GET_ERRORS,
     SET_CURRENT_USER,
-    USER_LOADING
+    USER_LOADING,
+    SET_FARMS,
+    SET_REVIEWS
 } from './types'
 import { get } from 'http'
 
@@ -70,11 +72,43 @@ export const loginUser = userData => dispatch => {
         )
 }
 
+//Dashboard
+export const setupDashboard = dispatch => {
+    axios
+        .get("/api/users/dashboard")
+        .then(res => {
+            //Should have a json object with reviews and farms to dispatch
+            dispatch(setFarms(res.data.farms))
+            dispatch(setReviews(res.data.reviews))
+        })
+        .catch(err =>
+            {
+               console.log(err)
+            }
+        )
+}
+
 //Set Current User
 export const setCurrentUser = decoded => {
     return {
         type: SET_CURRENT_USER,
         payload: decoded
+    }
+}
+
+//Set Farms
+export const setFarms = farms => {
+    return {
+        type: SET_FARMS,
+        payload: farms
+    }
+}
+
+//Set Reviews
+export const setReviews = reviews => {
+    return {
+        type: SET_REVIEWS,
+        payload: reviews
     }
 }
 

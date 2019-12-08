@@ -104,24 +104,23 @@ class dashboard extends Component {
 
     return (
       <ThemeProvider theme={theme}>
-        <DashboardHeader />
         <div className="container">
           <SwipeableViews
             axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
             index={this.state.value}
             onChangeIndex={this.handleChangeIndex}
           >
-            <TabPanel value={this.state.value} index={0} dir={theme.direction}>
-              <Home />
+            <TabPanel className="tabView" value={this.state.value} index={0} dir={theme.direction}>
+              <Home data={this.props} />
         </TabPanel>
-            <TabPanel value={this.state.value} index={1} dir={theme.direction}>
-              <Market />
+            <TabPanel className="tabView" value={this.state.value} index={1} dir={theme.direction}>
+              <Market data={this.props} />
         </TabPanel>
-            <TabPanel value={this.state.value} index={2} dir={theme.direction}>
-              <Cart />
+            <TabPanel className="tabView" value={this.state.value} index={2} dir={theme.direction}>
+              <Cart data={this.props} />
         </TabPanel>
-        <TabPanel value={this.state.value} index={3} dir={theme.direction}>
-              <Settings />
+        <TabPanel className="tabView" value={this.state.value} index={3} dir={theme.direction}>
+              <Settings data={this.props} />
         </TabPanel>
           </SwipeableViews>
         </div>

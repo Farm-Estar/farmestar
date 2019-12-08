@@ -14,6 +14,7 @@ import { validateLoginInput } from '../../validation/login'
 //Model
 import { User } from '../../models/user'
 import { Token } from '../../models/token'
+import { Farm } from '../../models/farm'
 
 //Create Email Transport to be used Globally
 const transporter = mailer.createTransport(
@@ -93,7 +94,8 @@ users.post("/login", (req, res) => {
                         //Create JWT Payload
                         const payload = {
                             id: user.id,
-                            name: user.name
+                            name: user.name,
+                            email: user.email
                         }
 
                         //Sign Token
@@ -197,6 +199,24 @@ users.post("/updatePassword", (req, res) => {
         }
 
     })
+})
+
+// @route GET api/users/dashboard
+// @desc Get the Farms and Reviews for Dashboard
+// @access Public
+users.get("/dashboard", (req, res) => {
+    var payload = {
+        farms:[],
+        reviews:[]
+    }
+
+    //Get Farms
+    Farm.find({}, function(err, farms){
+        farms.forEach(function(farm){
+            payload.farms.push(farm)
+        })
+        res.send(payload)
+    })  
 })
 
 export { users }

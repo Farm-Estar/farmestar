@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import propTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { loginUser } from '../../actions/authActions'
+import { loginUser, setupDashboard } from '../../actions/authActions'
 import classnames from 'classnames'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
@@ -112,6 +112,8 @@ export class login extends Component {
             password: this.state.password
         }
 
+        // TODO: Will wan to persist this call better for Dashboard
+        // this.props.setupDashboard()
         this.props.loginUser(userData)
     }
 
@@ -213,6 +215,7 @@ export class login extends Component {
 
 login.propTypes = {
     loginUser: propTypes.func.isRequired,
+    setupDashboard: propTypes.func.isRequired,
     auth: propTypes.object.isRequired,
     errors: propTypes.object.isRequired
 }
@@ -222,4 +225,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 })
 
-export default connect(mapStateToProps, { loginUser })(login)
+export default connect(mapStateToProps, { loginUser, setupDashboard })(login)

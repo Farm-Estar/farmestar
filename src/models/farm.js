@@ -1,6 +1,10 @@
 import mongoose from 'mongoose'
 
 const farmSchema = new mongoose.Schema({
+    farmer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users'
+    },
     farmName: {
         type: String,
         required: true

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Route , withRouter, Redirect} from 'react-router-dom'
 import './home.css'
 import propTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -8,8 +9,11 @@ import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 
+//Import Actions
+// import { featureFarmsFetch } from '../../actions/authActions'
+
 //Import Components
-import FeatureFarms from './feature_farms'
+import FeatureFarmsHome from './feature_farms'
 import DashboardHeader from '../../components/dashboard/dashboard_header'
 import Reviews from './reviews'
 
@@ -69,15 +73,32 @@ const theme = createMuiTheme({
 class Home extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            farms:[]
+        }
     }
+
+    componentDidUpdate(prevProps){
+        if (prevProps !== this.props) {
+            //Persist Errors
+            if (this.state.farms !== this.props.farms) {
+                this.setState(this.props)
+            }
+        }
+    }
+
+    featuredFarms = (e) => {
+        e.preventDefault()
+        this.props.history.push("/featuredFarms")
+    }
+
     render() {
         return (
             <ThemeProvider theme={theme}>
                 <DashboardHeader />
                 <div className="dashboard-container">
                     <div className="farms-container">
-                        <FeatureFarms data={this.state.farms} />
+                        <FeatureFarmsHome user={{featuredFarm:this.featuredFarms, auth: this.props.auth}} />
                     </div>
                     <div className="review-container">
                         <Reviews data={this.state.reviews} />
@@ -86,6 +107,12 @@ class Home extends React.Component {
             </ThemeProvider>
         )
     }
+}
+
+Home.propTypes = {
+    auth: propTypes.object.isRequired,
+    history: propTypes.object.isRequired,
+    farms: propTypes.array
 }
 
 const mapStateToProps = state => ({

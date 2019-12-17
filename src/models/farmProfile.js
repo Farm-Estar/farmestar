@@ -1,6 +1,14 @@
 import mongoose from 'mongoose'
 
 const farmProfileSchema = new mongoose.Schema({
+    farmer: {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'users'
+    },
+    farm:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'farms'
+    },
     displayName: {
         type: String,
         required: true
@@ -10,8 +18,7 @@ const farmProfileSchema = new mongoose.Schema({
         required: true
     },
     image: {
-        type: String,
-        required: true
+        type: String
     },
     date: {
         type: Date,

@@ -265,13 +265,80 @@ a {
 .cart-list-container{
     margin-top: 5%;
 }
+.settings-header-container {
+    color: rgba(38, 153, 251, 1);
+    background-color: #BCE0FD;
+    height: 56px;
+    margin: 0;
+    width: 100%;
+    justify-content: center;
+    text-align: left;
+    padding: 5% 15% 10% 8%;
+}
 
+.settings-header-name {
+    font-size: 1.2em;
+}
+
+.settings-header-email {
+    font-size: 1em;
+}
+
+.settings-icon{
+    color: rgba(38, 153, 251, 1);
+}
+
+.logout-icon {
+    color: red;
+}
 .password_header {
     color: gray;
     font: bold 2em Arial, Helvetica, sans-serif;
 }
 
 
+
+
+.featured_farm_header_container {
+    position: fixed;
+}
+.profile_pic_container {
+    /* margin-left: 125px;
+    display: block;
+    margin-right: 125px; */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: #BCE0FD;
+}
+
+.farm-profile-body{
+    text-align: left;
+    padding: 5%;
+}
+
+.farm-profile-name{
+    color: #2699FB;
+    font-size: 1.4em;
+}
+
+.farm-profile-description{
+    color: #2699FB;
+    font-size: 1.0em;
+}
+
+.farm-profile-menu-button{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.farm-profile-map {
+    height: 178px;
+    width: 100%;
+    position: fixed;
+    bottom: auto;
+}
 
 
 

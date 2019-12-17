@@ -4,7 +4,6 @@ import isEmpty from 'is-empty'
 //Data should be email and Password(unhashed)
 export function validateForgotPassword(data) {
     let errors = {}
-    console.log("Validate Info: " + toString(data))
 
     //Convert String for Validator
     data.email = !isEmpty(data.email) ? data.email : ""

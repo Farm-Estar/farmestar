@@ -6,6 +6,9 @@ import { connect } from 'react-redux'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
 
+//Import Actions
+import { logout } from '../../actions/authActions'
+
 //Import Components
 import DashboardHeader from '../dashboard/dashboard_header'
 import SettingsHeader from './settings_header'
@@ -18,19 +21,29 @@ class Settings extends Component {
 
         }
     }
+
+     logout = e => {
+        e.preventDefault()
+        this.props.logout(this.props.history)
+    }
+
     render() {
         return (
             <div>
                 <DashboardHeader />
-                <SettingsHeader user={this.props.auth.user} />
-                <SettingsList />
+                <SettingsHeader auth={this.props.auth}/>
+                <SettingsList actions={{logout:this.logout}} />
             </div>
         )
     }
+}
+
+Settings.propTypes = {
+    logout: propTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, {})(Settings)
+export default connect(mapStateToProps, {logout})(Settings)

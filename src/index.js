@@ -20,6 +20,9 @@ import UpdatePassword from './components/update_password/update_password'
 import CreateFarmer from './components/create_farmer/create_farmer'
 import CreateFarmProfile from './components/create_farm_profile/create_farm_profile'
 import AddFarm from './components/add_farm/add_farm'
+import FeaturedFarms from './components/featured_farms/featured_farms'
+import FarmProfile from './components/farm_profile/farm_profile'
+import AddProduce from './components/add_produce/add_produce'
 import NotFound from './components/notfound/notfound';
 import PrivateRoute from './components/private-route/private-route'
 
@@ -60,6 +63,9 @@ const routing = (
                     <Route exact path="/addFarm" component={AddFarm} />
                     <Route exact path="/addFarmProfile" component={CreateFarmProfile} />
                     <PrivateRoute exact path="/dashboard" component={dashboard} />
+                    <Route exact path="/featuredFarms" component={FeaturedFarms} />
+                    <Route exact path="/farmProfile" component={FarmProfile} />
+                    <Route exact path="/addProduce" component={AddProduce} />
                     <Route component={NotFound} />
                 </Switch>
             </div>

@@ -16,6 +16,7 @@ import { User } from '../../models/user'
 import { Token } from '../../models/token'
 import { Farm } from '../../models/farm'
 import { FarmProfile } from '../../models/farmProfile'
+import { Produce } from '../../models/produce'
 
 //Create Email Transport to be used Globally
 const transporter = mailer.createTransport(
@@ -91,9 +92,10 @@ users.post("/login", (req, res) => {
             email: ""
         },
         token: "",
-        isFarmer:"",
+        isFarmer: "",
         success: false,
         farms: [],
+        produce: [],
         reviews: [],
         profiles: []
     }
@@ -132,12 +134,18 @@ users.post("/login", (req, res) => {
                                             payload.profiles.push(profile)
                                         })
 
-                                        //Set Payload
-                                        payload.success = true
-                                        payload.token = "Bearer " + token
+                                        Produce.find({}, function (err, produce) {
+                                            produce.forEach(function (item) {
+                                                payload.produce.push(item)
+                                            })
+
+                                            //Set Payload
+                                            payload.success = true
+                                            payload.token = "Bearer " + token
 
 
-                                        res.json(payload)
+                                            res.json(payload)
+                                        })
                                     })
                                 })
                             })

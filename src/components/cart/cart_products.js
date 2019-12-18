@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -14,18 +15,35 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-function CartProducts() {
+const roundTotal = (total) => {
+    return (Math.round(total * 100) / 100).toFixed(2)
+}
+
+function CartProducts(props) {
     const classes = useStyles()
+
+    let cart_products
+
+    if (props.auth.cart <= 0) {
+        cart_products =
+            <div className="no-items-in-cart">
+                There are no Items in your cart, please visit the market and then check back.
+        </div>
+    } else {
+        cart_products = props.auth.cart.map((product) =>
+            <List key={product._id}>
+                <ListItem>
+                    <ListItemText primary={product.produce.title} secondary={"$" + roundTotal(product.produce.price)}></ListItemText>
+                </ListItem>
+                <Divider />
+            </List>
+        )
+    }
+
     return (
         <div className={classes.root}>
             <List>
-                <ListItem>
-                    <ListItemText primary="Product" secondary="$44.00"></ListItemText>
-                </ListItem>
-                <Divider />
-                <ListItem>
-                    <ListItemText primary="Total" secondary="$44.00"></ListItemText>
-                </ListItem>
+                {cart_products}
             </List>
             <Divider />
         </div>

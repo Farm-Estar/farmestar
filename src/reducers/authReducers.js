@@ -3,7 +3,9 @@ import {
     USER_LOADING,
     SET_FARMS,
     SET_REVIEWS,
-    SET_FARM_PROFILE
+    SET_FARM_PROFILE,
+    ADD_PRODUCE,
+    ADD_TO_CART
 } from '../actions/types'
 
 
@@ -15,6 +17,7 @@ const initialState = {
     farms: [],
     reviews: [],
     profiles:[],
+    produce:[],
     cart: [],
     loading: false
 }
@@ -27,6 +30,7 @@ export default function(state = initialState, action) {
                 isAuthenticated: !isEmpty(action.payload),
                 user: action.payload.user,
                 farms: action.payload.farms,
+                produce: action.payload.produce,
                 reviews: action.payload.reviews,
                 profiles: action.payload.profiles
             }
@@ -46,7 +50,13 @@ export default function(state = initialState, action) {
                 ...state,
                 farmProfile: action.payload,
                 loading: true
-            }            
+            }
+        case ADD_PRODUCE:
+            return {
+                ...state,
+                produce: action.payload,
+                loading:true
+            }                    
         default:
             return state        
     }

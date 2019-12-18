@@ -11,7 +11,7 @@ import { ThemeProvider } from '@material-ui/styles'
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 
 //Import Actions
-import {addProduce} from '../../actions/authActions'
+import {toProduce, toListProduce} from '../../actions/authActions'
 
 //Map Configure
 const Marker = ({ text }) => <div>{text}</div>
@@ -86,7 +86,12 @@ class FarmProfile extends Component {
 
     addProduct = () => {
         const farm_data = {...this.props.location.state}
-        this.props.addProduce(farm_data, this.props.history)
+        this.props.toProduce(farm_data, this.props.history)
+    }
+
+    viewMenu = () => {
+        const farm_data = {...this.props.location.state}
+        this.props.toListProduce(farm_data, this.props.history)
     }
 
     render() {
@@ -114,6 +119,7 @@ class FarmProfile extends Component {
                             type="submit"
                             variant="contained"
                             color="primary"
+                            onClick={this.viewMenu}
                         >Menu</Button>
                         {this.props.location.state.isFarmer ? <Button
                             style={{
@@ -150,12 +156,13 @@ class FarmProfile extends Component {
 }
 
 FarmProfile.propTypes = {
-    addProduce: propTypes.func.isRequired
+    toProduce: propTypes.func.isRequired,
+    toListProduce: propTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-
+    auth: propTypes.object.isRequired
 })
 
 
-export default connect(mapStateToProps, {addProduce})(FarmProfile)
+export default connect(mapStateToProps, {toProduce, toListProduce})(FarmProfile)

@@ -12,6 +12,7 @@ import keys from '../../config/keys'
 //Models
 import { Farm } from '../../models/farm'
 import { FarmProfile } from '../../models/farmProfile'
+import { Produce } from '../../models/produce'
 
 var farms = express.Router()
 
@@ -94,6 +95,27 @@ farms.post("/farmProfile", (req, res) => {
         res.json(profile)
     })
     .catch(err => res.json(err))
+})
+
+// @route POST api/farm/addProduce
+// @desc add a new produce to farm
+// @access Public
+farms.post("/addProduce", (req, res) => {
+    const produce = new Produce({
+        farm: req.body.farm,
+        title: req.body.title,
+        description: req.body.description,
+        price: req.body.price,
+        sku: req.body.sku
+    })
+
+    //Add Produce with mapping to the farm
+    produce
+        .save()
+        .then(item => {
+            res.json(item)
+        })
+        .catch(err => res.json(err))
 })
 
 export { farms }

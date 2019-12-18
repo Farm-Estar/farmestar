@@ -72,7 +72,7 @@ class Cart extends Component {
                     <CartMap />
                 </div>
                 <div className="cart-list-container">
-                    <CartProducts />
+                    <CartProducts {...this.props}/>
                 </div>
                 <ThemeProvider theme={theme}>
                     <div>

@@ -38,7 +38,7 @@ function SettingsList(props) {
         <div className={classes.root}>
             <Divider />
             <List component="nav">
-                <ListItem button>
+                <ListItem button onClick={props.actions.previousOrders}>
                     <ListItemIcon>
                         <div className="settings-icon">
                             <NotificationsIcon />
@@ -46,7 +46,7 @@ function SettingsList(props) {
                     </ListItemIcon>
                     <ListItemText primary="Previous Orders" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button onClick={props.actions.paymentSettings}>
                     <ListItemIcon>
                         <div className="settings-icon">
                             <SettingsIcon />
@@ -54,7 +54,7 @@ function SettingsList(props) {
                     </ListItemIcon>
                     <ListItemText primary="Payment Settings" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button onClick={props.actions.account}>
                     <ListItemIcon>
                         <div className="settings-icon">
                             <PersonIcon />
@@ -62,7 +62,7 @@ function SettingsList(props) {
                     </ListItemIcon>
                     <ListItemText primary="Account" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button onClick={props.actions.support}>
                     <ListItemIcon>
                         <div className="settings-icon">
                             <ContactSupportIcon />

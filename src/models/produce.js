@@ -1,6 +1,10 @@
 import mongoose from 'mongoose'
 
 const produceSchema = new mongoose.Schema({
+    farm: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'farms'
+    },
     title: {
         type: String,
         required: true
@@ -23,4 +27,4 @@ const produceSchema = new mongoose.Schema({
     }
 });
 
-export const User = mongoose.model('produce', produceSchema);
+export const Produce = mongoose.model('produce', produceSchema);

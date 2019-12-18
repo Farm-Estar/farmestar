@@ -27,12 +27,32 @@ class Settings extends Component {
         this.props.logout(this.props.history)
     }
 
+    previousOrders = e => {
+        e.preventDefault()
+        this.props.history("/previousOrders")
+    }
+
+    paymentSettings = e => {
+        e.preventDefault()
+        this.props.history("/paymentSettings")
+    }
+
+    account = e => {
+        e.preventDefault()
+        this.props.history("/account")
+    }
+
+    support = e => {
+        e.preventDefault()
+        this.props.history("/support")
+    }
+
     render() {
         return (
             <div>
                 <DashboardHeader />
                 <SettingsHeader auth={this.props.auth}/>
-                <SettingsList actions={{logout:this.logout}} />
+                <SettingsList actions={{logout:this.logout, orders: this.previousOrders, paymentSettings: this.paymentSettings, account: this.account, support: this.support}} />
             </div>
         )
     }

@@ -5,6 +5,9 @@ import { connect } from 'react-redux'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
 
+//Import Actions
+import {farmProfile} from '../../actions/authActions'
+
 //Import Components
 import MarketHeader from './market_header'
 import Farms from './farms'
@@ -14,14 +17,19 @@ class Market extends Component {
         return (
             <div>
                 <MarketHeader />
-                <Farms />
+                <Farms {...this.props} selectedFarm={this.props.farmProfile}/>
             </div>
         )
     }
+}
+
+Market.propTypes = {
+    farmProfile: propTypes.func.isRequired,
+    auth: propTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, {})(Market)
+export default connect(mapStateToProps, {farmProfile})(Market)

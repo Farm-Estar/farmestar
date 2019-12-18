@@ -8,7 +8,9 @@ import {
     USER_LOADING,
     SET_FARMS,
     SET_REVIEWS,
-    SET_FARM_PROFILE
+    SET_FARM_PROFILE,
+    ADD_PRODUCE,
+    ADD_TO_CART
 } from './types'
 import { get } from 'http'
 
@@ -58,6 +60,7 @@ export const loginUser = userData => dispatch => {
             const token = res.data.token
             const _farms = res.data.farms
             const _reviews = res.data.reviews
+            const _produce = res.data.produce
             const _profiles = res.data.profiles
 
             localStorage.setItem("jwtToken", token)
@@ -68,6 +71,7 @@ export const loginUser = userData => dispatch => {
                 user: jwt_decode(token),
                 farms: _farms,
                 reviews: _reviews,
+                produce: _produce,
                 profiles: _profiles
             }
             //Set User
@@ -174,12 +178,73 @@ export const farmProfile = (farm_data, history) => dispatch => {
         )
 }
 
-//Add Produce
-export const addProduce = (farm_data, history) => dispatch => {
+//Nav setup for Produce
+export const toProduce = (farm_data, history) => dispatch => {
     history.push({
         pathname: '/addProduce',
         state: {...farm_data}
     })
+}
+
+// Add Produce
+export const addProduce = (produce_data, history) => dispatch => {
+    const payload = {
+        produce: []
+    }
+    const mapping_produce = {
+
+    }
+
+    axios
+        .post("api/farm/addProduce", produce_data)
+        .then(res => {
+            console.log(JSON.stringify(res.data))
+            mapping_produce._id = res.data._id,
+            mapping_produce.farm = res.data.farm,
+            mapping_produce.title = res.data.title,
+            mapping_produce.description = res.data.description,
+            mapping_produce.price = res.data.price,
+            mapping_produce.sku = res.data.sku
+
+            payload.produce.push(mapping_produce)
+
+            dispatch({
+                type: ADD_PRODUCE,
+                payload: payload.produce
+            })
+            history.push("/dashboard")
+        })
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })    
+        )
+}
+
+//Produce List
+export const toListProduce = (farm_data, history) => dispatch => {
+    //Take farm Id and map it against produce data to return only that farms
+    history.push({
+        pathname: '/listProduce',
+        state: {...farm_data}
+    })
+}
+
+//Produce Profile
+export const produceProfile = (produce_data, history) => dispatch => {
+
+    console.log("Hit Produce Profile Action with Payload :" + JSON.stringify(produce_data))
+
+            history.push({
+                pathname: '/produceProfile',
+                state: {...produce_data}
+              })
+}
+
+//Add To Cart
+export const addToCart = (product_data, history) => dispatch => {
+    history.push("/dashboard")
 }
 
 

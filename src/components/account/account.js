@@ -95,8 +95,8 @@ class Account extends Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = state => ({
     auth: state.auth
-}
+})
 
 export default connect(mapStateToProps, {})(Account)

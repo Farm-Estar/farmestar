@@ -6,9 +6,10 @@ const WorkboxPlugin = require("workbox-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
+
 module.exports = {
     entry: {
-        main: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/index.js'],
+        main: ['babel-polyfill','webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/index.js'],
         'OneSignalSDKUpdaterWorker': path.resolve('./src/OneSignalSDKUpdaterWorker.js'),
         'OneSignalSDKWorker': path.resolve('./src/OneSignalSDKWorker.js')
     },

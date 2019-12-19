@@ -7,6 +7,7 @@ import setAuthToken from './utils/setAuthToken'
 import { setCurrentUser, logout } from './actions/authActions'
 import { Provider } from 'react-redux'
 import store from './config/store'
+import {Elements, StripeProvider} from 'react-stripe-elements'
 // import { ThemeProvider } from '@material-ui/core/styles'
 // import * as serviceWorker from './serviceWorker';
 
@@ -29,6 +30,7 @@ import PreviousOrders from './components/previous_orders/previous_orders'
 import PaymentSettings from './components/payment_settings/payment_settings'
 import Account from './components/account/account'
 import Support from './components/support/support'
+import Checkout from './components/checkout/checkout'
 import NotFound from './components/notfound/notfound';
 import PrivateRoute from './components/private-route/private-route'
 
@@ -54,6 +56,7 @@ if (localStorage.jwtToken) {
 
 
 const routing = (
+    <StripeProvider apiKey="pk_test_ouzHjSY3RBkcUbxIhx5VdZqY00VmMG2SNL">
     <Provider store={store}>
         <Router>
             <div>
@@ -78,11 +81,17 @@ const routing = (
                     <Route exact path="/paymentSettings" component={PaymentSettings} />
                     <Route exact path="/account" component={Account} />
                     <Route exact path="/support" component={Support} />
+                    <Route exact path="/checkout">
+                            <Elements>
+                                <Checkout />
+                            </Elements>
+                    </Route>
                     <Route component={NotFound} />
                 </Switch>
             </div>
         </Router>
     </Provider>
+    </StripeProvider>
 )
 
 ReactDOM.render(routing, document.getElementById('root'));

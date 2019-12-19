@@ -142,6 +142,26 @@ export const logout = (history) => dispatch => {
     history.push("/")
 }
 
+//Previous Orders
+export const previousOrders = (history) => dispatch => {
+    history.push("/previousOrders")
+}
+
+//Payment Settings
+export const paymentSettings = (history) => dispatch => {
+    history.push("/paymentSettings")
+}
+
+//Account
+export const account = (history) => dispatch => {
+    history.push("/account")
+}
+
+//Support
+export const support = (history) => dispatch => {
+    history.push("/support")
+}
+
 //Farm Profile
 export const farmProfile = (farm_data, history) => dispatch => {
     const payload = {
@@ -245,6 +265,28 @@ export const produceProfile = (produce_data, history) => dispatch => {
 //Add To Cart
 export const addToCart = (product_data, history) => dispatch => {
     history.push("/dashboard")
+}
+
+//Checkout Charge Card
+export const chargeCard = (token_data, history) => dispatch => {
+    console.log(JSON.stringify(token_data))
+    axios
+        .post("/api/users/charge", token_data)
+        .then(res => {
+            //Handle success payment
+            if (res.status == 200) {
+                //Success
+                history.push("/dashboard")
+            }else {
+                //Failed
+            }
+        })
+        .catch(err =>
+            dispatch({
+                type:GET_ERRORS,
+                payload: err.response.data
+            })
+        )
 }
 
 

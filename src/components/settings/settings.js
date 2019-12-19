@@ -7,12 +7,12 @@ import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
 
 //Import Actions
-import { logout } from '../../actions/authActions'
+import { logout, previousOrders, paymentSettings, account, support } from '../../actions/authActions'
 
 //Import Components
 import DashboardHeader from '../dashboard/dashboard_header'
 import SettingsHeader from './settings_header'
-import SettingsList from './settings_list'
+import SettingsList from './settings_list_new'
 
 class Settings extends Component {
     constructor(props){
@@ -29,22 +29,22 @@ class Settings extends Component {
 
     previousOrders = e => {
         e.preventDefault()
-        this.props.history("/previousOrders")
+        this.props.previousOrders(this.props.history)
     }
 
     paymentSettings = e => {
         e.preventDefault()
-        this.props.history("/paymentSettings")
+        this.props.paymentSettings(this.props.history)
     }
 
     account = e => {
         e.preventDefault()
-        this.props.history("/account")
+        this.props.account(this.props.history)
     }
 
     support = e => {
         e.preventDefault()
-        this.props.history("/support")
+        this.props.support(this.props.history)
     }
 
     render() {
@@ -59,11 +59,15 @@ class Settings extends Component {
 }
 
 Settings.propTypes = {
-    logout: propTypes.func.isRequired
+    logout: propTypes.func.isRequired,
+    previousOrders: propTypes.func.isRequired,
+    paymentSettings: propTypes.func.isRequired,
+    account: propTypes.func.isRequired,
+    support: propTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, {logout})(Settings)
+export default connect(mapStateToProps, {logout,previousOrders,paymentSettings,account,support})(Settings)

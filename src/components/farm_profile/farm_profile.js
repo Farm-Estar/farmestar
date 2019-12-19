@@ -157,11 +157,12 @@ class FarmProfile extends Component {
 
 FarmProfile.propTypes = {
     toProduce: propTypes.func.isRequired,
-    toListProduce: propTypes.func.isRequired
+    toListProduce: propTypes.func.isRequired,
+    auth: propTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-    auth: propTypes.object.isRequired
+    auth: state.auth
 })
 
 

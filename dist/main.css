@@ -399,6 +399,9 @@ a {
     justify-content: center;
     align-content: center;
 }
+.list-products-list-container {
+    margin-left: 5%;
+}
 .coming-soon-container {
     display: flex;
     justify-content: center;

@@ -64,6 +64,18 @@ const theme = createMuiTheme({
 })
 
 class Cart extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+
+        }
+    }
+
+    payClick = () => {
+        // eslint-disable-next-line react/prop-types
+        this.props.history.push("/checkout")
+    }
+
     render() {
         return (
             <div>
@@ -86,6 +98,9 @@ class Cart extends Component {
                                 letterSpacing: "1.5px",
                                 marginTop: "1rem"
                             }}
+                            type="submit"
+                            varient="contained"
+                            color="primary"
                         >Pay Now</Button>
                     </div>
                 </ThemeProvider>

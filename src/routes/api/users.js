@@ -6,6 +6,9 @@ import mailer from 'nodemailer'
 import transport from 'nodemailer-sendgrid-transport'
 import keys from '../../config/keys'
 
+const stripe = require("stripe")("sk_test_GFG8Z3zu7QO66KUwd4yQYX9B00TvN3UNJb")
+require('babel-polyfill')
+
 //Validation
 import { validateRegistrationInput } from '../../validation/register'
 import { validateLoginInput } from '../../validation/login'
@@ -237,6 +240,25 @@ users.post("/updatePassword", (req, res) => {
         }
 
     })
+})
+
+// @route POST api/users/charge
+// @desc Make chare to stripe
+// @Access Private
+users.post("/charge", async (req, res) => {
+    try {
+        let {status} = await stripe.charges.create({
+          amount: req.body.total,
+          currency: "usd",
+          description: "Farm Estar Purchase",
+          source: req.body.tokenId
+        });
+    
+        res.json({status});
+      } catch (err) {
+        console.log(err);
+        res.status(500).end();
+      }
 })
 
 // @route GET api/users/dashboard

@@ -31,7 +31,7 @@ function CartProducts(props) {
         </div>
     } else {
         cart_products = props.auth.cart.map((product) =>
-            <List key={product._id}>
+            <List key={product.produce._id}>
                 <ListItem>
                     <ListItemText primary={product.produce.title} secondary={"$" + roundTotal(product.produce.price)}></ListItemText>
                 </ListItem>
@@ -45,7 +45,6 @@ function CartProducts(props) {
             <List>
                 {cart_products}
             </List>
-            <Divider />
         </div>
     )
 }

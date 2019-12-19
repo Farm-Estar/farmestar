@@ -111,16 +111,16 @@ class dashboard extends Component {
             onChangeIndex={this.handleChangeIndex}
           >
             <TabPanel className="tabView" value={this.state.value} index={0} dir={theme.direction}>
-              <Home data={this.props} />
+              <Home data={this.props} history={this.props.history} />
         </TabPanel>
             <TabPanel className="tabView" value={this.state.value} index={1} dir={theme.direction}>
-              <Market data={this.props} />
+              <Market data={this.props} history={this.props.history} />
         </TabPanel>
             <TabPanel className="tabView" value={this.state.value} index={2} dir={theme.direction}>
-              <Cart data={this.props} />
+              <Cart data={this.props} history={this.props.history} />
         </TabPanel>
         <TabPanel className="tabView" value={this.state.value} index={3} dir={theme.direction}>
-              <Settings data={this.props} />
+              <Settings data={this.props} history={this.props.history} />
         </TabPanel>
           </SwipeableViews>
         </div>
@@ -172,8 +172,7 @@ function TabPanel(props) {
 
 dashboard.propTypes = {
   logout: propTypes.func.isRequired,
-  auth: propTypes.object.isRequired,
-
+  auth: propTypes.object.isRequired
 }
 
 TabPanel.propTypes = {

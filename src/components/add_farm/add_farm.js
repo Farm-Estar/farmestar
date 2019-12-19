@@ -288,6 +288,7 @@ class AddFarm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            farmer: props.location.state.farmerId,
             farmName: "",
             address: "",
             city: "",
@@ -311,7 +312,7 @@ class AddFarm extends React.Component {
 
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value })
-        console.log(this.state)
+
     }
 
     handleState = e => {
@@ -326,6 +327,7 @@ class AddFarm extends React.Component {
         e.preventDefault()
 
         const newFarm = {
+            farmer: this.state.farmer,
             farmName: this.state.farmName,
             address: this.state.address,
             city: this.state.city,
@@ -489,7 +491,8 @@ class AddFarm extends React.Component {
 
 AddFarm.propTypes = {
     addFarm: propTypes.func.isRequired,
-    errors: propTypes.object.isRequired
+    errors: propTypes.object.isRequired,
+    location: propTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({

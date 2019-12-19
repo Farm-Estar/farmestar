@@ -85,7 +85,6 @@ class UpdatePassword extends Component {
         if (this.props.match.params.token) {
             this.setState({token: this.props.match.params.token})
         }
-        console.log(this.state.token)
     }
 
     componentDidUpdate(prevProps) {
@@ -98,7 +97,6 @@ class UpdatePassword extends Component {
                 this.setState({token: this.props.match.params.token})
             }
         }
-        console.log(this.state.token)
     }
 
     onChange = e => {
@@ -114,7 +112,6 @@ class UpdatePassword extends Component {
             password2: this.state.password2,
             token: this.state.token
         }
-        console.log(userData.token)
 
         this.props.updatePassword(userData, this.props.history)
     }

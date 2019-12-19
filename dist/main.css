@@ -265,13 +265,148 @@ a {
 .cart-list-container{
     margin-top: 5%;
 }
+.settings-header-container {
+    color: rgba(38, 153, 251, 1);
+    background-color: #BCE0FD;
+    height: 56px;
+    margin: 0;
+    width: 100%;
+    justify-content: center;
+    text-align: left;
+    padding: 5% 15% 10% 8%;
+}
 
+.settings-header-name {
+    font-size: 1.2em;
+}
+
+.settings-header-email {
+    font-size: 1em;
+}
+
+.settings-icon{
+    color: rgba(38, 153, 251, 1);
+}
+
+.logout-icon {
+    color: red;
+}
 .password_header {
     color: gray;
     font: bold 2em Arial, Helvetica, sans-serif;
 }
 
 
+
+
+.featured_farm_header_container {
+    position: fixed;
+}
+.profile_pic_container {
+    /* margin-left: 125px;
+    display: block;
+    margin-right: 125px; */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: #BCE0FD;
+}
+
+.farm-profile-body{
+    text-align: left;
+    padding: 5%;
+}
+
+.farm-profile-name{
+    color: #2699FB;
+    font-size: 1.4em;
+}
+
+.farm-profile-description{
+    color: #2699FB;
+    font-size: 1.0em;
+}
+
+.farm-profile-menu-button{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.farm-profile-map {
+    height: 178px;
+    width: 100%;
+    position: fixed;
+    bottom: auto;
+}
+
+
+.add-produce-container{
+    margin-top: 8%;
+}
+.produce-profile-total{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    color: rgba(38, 153, 251, 1);
+    font-size: 3em;
+}
+
+.product-detail-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30%;
+}
+
+.product-name-container {
+    width: 50%;
+    font-size: 1.3em;
+    padding-left: 5%;
+}
+
+.product-price-container {
+    width: 50%;
+    font-size: 1.3em;
+    color: rgba(38, 153, 251, 1);
+    text-align: right;
+    padding-right: 5%;
+}
+
+.product-qty-main-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10%;
+}
+
+.product-qty-text-container {
+    width: 50%;
+    font-size: 1.3em;
+    padding-left: 5%;
+}
+
+.product-qty-form-control-container {
+    width: 50%;
+    font-size: 1.3em;
+    color: rgba(38, 153, 251, 1);
+    text-align: right;
+    padding-right: 5%;
+}
+
+.add-to-cart-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.list-products-list-container {
+    margin-left: 5%;
+}
+.coming-soon-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
 
 
 

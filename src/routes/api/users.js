@@ -6,6 +6,9 @@ import mailer from 'nodemailer'
 import transport from 'nodemailer-sendgrid-transport'
 import keys from '../../config/keys'
 
+const stripe = require("stripe")("sk_test_GFG8Z3zu7QO66KUwd4yQYX9B00TvN3UNJb")
+require('babel-polyfill')
+
 //Validation
 import { validateRegistrationInput } from '../../validation/register'
 import { validateLoginInput } from '../../validation/login'
@@ -15,6 +18,8 @@ import { validateLoginInput } from '../../validation/login'
 import { User } from '../../models/user'
 import { Token } from '../../models/token'
 import { Farm } from '../../models/farm'
+import { FarmProfile } from '../../models/farmProfile'
+import { Produce } from '../../models/produce'
 
 //Create Email Transport to be used Globally
 const transporter = mailer.createTransport(
@@ -46,6 +51,7 @@ users.post("/register", (req, res) => {
             } else {
                 const newUser = new User({
                     name: req.body.name,
+                    lastName: req.body.lastName,
                     email: req.body.email,
                     isFarmer: req.body.isFarmer,
                     password: req.body.password
@@ -58,7 +64,9 @@ users.post("/register", (req, res) => {
                         newUser.password = hash;
                         newUser
                             .save()
-                            .then(user => res.json(user))
+                            .then(user => {
+                                res.json(user)
+                            })
                             .catch(err => console.log(err))
                     })
                 })
@@ -79,7 +87,21 @@ users.post("/login", (req, res) => {
 
     const email = req.body.email
     const password = req.body.password
-
+    //Setup Payload for user dashbaord
+    const payload = {
+        user: {
+            id: "",
+            name: "",
+            email: ""
+        },
+        token: "",
+        isFarmer: "",
+        success: false,
+        farms: [],
+        produce: [],
+        reviews: [],
+        profiles: []
+    }
     //Find user by email
     User.findOne({ email })
         .then(user => {
@@ -87,26 +109,47 @@ users.post("/login", (req, res) => {
                 return res.status(404).json({ emailnotfound: "Email not found" })
             }
 
+            //Set User Details
+            payload.user.id = user.id
+            payload.user.name = user.name
+            payload.user.email = user.email
+            payload.user.isFarmer = user.isFarmer
+
+
             //Verify Password
             bcrypt.compare(password, user.password)
                 .then(isMatch => {
                     if (isMatch) {
-                        //Create JWT Payload
-                        const payload = {
-                            id: user.id,
-                            name: user.name,
-                            email: user.email
-                        }
-
                         //Sign Token
-                        jwt.sign(payload, keys.secretOrKey,
+                        jwt.sign(payload.user, keys.secretOrKey,
                             {
                                 expiresIn: 31556926 //1 year
                             },
                             (err, token) => {
-                                res.json({
-                                    success: true,
-                                    token: "Bearer " + token
+                                //Get Farms
+                                Farm.find({}, function (err, farms) {
+                                    farms.forEach(function (farm) {
+                                        payload.farms.push(farm)
+                                    })
+
+                                    FarmProfile.find({}, function (err, profiles) {
+                                        profiles.forEach(function (profile) {
+                                            payload.profiles.push(profile)
+                                        })
+
+                                        Produce.find({}, function (err, produce) {
+                                            produce.forEach(function (item) {
+                                                payload.produce.push(item)
+                                            })
+
+                                            //Set Payload
+                                            payload.success = true
+                                            payload.token = "Bearer " + token
+
+
+                                            res.json(payload)
+                                        })
+                                    })
                                 })
                             })
                     } else {
@@ -157,8 +200,6 @@ users.post("/forgotPassword", (req, res) => {
 // @desc Verify Token and Reset Password
 // @access Public
 users.post("/updatePassword", (req, res) => {
-    console.log(req.body.email)
-    console.log(req.body.token)
     // const { errors, isValid } = validateForgotPassword(req.body)
 
     //Check Validation
@@ -201,22 +242,41 @@ users.post("/updatePassword", (req, res) => {
     })
 })
 
+// @route POST api/users/charge
+// @desc Make chare to stripe
+// @Access Private
+users.post("/charge", async (req, res) => {
+    try {
+        let {status} = await stripe.charges.create({
+          amount: req.body.total,
+          currency: "usd",
+          description: "Farm Estar Purchase",
+          source: req.body.tokenId
+        });
+    
+        res.json({status});
+      } catch (err) {
+        console.log(err);
+        res.status(500).end();
+      }
+})
+
 // @route GET api/users/dashboard
 // @desc Get the Farms and Reviews for Dashboard
 // @access Public
 users.get("/dashboard", (req, res) => {
     var payload = {
-        farms:[],
-        reviews:[]
+        farms: [],
+        reviews: []
     }
 
     //Get Farms
-    Farm.find({}, function(err, farms){
-        farms.forEach(function(farm){
+    Farm.find({}, function (err, farms) {
+        farms.forEach(function (farm) {
             payload.farms.push(farm)
         })
         res.send(payload)
-    })  
+    })
 })
 
 export { users }

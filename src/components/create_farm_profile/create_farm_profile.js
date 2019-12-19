@@ -77,6 +77,8 @@ class CreateFarmProfile extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            farmer: props.location.state.farmerId,
+            farm: props.location.state.farmId,
             displayName: "",
             description: "",
             image: "",
@@ -97,13 +99,14 @@ class CreateFarmProfile extends React.Component {
 
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value })
-        console.log(this.state)
     }
 
     onSubmit = e => {
         e.preventDefault()
 
         const profile = {
+            farmer: this.state.farmer,
+            farm: this.state.farm,
             displayName: this.state.displayName,
             description: this.state.description,
             image: this.state.image
@@ -204,7 +207,8 @@ class CreateFarmProfile extends React.Component {
 
 CreateFarmProfile.propTypes = {
     addProfile: propTypes.func.isRequired,
-    errors: propTypes.object.isRequired
+    errors: propTypes.object.isRequired,
+    location: propTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({

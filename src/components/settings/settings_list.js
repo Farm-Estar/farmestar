@@ -1,4 +1,7 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
+import propTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -9,6 +12,11 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import SettingsIcon from '@material-ui/icons/Settings';
 import PersonIcon from '@material-ui/icons/Person';
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
+//Import actions
+import {logout} from '../../actions/authActions'
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -20,13 +28,17 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function SettingsList() {
+
+
+
+function SettingsList(props) {
     const classes = useStyles()
+
     return (
         <div className={classes.root}>
             <Divider />
             <List component="nav">
-                <ListItem button>
+                <ListItem button onClick={props.actions.previousOrders}>
                     <ListItemIcon>
                         <div className="settings-icon">
                             <NotificationsIcon />
@@ -34,7 +46,7 @@ function SettingsList() {
                     </ListItemIcon>
                     <ListItemText primary="Previous Orders" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button onClick={props.actions.paymentSettings}>
                     <ListItemIcon>
                         <div className="settings-icon">
                             <SettingsIcon />
@@ -42,7 +54,7 @@ function SettingsList() {
                     </ListItemIcon>
                     <ListItemText primary="Payment Settings" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button onClick={props.actions.account}>
                     <ListItemIcon>
                         <div className="settings-icon">
                             <PersonIcon />
@@ -50,7 +62,7 @@ function SettingsList() {
                     </ListItemIcon>
                     <ListItemText primary="Account" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button onClick={props.actions.support}>
                     <ListItemIcon>
                         <div className="settings-icon">
                             <ContactSupportIcon />
@@ -58,9 +70,17 @@ function SettingsList() {
                     </ListItemIcon>
                     <ListItemText primary="Contact" />
                 </ListItem>
+                <ListItem button onClick={props.actions.logout}>
+                    <ListItemIcon>
+                        <div className="logout-icon">
+                            <ExitToAppIcon />
+                        </div>
+                    </ListItemIcon>
+                    <ListItemText primary="Logout" />
+                </ListItem>
             </List>
         </div>
     )
 }
-
-export default SettingsList
+  
+  export default SettingsList

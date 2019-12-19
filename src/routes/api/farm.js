@@ -12,6 +12,7 @@ import keys from '../../config/keys'
 //Models
 import { Farm } from '../../models/farm'
 import { FarmProfile } from '../../models/farmProfile'
+import { Produce } from '../../models/produce'
 
 var farms = express.Router()
 
@@ -23,6 +24,7 @@ farms.post("/add", (req, res) => {
     //Perform Validation Here
 
     const farm = new Farm({
+        farmer: req.body.farmer,
         farmName: req.body.farmName,
         address: req.body.address,
         city: req.body.city,
@@ -34,17 +36,21 @@ farms.post("/add", (req, res) => {
     //Save new farm to the DB
     farm
       .save()
-      .then(res.json("Farm added succesfuly"))
+      .then(farm => {
+          res.json(farm)
+        })
       .catch(err => res.json(err))
 })
 
 // @route POST api/farm/addProfile
 // @desc Add a new farm profile
 // @access Public
-farms.post("/addProfile", (req, res) => {
+farms.post("/addFarmProfile", (req, res) => {
     //Perform Validation Here
 
     const profile = new FarmProfile({
+        farmer: req.body.farmer,
+        farm: req.body.farm,
         displayName: req.body.displayName,
         description: req.body.description,
         image: req.body.image
@@ -53,8 +59,63 @@ farms.post("/addProfile", (req, res) => {
     //Save new farmer profile to the DB
     profile
       .save()
-      .then(res.json("Farmer Profile added succesfuly"))
+      .then(profile => {
+          res.json(profile)
+      })
       .catch(err => res.json(err))
+})
+
+
+// @route GET api/farm/farms
+// @desc Get all farms
+// @access Public
+farms.get("/farms", (req, res) => {
+    const payload = {
+        farms:[]
+    }
+
+    //Get Farms
+    Farm.find({}, function(err, farms){
+        farms.forEach((farm) => {
+            payload.farms.push(farm)
+        })
+
+        res.json(payload)
+    })
+})
+
+// @route POST api/farm/farmProfile
+// @desc Get a farm profile
+// @access Public
+farms.post("/farmProfile", (req, res) => {
+    const farm_id = req.body.farm_id
+
+    //find farm profile from farm id
+    FarmProfile.findOne({'farm': farm_id}, function(err, profile){
+        res.json(profile)
+    })
+    .catch(err => res.json(err))
+})
+
+// @route POST api/farm/addProduce
+// @desc add a new produce to farm
+// @access Public
+farms.post("/addProduce", (req, res) => {
+    const produce = new Produce({
+        farm: req.body.farm,
+        title: req.body.title,
+        description: req.body.description,
+        price: req.body.price,
+        sku: req.body.sku
+    })
+
+    //Add Produce with mapping to the farm
+    produce
+        .save()
+        .then(item => {
+            res.json(item)
+        })
+        .catch(err => res.json(err))
 })
 
 export { farms }

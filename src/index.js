@@ -7,6 +7,7 @@ import setAuthToken from './utils/setAuthToken'
 import { setCurrentUser, logout } from './actions/authActions'
 import { Provider } from 'react-redux'
 import store from './config/store'
+import {Elements, StripeProvider} from 'react-stripe-elements'
 // import { ThemeProvider } from '@material-ui/core/styles'
 // import * as serviceWorker from './serviceWorker';
 
@@ -20,6 +21,16 @@ import UpdatePassword from './components/update_password/update_password'
 import CreateFarmer from './components/create_farmer/create_farmer'
 import CreateFarmProfile from './components/create_farm_profile/create_farm_profile'
 import AddFarm from './components/add_farm/add_farm'
+import FeaturedFarms from './components/featured_farms/featured_farms'
+import FarmProfile from './components/farm_profile/farm_profile'
+import AddProduce from './components/add_produce/add_produce'
+import ProduceProfile from './components/produce_profile/produce_profile'
+import ListProduce from './components/list_produce/list_produce'
+import PreviousOrders from './components/previous_orders/previous_orders'
+import PaymentSettings from './components/payment_settings/payment_settings'
+import Account from './components/account/account'
+import Support from './components/support/support'
+import Checkout from './components/checkout/checkout'
 import NotFound from './components/notfound/notfound';
 import PrivateRoute from './components/private-route/private-route'
 
@@ -45,6 +56,7 @@ if (localStorage.jwtToken) {
 
 
 const routing = (
+    <StripeProvider apiKey="pk_test_ouzHjSY3RBkcUbxIhx5VdZqY00VmMG2SNL">
     <Provider store={store}>
         <Router>
             <div>
@@ -60,11 +72,26 @@ const routing = (
                     <Route exact path="/addFarm" component={AddFarm} />
                     <Route exact path="/addFarmProfile" component={CreateFarmProfile} />
                     <PrivateRoute exact path="/dashboard" component={dashboard} />
+                    <Route exact path="/featuredFarms" component={FeaturedFarms} />
+                    <Route exact path="/farmProfile" component={FarmProfile} />
+                    <Route exact path="/addProduce" component={AddProduce} />
+                    <Route exact path="/produceProfile" component={ProduceProfile} />
+                    <Route exact path="/listProduce" component={ListProduce} />
+                    <Route exact path="/previousOrders" component={PreviousOrders} />
+                    <Route exact path="/paymentSettings" component={PaymentSettings} />
+                    <Route exact path="/account" component={Account} />
+                    <Route exact path="/support" component={Support} />
+                    <Route exact path="/checkout">
+                            <Elements>
+                                <Checkout />
+                            </Elements>
+                    </Route>
                     <Route component={NotFound} />
                 </Switch>
             </div>
         </Router>
     </Provider>
+    </StripeProvider>
 )
 
 ReactDOM.render(routing, document.getElementById('root'));

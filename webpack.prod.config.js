@@ -7,7 +7,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const WorkboxPlugin = require("workbox-webpack-plugin");
 module.exports = {
   entry: {
-    main: './src/index.js',
+    main: ['babel-polyfill', './src/index.js'],
     'OneSignalSDKUpdaterWorker': path.resolve('./src/OneSignalSDKUpdaterWorker.js'),
     'OneSignalSDKWorker': path.resolve('./src/OneSignalSDKWorker.js')
   },

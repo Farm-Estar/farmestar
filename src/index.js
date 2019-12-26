@@ -6,8 +6,9 @@ import jwt_decode from 'jwt-decode'
 import setAuthToken from './utils/setAuthToken'
 import { setCurrentUser, logout } from './actions/authActions'
 import { Provider } from 'react-redux'
-import store from './config/store'
-import {Elements, StripeProvider} from 'react-stripe-elements'
+import { store, persistor } from './config/store'
+import { PersistGate } from 'redux-persist/lib/integration/react'
+import { Elements, StripeProvider } from 'react-stripe-elements'
 // import { ThemeProvider } from '@material-ui/core/styles'
 // import * as serviceWorker from './serviceWorker';
 
@@ -57,40 +58,42 @@ if (localStorage.jwtToken) {
 
 const routing = (
     <StripeProvider apiKey="pk_test_ouzHjSY3RBkcUbxIhx5VdZqY00VmMG2SNL">
-    <Provider store={store}>
-        <Router>
-            <div>
-                <Switch>
-                    <Route exact path="/" component={App} />
-                    <Route exact path="/login" component={login} />
-                    <Route exact path="/register" component={register} />
-                    <Route exact path="/dashboard" component={dashboard} />
-                    <Route exact path="/forgotPassword" component={forgotPassword} />
-                    {/* UpdatePassword is browser only Page */}
-                    <Route exact path="/updatePassword/:token" component={UpdatePassword} />
-                    <Route exact path="/createFarmer" component={CreateFarmer} />
-                    <Route exact path="/addFarm" component={AddFarm} />
-                    <Route exact path="/addFarmProfile" component={CreateFarmProfile} />
-                    <PrivateRoute exact path="/dashboard" component={dashboard} />
-                    <Route exact path="/featuredFarms" component={FeaturedFarms} />
-                    <Route exact path="/farmProfile" component={FarmProfile} />
-                    <Route exact path="/addProduce" component={AddProduce} />
-                    <Route exact path="/produceProfile" component={ProduceProfile} />
-                    <Route exact path="/listProduce" component={ListProduce} />
-                    <Route exact path="/previousOrders" component={PreviousOrders} />
-                    <Route exact path="/paymentSettings" component={PaymentSettings} />
-                    <Route exact path="/account" component={Account} />
-                    <Route exact path="/support" component={Support} />
-                    <Route exact path="/checkout">
-                            <Elements>
-                                <Checkout />
-                            </Elements>
-                    </Route>
-                    <Route component={NotFound} />
-                </Switch>
-            </div>
-        </Router>
-    </Provider>
+        <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+                <Router>
+                    <div>
+                        <Switch>
+                            <Route exact path="/" component={App} />
+                            <Route exact path="/login" component={login} />
+                            <Route exact path="/register" component={register} />
+                            <Route exact path="/dashboard" component={dashboard} />
+                            <Route exact path="/forgotPassword" component={forgotPassword} />
+                            {/* UpdatePassword is browser only Page */}
+                            <Route exact path="/updatePassword/:token" component={UpdatePassword} />
+                            <Route exact path="/createFarmer" component={CreateFarmer} />
+                            <Route exact path="/addFarm" component={AddFarm} />
+                            <Route exact path="/addFarmProfile" component={CreateFarmProfile} />
+                            <PrivateRoute exact path="/dashboard" component={dashboard} />
+                            <Route exact path="/featuredFarms" component={FeaturedFarms} />
+                            <Route exact path="/farmProfile" component={FarmProfile} />
+                            <Route exact path="/addProduce" component={AddProduce} />
+                            <Route exact path="/produceProfile" component={ProduceProfile} />
+                            <Route exact path="/listProduce" component={ListProduce} />
+                            <Route exact path="/previousOrders" component={PreviousOrders} />
+                            <Route exact path="/paymentSettings" component={PaymentSettings} />
+                            <Route exact path="/account" component={Account} />
+                            <Route exact path="/support" component={Support} />
+                            <Route exact path="/checkout">
+                                <Elements>
+                                    <Checkout />
+                                </Elements>
+                            </Route>
+                            <Route component={NotFound} />
+                        </Switch>
+                    </div>
+                </Router>
+            </PersistGate>
+        </Provider>
     </StripeProvider>
 )
 

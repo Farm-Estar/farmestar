@@ -32,35 +32,42 @@ function FeatureFarmsHome(props) {
     const { classes } = props
     let featuredFarmsDom
 
-
     //Use State
     const [count, setCount] = useState(Object.keys(props.user.auth.farms).length);
     const [farms, setFarms] = useState(props.user.auth.farms)
+    const [limit, setLimit] = useState(4)
+    let featuredFarm 
+    if (count > 3) {
+        featuredFarm = farms.slice(0, limit)
+    }else {
+        featuredFarm = farms
+    }
+    
 
-    if (count >= 3) {
+    if (count >= 4) {
         featuredFarmsDom =
             <div>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Paper className={classes.paper} onClick={props.user.featuredFarm}>
-                            <div className="farm-label">{farms[0].farmName}</div>
+                            <div className="farm-label">{featuredFarm[0].farmName}</div>
                         </Paper>
                     </Grid>
                     <Grid item xs={6}>
                         <Paper className={classes.paper}>
-                            <div className="farm-label">{farms[1].farmName}</div>
+                            <div className="farm-label">{featuredFarm[1].farmName}</div>
                         </Paper>
                     </Grid>
                 </Grid>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Paper className={classes.paper}>
-                            <div className="farm-label">{farms[2].farmName}</div>
+                            <div className="farm-label">{featuredFarm[2].farmName}</div>
                         </Paper>
                     </Grid>
                     <Grid item xs={6}>
                         <Paper className={classes.paper}>
-                            <div className="farm-label">{farms[3].farmName}</div>
+                            <div className="farm-label">{featuredFarm[3].farmName}</div>
                         </Paper>
                     </Grid>
                 </Grid>

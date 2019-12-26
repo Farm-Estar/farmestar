@@ -7,6 +7,7 @@ import {
     ADD_PRODUCE,
     ADD_TO_CART
 } from '../actions/types'
+import {REHYDRATE, PERSIST} from 'redux-persist/es/constants'
 
 
 const isEmpty = require("is-empty")
@@ -24,6 +25,12 @@ const initialState = {
 
 export default function(state = initialState, action) {
     switch (action.type) {
+        case REHYDRATE:
+            console.log(action.payload)
+            var incoming = action.payload.auth
+            if (incoming) return {...state, ...incoming}
+
+            return state
         case SET_CURRENT_USER:
             return {
                 ...state,
@@ -61,10 +68,3 @@ export default function(state = initialState, action) {
             return state        
     }
 }
-
-// case SET_FARMS:
-//             return{
-//                 ...state,
-//                 loading: true,
-//                 farms: action.payload.farms
-//             }

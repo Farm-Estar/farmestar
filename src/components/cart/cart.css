@@ -37,3 +37,9 @@
 .cart-list-container{
     margin-top: 5%;
 }
+
+.product-cart-detail-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

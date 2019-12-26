@@ -76,10 +76,6 @@ module.exports = {
         ]
       },
       {
-        test: /\.jpg$/,
-        use: [{ loader: "url-loader" }]
-      },
-      {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader']
       },

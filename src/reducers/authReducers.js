@@ -25,12 +25,12 @@ const initialState = {
 
 export default function(state = initialState, action) {
     switch (action.type) {
-        case REHYDRATE:
-            console.log(action.payload)
-            var incoming = action.payload.auth
-            if (incoming) return {...state, ...incoming}
+        // case REHYDRATE:
+        //     console.log(action.payload)
+        //     var incoming = action.payload.auth
+        //     if (incoming) return {...state, ...incoming}
 
-            return state
+        //     return state
         case SET_CURRENT_USER:
             return {
                 ...state,

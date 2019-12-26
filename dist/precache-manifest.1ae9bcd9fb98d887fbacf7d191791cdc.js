@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "080f22c26ef138724b78d12d16aa71cb",
+    "revision": "16f07a013580f44c066d7af84d57b969",
     "url": "/./index.html"
   },
   {
@@ -13,11 +13,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/4a1ab6ea60c4941cf728527e9ac7c96c.png"
   },
   {
-    "revision": "129d0c5fde36a6c86d4e",
+    "revision": "5ae803c33db3d01e1c70",
     "url": "/OneSignalSDKUpdaterWorker.js"
   },
   {
-    "revision": "77760970200e9fdf053e",
+    "revision": "bd7e2929acbbc85a4455",
     "url": "/OneSignalSDKWorker.js"
   },
   {
@@ -28,11 +28,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/favicon.ico"
   },
   {
-    "revision": "b8cebd2afb3f7132c5ad",
+    "revision": "5b32ed6db6035735c309",
     "url": "/main.css"
   },
   {
-    "revision": "b8cebd2afb3f7132c5ad",
+    "revision": "5b32ed6db6035735c309",
     "url": "/main.js"
   }
 ]);

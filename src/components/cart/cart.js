@@ -67,7 +67,17 @@ class Cart extends Component {
     constructor(props){
         super(props)
         this.state = {
+            cartTotal: 0
+        }
+    }
 
+    componentDidMount = () => {
+        this.calculateTotal()
+    }
+
+    componentDidUpdate = (prevProps) => {
+        if (prevProps !== this.props) {
+            this.calculateTotal()
         }
     }
 
@@ -76,10 +86,20 @@ class Cart extends Component {
         this.props.history.push("/checkout")
     }
 
+    calculateTotal = () => {
+        let total = 0
+        this.props.auth.cart.map((product) => {
+            total = total + product.total
+            this.setState({
+                cartTotal: total
+            })
+        })
+    }
+
     render() {
         return (
             <div>
-                <CartHeader />
+                <CartHeader total={this.state.cartTotal} />
                 <div className="cart-map-container">
                     <CartMap />
                 </div>
@@ -87,7 +107,7 @@ class Cart extends Component {
                     <CartProducts {...this.props}/>
                 </div>
                 <ThemeProvider theme={theme}>
-                    <div>
+                    <div className="signup_button" style={{ paddingLeft: "11.250px" }}>
                         <Button
                             component={Link}
                             to="/checkout"

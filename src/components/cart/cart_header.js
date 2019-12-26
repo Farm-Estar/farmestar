@@ -12,14 +12,15 @@ const theme = createMuiTheme({
     }
 })
 
-function CartHeader() {
+function CartHeader(props) {
+
     return (
         <ThemeProvider theme={theme}>
             <div className="container cart-header">
                 Cart
             </div>
             <div className="header-price-total">
-                $44.00
+                ${props.total}
             </div>
             <div className="total-text">
                 Total

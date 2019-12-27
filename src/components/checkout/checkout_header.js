@@ -13,8 +13,11 @@ const theme = createMuiTheme({
     }
 })
 
+const roundTotal = (total) => {
+    return (Math.round(total * 100) / 100).toFixed(2)
+}
+
 function CheckoutHeader(props) {
-    const tempTotal = 44
     return (
         <ThemeProvider theme={theme}>
             <div className="backbutton">
@@ -35,7 +38,7 @@ function CheckoutHeader(props) {
                Payment
             </div>
             <div className="checkout-total-header">
-                ${tempTotal}.00
+                {"$" + roundTotal(props.total)}
             </div>
         </ThemeProvider>
     )

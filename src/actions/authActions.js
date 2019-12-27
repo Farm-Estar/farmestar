@@ -262,6 +262,11 @@ export const produceProfile = (produce_data, history) => dispatch => {
               })
 }
 
+//Nav to Checkout
+export const checkout = (history) => dispatch => {
+    history.push("/checkout")
+}
+
 //Add To Cart
 export const addToCart = (product_data, history) => dispatch => {
     history.push("/dashboard")
@@ -289,6 +294,11 @@ export const chargeCard = (token_data, history) => dispatch => {
         )
 }
 
+
+//Checkout Continue Shopping
+export const continueShopping = (history) => dispatch => {
+    history.push("/dashboard")
+}
 
 //Feature Farms
 // export const featureFarmsFetch = (history) => {

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './checkout.css'
 import propTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import { createMuiTheme } from '@material-ui/core/styles'
@@ -13,7 +14,7 @@ import {
 } from 'react-stripe-elements';
 
 //Import Actions
-import { chargeCard } from '../../actions/authActions'
+import { chargeCard, continueShopping } from '../../actions/authActions'
 
 //Import Components
 import CheckoutHeader from './checkout_header'
@@ -126,6 +127,10 @@ class Checkout extends Component {
         }
     }
 
+    continueShopping = (e) => {
+        this.props.continueShopping(this.props.history)
+    }
+
 
     render() {
         //Checkout form styling outside of CSS injection
@@ -200,6 +205,7 @@ class Checkout extends Component {
                 </form>
                 <div className="checkout-form-button">
                     <Button
+                        onClick={this.continueShopping}
                         style={{
                             width: "90%",
                             height: "48pt",
@@ -219,11 +225,12 @@ class Checkout extends Component {
 
 Checkout.propTypes = {
     auth: propTypes.object.isRequired,
-    chargeCard: propTypes.func.isRequired
+    chargeCard: propTypes.func.isRequired,
+    continueShopping: propTypes.func.isRequired
 }
 
 const mapStatetoProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStatetoProps, { chargeCard })(injectStripe(Checkout))
+export default connect(mapStatetoProps, { chargeCard, continueShopping })(injectStripe(withRouter(Checkout)))

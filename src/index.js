@@ -34,6 +34,7 @@ import Support from './components/support/support'
 import Checkout from './components/checkout/checkout'
 import NotFound from './components/notfound/notfound';
 import PrivateRoute from './components/private-route/private-route'
+import Terms from './components/term_policies/terms';
 
 //Check to keep user logged in
 if (localStorage.jwtToken) {
@@ -83,6 +84,7 @@ const routing = (
                             <Route exact path="/paymentSettings" component={PaymentSettings} />
                             <Route exact path="/account" component={Account} />
                             <Route exact path="/support" component={Support} />
+                            <Route exact path="/terms" component={Terms} />
                             <Route exact path="/checkout">
                                 <Elements>
                                     <Checkout />

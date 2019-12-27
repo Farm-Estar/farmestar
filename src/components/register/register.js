@@ -221,6 +221,9 @@ class register extends React.Component {
                             >CONTINUE</Button>
                         </div>
                     </form>
+                    <div className="terms-policy-container">
+                        By logging in you agree to our {" "}<Link to="/terms"> terms and services policy</Link>
+                    </div>
                 </div>
                 <SignupFooter />
             </ThemeProvider>

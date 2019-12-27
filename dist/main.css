@@ -482,5 +482,19 @@ a {
     height: 20px;
     width: 80%;
   }
+.terms-iframe-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+}
+
+.terms-actions-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0%;
+}
 
 /*# sourceMappingURL=main.css.map*/

@@ -212,30 +212,17 @@ users.post("/updatePassword", (req, res) => {
         if (!token) {
             return res.status(400).send({ type: 'not-verified', msg: 'We were unable to find a valid token. Your token my have expired.' })
         } else {
-            User.findOne({ email: req.body.email }, (err, user) => {
-                if (!user) {
-                    return res.status(400).send({ type: 'no-email', msg: 'This user could not be found. Please try again.' })
-                } else {
-                    const newUser = new User({
-                        name: user.name,
-                        email: user.email,
-                        password: req.body.password,
-                        isFarmer: user.isFarmer
+            //Hash Password before persisting back to DB
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(req.body.password, salt, (err, hash) => {
+                    if (err) throw err;
+                    User.findOneAndUpdate({ email: req.body.email }, { $set: { password: hash } }, { new: true }, (err, user) => {
+                        if (err) {
+                            res.json(err)
+                        }
+                        res.json("User has updated passwor, User: " + JSON.stringify(user));
                     })
-                    //Hash Password before persisting back to DB
-                    bcrypt.genSalt(10, (err, salt) => {
-                        bcrypt.hash(newUser.password, salt, (err, hash) => {
-                            if (err) throw err;
-                            newUser.password = hash;
-                            newUser
-                                .save()
-                                .then(user => {
-                                    res.json(user.email + ' has updated their password succesfully.')
-                                })
-                                .catch(err => res.json(err))
-                        })
-                    })
-                }
+                })
             })
         }
 
@@ -247,18 +234,18 @@ users.post("/updatePassword", (req, res) => {
 // @Access Private
 users.post("/charge", async (req, res) => {
     try {
-        let {status} = await stripe.charges.create({
-          amount: req.body.total,
-          currency: "usd",
-          description: "Farm Estar Purchase",
-          source: req.body.tokenId
+        let { status } = await stripe.charges.create({
+            amount: req.body.total,
+            currency: "usd",
+            description: "Farm Estar Purchase",
+            source: req.body.tokenId
         });
-    
-        res.json({status});
-      } catch (err) {
+
+        res.json({ status });
+    } catch (err) {
         console.log(err);
         res.status(500).end();
-      }
+    }
 })
 
 // @route GET api/users/dashboard

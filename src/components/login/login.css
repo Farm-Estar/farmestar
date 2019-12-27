@@ -49,3 +49,11 @@
 .login_button {
     margin-top: 20px;
 }
+
+.terms-policy-container {
+    font-size: small;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 13%;
+}

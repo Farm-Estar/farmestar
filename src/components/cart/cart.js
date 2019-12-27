@@ -4,8 +4,11 @@ import propTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
-import { Link } from 'react-router-dom'
+import { withRouter} from 'react-router'
 import Button from '@material-ui/core/Button'
+
+//Import Actions
+import {checkout} from '../../actions/authActions'
 
 //Import Components
 import CartHeader from './cart_header'
@@ -81,11 +84,6 @@ class Cart extends Component {
         }
     }
 
-    payClick = () => {
-        // eslint-disable-next-line react/prop-types
-        this.props.history.push("/checkout")
-    }
-
     calculateTotal = () => {
         let total = 0
         this.props.auth.cart.map((product) => {
@@ -94,6 +92,10 @@ class Cart extends Component {
                 cartTotal: total
             })
         })
+    }
+
+    checkoutHandle = () => {
+        this.props.checkout(this.props.history)
     }
 
     render() {
@@ -109,8 +111,7 @@ class Cart extends Component {
                 <ThemeProvider theme={theme}>
                     <div className="signup_button" style={{ paddingLeft: "11.250px" }}>
                         <Button
-                            component={Link}
-                            to="/checkout"
+                            onClick={this.checkoutHandle}
                             style={{
                                 width: "90%",
                                 height: "48pt",
@@ -129,8 +130,12 @@ class Cart extends Component {
     }
 }
 
+Cart.propTypes = {
+    checkout: propTypes.func.isRequired
+}
+
 const mapStatetoProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStatetoProps, {})(Cart)
+export default connect(mapStatetoProps, {checkout})(withRouter(Cart))

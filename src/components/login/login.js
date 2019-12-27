@@ -206,6 +206,9 @@ export class login extends Component {
                             }}
                         >Login as Guest</Button>
                     </div>
+                    <div className="terms-policy-container">
+                        By logging in you agree to our {" "}<Link to="/terms"> terms and services policy</Link>
+                    </div>
                 </div>
                 <LoginFooter />
             </ThemeProvider>

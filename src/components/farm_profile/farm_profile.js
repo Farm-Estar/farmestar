@@ -95,6 +95,27 @@ class FarmProfile extends Component {
     }
 
     render() {
+        let produceButton 
+
+        if (this.props.auth.user.isFarmer == true) {
+            produceButton = <Button
+            style={{
+                width: "30%",
+                height: "48pt",
+                borderRadius: "3px",
+                letterSpacing: "1.5px",
+                marginTop: "1rem",
+                marginLeft: "13px"
+            }}
+            type="submit"
+            variant="contained"
+            color="primary"
+            onClick={this.addProduct}
+        ><LibraryAddIcon /></Button>
+        } else {
+            produceButton = null
+        }
+
         return (
             <ThemeProvider theme={theme}>
                 {/* Layout of the farm profile */}
@@ -121,20 +142,7 @@ class FarmProfile extends Component {
                             color="primary"
                             onClick={this.viewMenu}
                         >Menu</Button>
-                        {this.props.location.state.isFarmer ? <Button
-                            style={{
-                                width: "30%",
-                                height: "48pt",
-                                borderRadius: "3px",
-                                letterSpacing: "1.5px",
-                                marginTop: "1rem",
-                                marginLeft: "13px"
-                            }}
-                            type="submit"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.addProduct}
-                        ><LibraryAddIcon /></Button> : null}
+                        {produceButton}
                     </div>
                 </div>
                 <div className="farm-profile-map">

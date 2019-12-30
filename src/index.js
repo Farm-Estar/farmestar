@@ -9,6 +9,14 @@ import { Provider } from 'react-redux'
 import { store, persistor } from './config/store'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import { Elements, StripeProvider } from 'react-stripe-elements'
+import {firebaseAPIKey, firebaseAuthdomain, firebaseDBUrl, firebaseProjectID,
+firebaseStorageBucket,firebaseMessagingSenderId, firebaseAppID, firebaseMeasurementId} from './config/keys'
+import FileUploader from 'react-firebase-file-uploader'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
+import 'firebase/analytics'
+import 'firebase/storage'
 // import { ThemeProvider } from '@material-ui/core/styles'
 // import * as serviceWorker from './serviceWorker';
 
@@ -105,6 +113,21 @@ ReactDOM.render(routing, document.getElementById('root'));
 if (typeof (module.hot) !== 'undefined') {
     module.hot.accept() // eslint-disable-line no-undef
 }
+
+//Firebase Configuration
+var firebaseConfig = {
+    apiKey: firebaseAPIKey,
+    authDomain: firebaseAuthdomain,
+    databaseURL: firebaseDBUrl,
+    projectId: firebaseProjectID,
+    storageBucket: firebaseStorageBucket,
+    messagingSender: firebaseMessagingSenderId,
+    appId: firebaseAppID,
+    measurementId: firebaseMeasurementId
+}
+
+firebase.initializeApp(firebaseConfig)
+firebase.analytics()
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

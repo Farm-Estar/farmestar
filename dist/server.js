@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("module.exports = {\n  mongoURI: \"mongodb+srv://admin:6JsteBFmfKQUcqq0@cluster0-gaygc.mongodb.net/farmestar?retryWrites=true&w=majority\",\n  userAuthKey: \"MTZlNWI0ZGQtODVmNC00NDliLTk3ODYtOTFkODE0NmUxYmQz\",\n  appAuthKey: \"NDYyMDU0YmEtOGM5OS00YTQ2LTgxY2UtZGRjNTI5ZDI4OTgw\",\n  appId: \"61035d16-4f24-4696-8645-cf5c54e20787\",\n  sendgridKey: \"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\",\n  secretOrKey: \"secret\"\n};\n\n//# sourceURL=webpack:///./src/config/keys.js?");
+eval("module.exports = {\n  mongoURI: \"mongodb+srv://admin:6JsteBFmfKQUcqq0@cluster0-gaygc.mongodb.net/farmestar?retryWrites=true&w=majority\",\n  userAuthKey: \"MTZlNWI0ZGQtODVmNC00NDliLTk3ODYtOTFkODE0NmUxYmQz\",\n  appAuthKey: \"NDYyMDU0YmEtOGM5OS00YTQ2LTgxY2UtZGRjNTI5ZDI4OTgw\",\n  appId: \"61035d16-4f24-4696-8645-cf5c54e20787\",\n  sendgridKey: \"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\",\n  secretOrKey: \"secret\",\n  firebaseAPIKey: \"AIzaSyA2IjtW7jbl1_2m1CJ68lYGGnTHQAFu8DI\",\n  firebaseAuthDomain: \"farm-estar.firebaseapp.com\",\n  firebaseDBUrl: \"https://farm-estar.firebaseio.com\",\n  firebaseProjectID: \"farm-estar\",\n  firebaseStorageBucket: \"farm-estar.appspot.com\",\n  firebaseAppID: \"1:980885994768:web:ab15ff912f8dcb96b9f995\",\n  firebaseMeasurementId: \"G-GPX1EL4KC8\",\n  firebaseMessagingSenderId: \"980885994768\"\n};\n\n//# sourceURL=webpack:///./src/config/keys.js?");
 
 /***/ }),
 

@@ -75,7 +75,7 @@ class ProduceProfile extends Component {
         super(props)
         this.state = {
             produce: { ...this.props.location.state },
-            qty: 0,
+            qty: 1,
             total: this.props.location.state.price
         }
     }

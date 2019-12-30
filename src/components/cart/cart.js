@@ -109,7 +109,7 @@ class Cart extends Component {
                     <CartProducts {...this.props}/>
                 </div>
                 <ThemeProvider theme={theme}>
-                    <div className="signup_button" style={{ paddingLeft: "11.250px" }}>
+                    <div className="" style={{ paddingLeft: "11.250px" }}>
                         <Button
                             onClick={this.checkoutHandle}
                             style={{

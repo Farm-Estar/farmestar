@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import propTypes from 'prop-types'
 import { connect } from 'react-redux'
 import './farm_profile.css'
+import {convertToBoolean} from '../../utils/setAuthToken'
 import Button from '@material-ui/core/Button'
 import GoogleMapReact from 'google-map-react'
 import classnames from 'classnames'
@@ -11,7 +12,7 @@ import { ThemeProvider } from '@material-ui/styles'
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 
 //Import Actions
-import {toProduce, toListProduce} from '../../actions/authActions'
+import { toProduce, toListProduce } from '../../actions/authActions'
 
 //Map Configure
 const Marker = ({ text }) => <div>{text}</div>
@@ -80,39 +81,61 @@ class FarmProfile extends Component {
                 lat: 59.95,
                 lng: 30.33
             },
-            zoom: 11
+            zoom: 11,
+            isFarmer: props.auth.user.isFarmer
+        }
+    }
+
+    // componentDidMount = () => {
+    //     this.updateFarmerState
+    // }
+
+    // componentDidUpdate = (prevProps) => {
+    //     if (prevProps !== this.props) {
+    //         this.updateFarmerState
+    //     }
+    // }
+
+    updateFarmerState = () => {
+        if (this.props.auth) {
+            let farmerStatus = this.props.auth.user.isFarmer
+            this.setState({
+                isFarmer: farmerStatus
+            })
         }
     }
 
     addProduct = () => {
-        const farm_data = {...this.props.location.state}
+        const farm_data = { ...this.props.location.state }
         this.props.toProduce(farm_data, this.props.history)
     }
 
     viewMenu = () => {
-        const farm_data = {...this.props.location.state}
+        const farm_data = { ...this.props.location.state }
         this.props.toListProduce(farm_data, this.props.history)
     }
 
     render() {
-        let produceButton 
+        let produceButton
 
-        if (this.props.auth.user.isFarmer == true) {
+        if (convertToBoolean(this.state.isFarmer)) {
+            console.log("User Is Farmer")
             produceButton = <Button
-            style={{
-                width: "30%",
-                height: "48pt",
-                borderRadius: "3px",
-                letterSpacing: "1.5px",
-                marginTop: "1rem",
-                marginLeft: "13px"
-            }}
-            type="submit"
-            variant="contained"
-            color="primary"
-            onClick={this.addProduct}
-        ><LibraryAddIcon /></Button>
+                style={{
+                    width: "30%",
+                    height: "48pt",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px",
+                    marginTop: "1rem",
+                    marginLeft: "13px"
+                }}
+                type="submit"
+                variant="contained"
+                color="primary"
+                onClick={this.addProduct}
+            ><LibraryAddIcon /></Button>
         } else {
+            console.log("User Is NOT Farmer")
             produceButton = null
         }
 
@@ -174,4 +197,4 @@ const mapStateToProps = state => ({
 })
 
 
-export default connect(mapStateToProps, {toProduce, toListProduce})(FarmProfile)
+export default connect(mapStateToProps, { toProduce, toListProduce })(FarmProfile)

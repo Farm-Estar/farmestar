@@ -54,19 +54,19 @@ function FeatureFarmsHome(props) {
                         </Paper>
                     </Grid>
                     <Grid item xs={6}>
-                        <Paper className={classes.paper}>
+                        <Paper className={classes.paper} onClick={props.user.featuredFarm}>
                             <div className="farm-label">{featuredFarm[1].farmName}</div>
                         </Paper>
                     </Grid>
                 </Grid>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
-                        <Paper className={classes.paper}>
+                        <Paper className={classes.paper} onClick={props.user.featuredFarm}>
                             <div className="farm-label">{featuredFarm[2].farmName}</div>
                         </Paper>
                     </Grid>
                     <Grid item xs={6}>
-                        <Paper className={classes.paper}>
+                        <Paper className={classes.paper} onClick={props.user.featuredFarm}>
                             <div className="farm-label">{featuredFarm[3].farmName}</div>
                         </Paper>
                     </Grid>

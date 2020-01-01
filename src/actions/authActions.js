@@ -136,6 +136,7 @@ export const setUserLoading = () => {
 export const logout = (history) => dispatch => {
     //Remove token
     localStorage.removeItem("jwtToken")
+    localStorage.removeItem("persist:root")
     //Remove Header
     setAuthToken(false)
     //Reset User
@@ -301,28 +302,3 @@ export const chargeCard = (token_data, history) => dispatch => {
 export const continueShopping = (history) => dispatch => {
     history.push("/dashboard")
 }
-
-//Feature Farms
-// export const featureFarmsFetch = (history) => {
-//     history.push("/featuredFarms")
-// }
-// export const featureFarmsFetch = (history) => dispatch => {
-//     axios
-//     .get("/api/farm/farms")
-//     .then(res => {
-//         const _farms  = res.data.farms
-//         console.log("From from API Call: " +JSON.stringify(_farms))
-//         //Set Farms
-//         dispatch({
-//             type:SET_FARMS,
-//             payload: _farms
-//         })
-//         history.push("/featuredFarms")
-//     })
-//     .catch(err =>
-//         dispatch({
-//             type: GET_ERRORS,
-//             payload: err.response.data
-//         })
-//     )  
-// }

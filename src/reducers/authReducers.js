@@ -25,12 +25,6 @@ const initialState = {
 
 export default function(state = initialState, action) {
     switch (action.type) {
-        // case REHYDRATE:
-        //     console.log(action.payload)
-        //     var incoming = action.payload.auth
-        //     if (incoming) return {...state, ...incoming}
-
-        //     return state
         case SET_CURRENT_USER:
             return {
                 ...state,
@@ -39,7 +33,8 @@ export default function(state = initialState, action) {
                 farms: action.payload.farms,
                 produce: action.payload.produce,
                 reviews: action.payload.reviews,
-                profiles: action.payload.profiles
+                profiles: action.payload.profiles,
+                cart:[]
             }
         case USER_LOADING:
             return {

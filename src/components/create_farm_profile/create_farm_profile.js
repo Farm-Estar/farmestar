@@ -6,6 +6,12 @@ import propTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 import { withRouter } from 'react-router-dom'
+import firebase from "firebase/app";
+import 'firebase/auth'
+import 'firebase/firestore'
+import 'firebase/analytics'
+import 'firebase/storage'
+import FileUploader from 'react-firebase-file-uploader'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -16,6 +22,9 @@ import { addProfile } from '../../actions/farmActions'
 
 //Import Components
 import CreateFarmProfileHeader from './create_farm_profile_header'
+
+//Init Firbase Storage
+// const storage = firebase.storage().ref("farm_profiles")
 
 const theme = createMuiTheme({
     palette: {
@@ -81,7 +90,9 @@ class CreateFarmProfile extends React.Component {
             farm: props.location.state.farmId,
             displayName: "",
             description: "",
-            image: "",
+            image:"",
+            imageUrl: "",
+            disableContinue: true,
             errors: {}
         }
     }
@@ -92,13 +103,29 @@ class CreateFarmProfile extends React.Component {
             if (this.state.errors !== this.props.errors) {
                 this.setState(this.props)
             }
-            //Perist Form Info
-            //Run console test to see prevProps vs Props on page refrsh against errors
         }
     }
 
+
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value })
+    }
+
+    handleImageUpload = () => {
+        //Handle anything visual to represent image upload
+    }
+
+    handleUploadSuccess = filename => {
+        const storage = firebase.storage().ref("farm_profiles")
+        //Get Image URL for persistance to MongoDB
+        storage.child(filename).getDownloadURL()
+            .then(url => {
+                this.setState({
+                    imageUrl: url,
+                    image: filename,
+                    disableContinue: false
+                })
+            })
     }
 
     onSubmit = e => {
@@ -109,7 +136,7 @@ class CreateFarmProfile extends React.Component {
             farm: this.state.farm,
             displayName: this.state.displayName,
             description: this.state.description,
-            image: this.state.image
+            imageUrl: this.state.imageUrl
         }
 
         // eslint-disable-next-line react/prop-types
@@ -119,6 +146,8 @@ class CreateFarmProfile extends React.Component {
 
     render() {
         const { errors } = this.state
+        const storage = firebase.storage().ref("farm_profiles")
+        
         return (
             <ThemeProvider theme={theme}>
                 <CreateFarmProfileHeader />
@@ -164,8 +193,15 @@ class CreateFarmProfile extends React.Component {
                             />
                             <span style={{ color: theme.palette.error.main }}>{errors.description}</span>
                         </div>
-                        <div>
-                            <TextField
+                        <div className="image-upload-container">
+                            <FileUploader 
+                                accept="image/*"
+                                name="image"
+                                storageRef={storage}
+                                onUploadStart={this.handleImageUpload}
+                                onUploadSuccess={this.handleUploadSuccess}
+                            />
+                            {/* <TextField
                                 required
                                 onChange={this.onChange}
                                 value={this.state.image}
@@ -182,7 +218,7 @@ class CreateFarmProfile extends React.Component {
                                 }}
                                 className={classnames("signup_textfield", { invalid: errors.image })}
                             />
-                            <span style={{ color: theme.palette.error.main }}>{errors.image}</span>
+                            <span style={{ color: theme.palette.error.main }}>{errors.image}</span> */}
                         </div>
                         <div className="signup_button" style={{ paddingLeft: "11.250px" }}>
                             <Button
@@ -196,6 +232,7 @@ class CreateFarmProfile extends React.Component {
                                 type="submit"
                                 variant="contained"
                                 color="primary"
+                                disabled={this.state.disableContinue}
                             >CONTINUE</Button>
                         </div>
                     </form>

@@ -13,6 +13,7 @@ import {
     ADD_TO_CART
 } from './types'
 import { get } from 'http'
+import { persistCombineReducers } from 'redux-persist'
 
 //Register User
 export const registerUser = (userData, history) => dispatch => {
@@ -176,7 +177,8 @@ export const farmProfile = (farm_data, history) => dispatch => {
                 displayName: res.data.displayName,
                 description: res.data.description,
                 isFarmer: payload.isFarmer,
-                farm: payload.farm_id
+                farm: payload.farm_id,
+                imageUrl: res.data.imageUrl
             }
 
             dispatch({

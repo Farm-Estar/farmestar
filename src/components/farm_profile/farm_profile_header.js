@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
@@ -13,7 +14,7 @@ const theme = createMuiTheme({
     }
 })
 
-function FarmProfileHeader() {
+function FarmProfileHeader(props) {
     return (
         <ThemeProvider theme={theme}>
             <div className="backbutton">
@@ -34,7 +35,7 @@ function FarmProfileHeader() {
                 Farm Profile
         </div>
             <div className="profile_pic_container">
-                <img src={profile_pic}></img>
+                <img src={props.profilePic}></img>
             </div>
         </ThemeProvider>
     )

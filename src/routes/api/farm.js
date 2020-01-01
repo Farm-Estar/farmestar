@@ -30,6 +30,7 @@ farms.post("/add", (req, res) => {
         city: req.body.city,
         zipcode: req.body.zipcode,
         state: req.body.state,
+        imageUrl: req.body.imageUrl,
         farmerType: req.body.farmerType
     })
 
@@ -53,7 +54,7 @@ farms.post("/addFarmProfile", (req, res) => {
         farm: req.body.farm,
         displayName: req.body.displayName,
         description: req.body.description,
-        image: req.body.image
+        imageUrl: req.body.imageUrl
     })
 
     //Save new farmer profile to the DB

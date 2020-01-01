@@ -86,16 +86,6 @@ class FarmProfile extends Component {
         }
     }
 
-    // componentDidMount = () => {
-    //     this.updateFarmerState
-    // }
-
-    // componentDidUpdate = (prevProps) => {
-    //     if (prevProps !== this.props) {
-    //         this.updateFarmerState
-    //     }
-    // }
-
     updateFarmerState = () => {
         if (this.props.auth) {
             let farmerStatus = this.props.auth.user.isFarmer
@@ -142,7 +132,7 @@ class FarmProfile extends Component {
         return (
             <ThemeProvider theme={theme}>
                 {/* Layout of the farm profile */}
-                <FarmProfileHeader />
+                <FarmProfileHeader profilePic={this.props.location.state.imageUrl} />
                 {/* FarmProfile Body incl. Name, Menu  button and Description & map */}
                 <div className="farm-profile-body">
                     <div className="farm-profile-name">

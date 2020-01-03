@@ -194,6 +194,7 @@ class CreateFarmProfile extends React.Component {
                             <span style={{ color: theme.palette.error.main }}>{errors.description}</span>
                         </div>
                         <div className="image-upload-container">
+                            <label>Prefered Image Size: 411x232</label>
                             <FileUploader 
                                 accept="image/*"
                                 name="image"
@@ -201,24 +202,9 @@ class CreateFarmProfile extends React.Component {
                                 onUploadStart={this.handleImageUpload}
                                 onUploadSuccess={this.handleUploadSuccess}
                             />
-                            {/* <TextField
-                                required
-                                onChange={this.onChange}
-                                value={this.state.image}
-                                id="image"
-                                type="text"
-                                margin="normal"
-                                label="Upload a Picture"
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <AddAPhotoIcon />
-                                        </InputAdornment>
-                                    )
-                                }}
-                                className={classnames("signup_textfield", { invalid: errors.image })}
-                            />
-                            <span style={{ color: theme.palette.error.main }}>{errors.image}</span> */}
+                            
+                            {/* maxHeight="232px"
+                                maxWidth="411px" */}
                         </div>
                         <div className="signup_button" style={{ paddingLeft: "11.250px" }}>
                             <Button

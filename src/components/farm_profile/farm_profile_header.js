@@ -35,7 +35,7 @@ function FarmProfileHeader(props) {
                 Farm Profile
         </div>
             <div className="profile_pic_container">
-                <img src={props.profilePic}></img>
+                <img height="232px" width="375" src={props.profilePic}></img>
             </div>
         </ThemeProvider>
     )

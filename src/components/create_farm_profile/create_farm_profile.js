@@ -194,6 +194,7 @@ class CreateFarmProfile extends React.Component {
                             <span style={{ color: theme.palette.error.main }}>{errors.description}</span>
                         </div>
                         <div className="image-upload-container">
+                            <label>Prefered Image Size: 411x232</label>
                             <FileUploader 
                                 accept="image/*"
                                 name="image"
@@ -201,6 +202,9 @@ class CreateFarmProfile extends React.Component {
                                 onUploadStart={this.handleImageUpload}
                                 onUploadSuccess={this.handleUploadSuccess}
                             />
+                            
+                            {/* maxHeight="232px"
+                                maxWidth="411px" */}
                         </div>
                         <div className="signup_button" style={{ paddingLeft: "11.250px" }}>
                             <Button

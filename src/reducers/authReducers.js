@@ -1,5 +1,6 @@
 import {
     SET_CURRENT_USER,
+    SET_GUEST_USER,
     USER_LOADING,
     SET_FARMS,
     SET_REVIEWS,
@@ -14,6 +15,7 @@ const isEmpty = require("is-empty")
 
 const initialState = {
     isAuthenticated: false,
+    isGuest: false,
     user: {},
     farms: [],
     reviews: [],
@@ -36,6 +38,16 @@ export default function(state = initialState, action) {
                 profiles: action.payload.profiles,
                 cart:[]
             }
+        case SET_GUEST_USER:
+            return{
+                ...state,
+                isAuthenticated: !isEmpty(action.payload),
+                isGuest: true,
+                farms: action.payload.farms,
+                produce: action.payload.produce,
+                profiles: action.payload.profiles,
+                cart:[]
+            }        
         case USER_LOADING:
             return {
                 ...state,

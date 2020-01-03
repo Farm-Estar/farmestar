@@ -7,13 +7,15 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import propTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { loginUser, setupDashboard } from '../../actions/authActions'
 import classnames from 'classnames'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import PersonIcon from '@material-ui/icons/Person';
 import LockIcon from '@material-ui/icons/Lock';
+
+//Import Actions
+import { loginUser, setupDashboard, loginGuest } from '../../actions/authActions'
 
 //Import Components
 import { LoginHeader } from './login_header'
@@ -112,9 +114,11 @@ export class login extends Component {
             password: this.state.password
         }
 
-        // TODO: Will wan to persist this call better for Dashboard
-        // this.props.setupDashboard()
         this.props.loginUser(userData)
+    }
+
+    onGuestLogin = e => {
+        this.props.loginGuest()
     }
 
     render() {
@@ -194,8 +198,7 @@ export class login extends Component {
                     </form>
                     <div>
                         <Button
-                            component={Link}
-                            to="/dashboard"
+                            onClick={this.onGuestLogin}
                             style={{
                                 width: "90%",
                                 height: "48pt",
@@ -218,6 +221,7 @@ export class login extends Component {
 
 login.propTypes = {
     loginUser: propTypes.func.isRequired,
+    loginGuest: propTypes.func.isRequired,
     setupDashboard: propTypes.func.isRequired,
     auth: propTypes.object.isRequired,
     errors: propTypes.object.isRequired
@@ -228,4 +232,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 })
 
-export default connect(mapStateToProps, { loginUser, setupDashboard })(login)
+export default connect(mapStateToProps, { loginUser, setupDashboard, loginGuest })(login)

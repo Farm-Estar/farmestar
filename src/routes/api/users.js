@@ -161,6 +161,88 @@ users.post("/login", (req, res) => {
         })
 })
 
+// @route POST api/users/guestLogin
+// @desc Guest Login users
+// @access Public
+users.post("/guestLogin", (req, res) =>{
+    //ToDo: Add Validation so no tamper
+
+    //Setup Payload for GuestUser
+    const email = "Guest@FarmEstar.com"
+    const password = "GuestUser"
+    const payload = {
+        user: {
+            id: "",
+            name: "",
+            email: ""
+        },
+        token: "",
+        isFarmer: "",
+        success: false,
+        farms: [],
+        produce: [],
+        reviews: [],
+        profiles: []
+    }
+
+    //Find and Map Guest User
+    User.findOne({email})
+        .then(user => {
+            if (!user) {
+                return res.status(404).json({ emailnotfound: "Guest User Not Applicable, Please create a profile or try again later." }) 
+            }
+
+            //Set Guest Details
+            payload.user.id = user.id
+            payload.user.name = user.name
+            payload.user.email = user.email
+            payload.user.isFarmer = user.isFarmer
+
+            //Tokenization for use tracking
+            bcrypt.compare(password, user.password)
+                .then(isMatch => {
+                    if (isMatch) {
+                        //Sign Token
+                        jwt.sign(payload.user, keys.secretOrKey,
+                            {
+                                expiresIn: 31556926
+                            },
+                            (err, token) => {
+                                //Get Farms
+                                Farm.find({}, function (err, farms) {
+                                    farms.forEach(function (farm) {
+                                        payload.farms.push(farm)
+                                    })
+
+                                    FarmProfile.find({}, function (err, profiles) {
+                                        profiles.forEach(function (profile) {
+                                            payload.profiles.push(profile)
+                                        })
+
+                                        Produce.find({}, function (err, produce) {
+                                            produce.forEach(function (item) {
+                                                payload.produce.push(item)
+                                            })
+
+                                            //Set Payload
+                                            payload.success = true
+                                            payload.token = "Bearer " + token
+
+
+                                            res.json(payload)
+                                        })
+                                    })
+                                })
+                            })
+                    } else {
+                        return res
+                            .status(400)
+                            .json({ passwordincorrect: "Password error for guest login" })
+                    }
+                })
+        })
+})
+
 // @route POST api/users/forgotPassword
 // @desc Request a token to reset password
 // @access Public

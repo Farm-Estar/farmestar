@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode'
 import {
     GET_ERRORS,
     SET_CURRENT_USER,
+    SET_GUEST_USER,
     USER_LOADING,
     SET_FARMS,
     SET_REVIEWS,
@@ -86,6 +87,40 @@ export const loginUser = userData => dispatch => {
         )
 }
 
+//Guest Login
+export const loginGuest = () => dispatch => {
+    axios
+    .post("/api/users/guestLogin")
+    .then(res => {
+        //Set token to LocalStorage
+        const token = res.data.token
+        const _farms = res.data.farms
+        const _reviews = res.data.reviews
+        const _produce = res.data.produce
+        const _profiles = res.data.profiles
+
+        localStorage.setItem("jwtToken", token)
+        //Set token to header
+        setAuthToken(token)
+        //Decode token
+        const payload = {
+            user: jwt_decode(token),
+            farms: _farms,
+            reviews: _reviews,
+            produce: _produce,
+            profiles: _profiles
+        }
+        //Set User
+        dispatch(setGuestUser(payload))
+    })
+    .catch(err =>
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        })
+    )
+}
+
 //Dashboard
 export const setupDashboard = dispatch => {
     axios
@@ -105,6 +140,14 @@ export const setupDashboard = dispatch => {
 export const setCurrentUser = decoded => {
     return {
         type: SET_CURRENT_USER,
+        payload: decoded
+    }
+}
+
+//Set Guest User
+export const setGuestUser = decoded => {
+    return {
+        type: SET_GUEST_USER,
         payload: decoded
     }
 }

@@ -201,24 +201,6 @@ class CreateFarmProfile extends React.Component {
                                 onUploadStart={this.handleImageUpload}
                                 onUploadSuccess={this.handleUploadSuccess}
                             />
-                            {/* <TextField
-                                required
-                                onChange={this.onChange}
-                                value={this.state.image}
-                                id="image"
-                                type="text"
-                                margin="normal"
-                                label="Upload a Picture"
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <AddAPhotoIcon />
-                                        </InputAdornment>
-                                    )
-                                }}
-                                className={classnames("signup_textfield", { invalid: errors.image })}
-                            />
-                            <span style={{ color: theme.palette.error.main }}>{errors.image}</span> */}
                         </div>
                         <div className="signup_button" style={{ paddingLeft: "11.250px" }}>
                             <Button

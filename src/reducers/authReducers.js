@@ -1,6 +1,7 @@
 import {
     SET_CURRENT_USER,
     SET_GUEST_USER,
+    CLEAR_GUEST_USER,
     USER_LOADING,
     SET_FARMS,
     SET_REVIEWS,
@@ -42,12 +43,17 @@ export default function(state = initialState, action) {
             return{
                 ...state,
                 isAuthenticated: !isEmpty(action.payload),
+                user: action.payload.user,
                 isGuest: true,
                 farms: action.payload.farms,
                 produce: action.payload.produce,
                 profiles: action.payload.profiles,
                 cart:[]
-            }        
+            }
+        case CLEAR_GUEST_USER:
+            return{
+                isGuest: false
+            }            
         case USER_LOADING:
             return {
                 ...state,

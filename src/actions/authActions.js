@@ -6,6 +6,7 @@ import {
     GET_ERRORS,
     SET_CURRENT_USER,
     SET_GUEST_USER,
+    CLEAR_GUEST_USER,
     USER_LOADING,
     SET_FARMS,
     SET_REVIEWS,
@@ -152,6 +153,14 @@ export const setGuestUser = decoded => {
     }
 }
 
+//Clear Guest User
+export const clearGuestUser = decoded => {
+    return {
+        type:CLEAR_GUEST_USER,
+        payload: decoded
+    }
+}
+
 //Set Farms
 export const setFarms = farms => {
     return {
@@ -184,6 +193,7 @@ export const logout = (history) => dispatch => {
     setAuthToken(false)
     //Reset User
     dispatch(setCurrentUser({}))
+    dispatch(clearGuestUser({}))
     history.push("/")
 }
 

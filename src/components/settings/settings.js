@@ -51,7 +51,7 @@ class Settings extends Component {
         return (
             <div>
                 <DashboardHeader />
-                <SettingsHeader auth={this.props.auth}/>
+                <SettingsHeader auth={this.props.auth} isGuest={this.props.isGuest}/>
                 <SettingsList actions={{logout:this.logout, orders: this.previousOrders, paymentSettings: this.paymentSettings, account: this.account, support: this.support}} />
             </div>
         )

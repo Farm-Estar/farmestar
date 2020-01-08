@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import propTypes from 'prop-types'
 import { connect } from 'react-redux'
 import './farm_profile.css'
-import {convertToBoolean} from '../../utils/setAuthToken'
+import { convertToBoolean } from '../../utils/setAuthToken'
 import Button from '@material-ui/core/Button'
 import GoogleMapReact from 'google-map-react'
 import classnames from 'classnames'
@@ -82,7 +82,20 @@ class FarmProfile extends Component {
                 lng: 30.33
             },
             zoom: 11,
-            isFarmer: props.auth.user.isFarmer
+            isFarmer: props.auth.user.isFarmer,
+            myFarm: false
+        }
+    }
+
+    componentDidMount = () => {
+        //Check if Is current users farm
+        const farmerId = this.props.auth.user.id
+        const farmsFarmer = this.props.location.state.farm.farmer
+
+        if (farmerId === farmsFarmer) {
+            this.setState({
+                myFarm: true
+            })
         }
     }
 
@@ -101,15 +114,18 @@ class FarmProfile extends Component {
     }
 
     viewMenu = () => {
-        const farm_data = { ...this.props.location.state }
+        const farm_data = {
+            ...this.props.location.state,
+            myFarm: this.state.myFarm
+        }
         this.props.toListProduce(farm_data, this.props.history)
     }
 
     render() {
         let produceButton
 
-        if (convertToBoolean(this.state.isFarmer)) {
-            console.log("User Is Farmer")
+        //Filter Product Button to only Current Farmer
+        if (convertToBoolean(this.state.isFarmer) && this.state.myFarm) {
             produceButton = <Button
                 style={{
                     width: "30%",
@@ -125,7 +141,6 @@ class FarmProfile extends Component {
                 onClick={this.addProduct}
             ><LibraryAddIcon /></Button>
         } else {
-            console.log("User Is NOT Farmer")
             produceButton = null
         }
 

@@ -36,11 +36,11 @@ farms.post("/add", (req, res) => {
 
     //Save new farm to the DB
     farm
-      .save()
-      .then(farm => {
-          res.json(farm)
+        .save()
+        .then(farm => {
+            res.json(farm)
         })
-      .catch(err => res.json(err))
+        .catch(err => res.json(err))
 })
 
 // @route POST api/farm/addProfile
@@ -59,11 +59,11 @@ farms.post("/addFarmProfile", (req, res) => {
 
     //Save new farmer profile to the DB
     profile
-      .save()
-      .then(profile => {
-          res.json(profile)
-      })
-      .catch(err => res.json(err))
+        .save()
+        .then(profile => {
+            res.json(profile)
+        })
+        .catch(err => res.json(err))
 })
 
 
@@ -72,11 +72,11 @@ farms.post("/addFarmProfile", (req, res) => {
 // @access Public
 farms.get("/farms", (req, res) => {
     const payload = {
-        farms:[]
+        farms: []
     }
 
     //Get Farms
-    Farm.find({}, function(err, farms){
+    Farm.find({}, function (err, farms) {
         farms.forEach((farm) => {
             payload.farms.push(farm)
         })
@@ -92,10 +92,10 @@ farms.post("/farmProfile", (req, res) => {
     const farm_id = req.body.farm_id
 
     //find farm profile from farm id
-    FarmProfile.findOne({'farm': farm_id}, function(err, profile){
+    FarmProfile.findOne({ 'farm': farm_id }, function (err, profile) {
         res.json(profile)
     })
-    .catch(err => res.json(err))
+        .catch(err => res.json(err))
 })
 
 // @route POST api/farm/addProduce
@@ -117,6 +117,45 @@ farms.post("/addProduce", (req, res) => {
             res.json(item)
         })
         .catch(err => res.json(err))
+})
+
+// @route POST api/farm/editProduct
+// @desc edit a product from a farm
+// @access Public
+farms.post("/editProduct", (req, res) => {
+    const product_id = req.body.product_id
+
+    //Edit Product with mapping to the farm
+    Produce.findOneAndUpdate({ _id: product_id },
+        {
+            $set:
+            {
+                farm: req.body.farm,
+                title: req.body.title,
+                description: req.body.description,
+                price: req.body.price,
+                sku: req.body.sku
+            }
+        }, { new: true }, (err, product) => {
+            if (err) {
+                res.json(err)
+            }
+            res.json("Product Updated Succesfully: " + JSON.stringify(product));
+        })
+})
+
+// @route POST api/farm/deleteProduct
+// @desc delete product from farm
+// @access Public
+farms.post("/deleteProduct", (req, res) => {
+    const productId = req.body.productId
+
+
+    //Delete Product from Farm
+    Produce.findByIdAndDelete(productId, function (err) {
+        if (err) res.json(err)
+        res.json({ "message": "Successfully deleted item: " + productId })
+    })
 })
 
 export { farms }

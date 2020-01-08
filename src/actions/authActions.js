@@ -12,7 +12,9 @@ import {
     SET_REVIEWS,
     SET_FARM_PROFILE,
     ADD_PRODUCE,
-    ADD_TO_CART
+    ADD_TO_CART,
+    REMOVE_PRODUCT,
+    EDIT_PRODUCT
 } from './types'
 import { get } from 'http'
 import { persistCombineReducers } from 'redux-persist'
@@ -262,6 +264,13 @@ export const toProduce = (farm_data, history) => dispatch => {
     })
 }
 
+export const toEditProduct = (data, history) => dispatch => {
+    history.push({
+        pathname: '/editProduct',
+        state: {...data}
+    })
+}
+
 // Add Produce
 export const addProduce = (produce_data, history) => dispatch => {
     const payload = {
@@ -286,7 +295,7 @@ export const addProduce = (produce_data, history) => dispatch => {
 
             dispatch({
                 type: ADD_PRODUCE,
-                payload: payload.produce
+                payload: payload.mapping_produce
             })
             history.push("/dashboard")
         })
@@ -296,6 +305,61 @@ export const addProduce = (produce_data, history) => dispatch => {
                 payload: err.response.data
             })    
         )
+}
+
+// Edit Produce
+export const editProduct = (product_data, history) => dispatch => {
+    const payload = {
+        product_index: product_data.product_index,
+        mapping_produce: {}
+    }
+
+    axios
+        .post("api/farm/editProduct", product_data)
+        .then(res => {
+            console.log(JSON.stringify(res.data))
+            payload.mapping_produce._id = res.data._id,
+            payload.mapping_produce.farm = res.data.farm,
+            payload.mapping_produce.title = res.data.title,
+            payload.mapping_produce.description = res.data.description,
+            payload.mapping_produce.price = res.data.price,
+            payload.mapping_produce.sku = res.data.sku
+
+            dispatch({
+                type: EDIT_PRODUCT,
+                payload: payload
+            })
+            history.push("/dashboard")
+        })
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })    
+        )
+}
+
+//Delete Product
+export const deleteProduct = (product_data, history) => dispatch => {
+    const payload = {
+        productId: product_data.product_id,
+        product_index: product_data.product_index
+    }
+
+    console.log(payload.product_id)
+    console.log(payload.product_index)
+
+    axios
+        .post("api/farm/deleteProduct", payload)
+        .then(res => {
+            console.log(JSON.stringify(res.data))
+            //Dispatch to remove by id
+            dispatch({
+                type: REMOVE_PRODUCT,
+                payload: payload
+            })
+            history.push("/dashboard")
+        })
 }
 
 //Produce List
@@ -308,13 +372,13 @@ export const toListProduce = (farm_data, history) => dispatch => {
 }
 
 //Produce Profile
-export const produceProfile = (produce_data, history) => dispatch => {
+export const produceProfile = (produce_data,farm_data, history) => dispatch => {
 
     console.log("Hit Produce Profile Action with Payload :" + JSON.stringify(produce_data))
 
             history.push({
                 pathname: '/produceProfile',
-                state: {...produce_data}
+                state: {produce_data: produce_data, farm_data: farm_data}
               })
 }
 

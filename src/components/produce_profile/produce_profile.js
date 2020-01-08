@@ -10,9 +10,11 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 
 //Import Actions
-import {addToCart} from '../../actions/authActions'
+import { addToCart, deleteProduct, toEditProduct } from '../../actions/authActions'
 
 
 const theme = createMuiTheme({
@@ -74,20 +76,23 @@ class ProduceProfile extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            produce: { ...this.props.location.state },
+            product_details: { ...this.props.location.state.produce_data },
+            farm_details: { ...this.props.location.state.farm_data },
             qty: 1,
-            total: this.props.location.state.price
+            total: this.props.location.state.produce_data.price,
+            myFarm: this.props.location.state.farm_data.myFarm,
+            index: this.props.location.state.produce_data.productIndex
         }
     }
 
     handleQty = e => {
-        this.setState({qty: e.target.value})
+        this.setState({ qty: e.target.value })
         const new_total = this.state.total * e.target.value
-        this.setState({total: new_total})
+        this.setState({ total: new_total })
     }
 
     addToCart = () => {
-        const cart_item = {...this.state}
+        const cart_item = { ...this.state }
         const current_cart = this.props.auth.cart
 
         //Add item to Cart
@@ -96,11 +101,67 @@ class ProduceProfile extends Component {
         this.props.addToCart(current_cart, this.props.history)
     }
 
+    deleteProduct = () => {
+        const payload = {
+            product_id:this.state.product_details._id,
+            product_index: this.state.index
+        }
+        this.props.deleteProduct(payload, this.props.history)
+    }
+
+    editProduct = () => {
+        const payload = {
+            farm_data: {...this.state.farm_details},
+            product_details: {...this.state.product_details}
+        }
+
+        this.props.toEditProduct(payload, this.props.history)
+    }
+
     roundTotal = (total) => {
         return (Math.round(total * 100) / 100).toFixed(2)
     }
 
     render() {
+        let operationButtons
+
+        if (this.state.myFarm) {
+            //Display Edit & Delete
+            operationButtons =
+                <div className="product-operations-container">
+                    <Button
+                        style={{
+                            width: "25%",
+                            height: "48pt",
+                            borderRadius: "3px",
+                            letterSpacing: "1.5px",
+                            marginTop: "1rem",
+                            marginRight: "1%"
+                        }}
+                        type="submit"
+                        variant="contained"
+                        className="edit-button"
+                        onClick={this.editProduct}
+                    ><EditIcon /></Button>
+                     <Button
+                        style={{
+                            width: "25%",
+                            height: "48pt",
+                            borderRadius: "3px",
+                            letterSpacing: "1.5px",
+                            marginTop: "1rem",
+                            marginLeft :"1%"
+                        }}
+                        type="submit"
+                        variant="contained"
+                        onClick={this.deleteProduct}
+                    ><DeleteForeverIcon color="error" /></Button>
+                </div>
+        } else {
+            operationButtons = null
+        }
+
+
         return (
             <ThemeProvider theme={theme}>
                 <ProduceProfileHeader />
@@ -110,10 +171,10 @@ class ProduceProfile extends Component {
                     </div>
                     <div className="product-detail-container">
                         <div className="product-name-container">
-                            {this.state.produce.title}
+                            {this.state.product_details.title}
                         </div>
                         <div className="product-price-container">
-                            ${this.roundTotal(this.state.produce.price)}
+                            ${this.roundTotal(this.state.product_details.price)}
                         </div>
                     </div>
                     <div className="product-qty-main-container">
@@ -168,6 +229,7 @@ class ProduceProfile extends Component {
                             onClick={this.addToCart}
                         >Add To Cart</Button>
                     </div>
+                    {operationButtons}
                 </div>
             </ThemeProvider>
         )
@@ -175,7 +237,9 @@ class ProduceProfile extends Component {
 }
 
 ProduceProfile.propTypes = {
-    addToCart: propTypes.func.isRequired
+    addToCart: propTypes.func.isRequired,
+    deleteProduct: propTypes.func.isRequired,
+    toEditProduct: propTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -184,4 +248,4 @@ const mapStateToProps = state => ({
 })
 
 
-export default connect(mapStateToProps, {addToCart})(ProduceProfile)
+export default connect(mapStateToProps, { addToCart, deleteProduct, toEditProduct })(ProduceProfile)

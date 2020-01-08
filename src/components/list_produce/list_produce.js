@@ -1,24 +1,19 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react'
-import { connect, compose } from 'react-redux';
+import { connect } from 'react-redux';
 import './list_produce.css'
 import propTypes from 'prop-types'
-import { withStyles } from "@material-ui/core/styles";
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
 import Paper from "@material-ui/core/Paper";
-import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
-import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import SearchIcon from '@material-ui/icons/Search';
-import { grey } from '@material-ui/core/colors';
+
 
 //Import Actions
-import { produceProfile, listProduce } from "../../actions/authActions"
+import { produceProfile } from "../../actions/authActions"
 
 
 //Import Component
@@ -97,26 +92,36 @@ class ListProducts extends Component {
         }
     }
 
-    handleClick = (product) => {
+    handleClick = (product, index) => {
         console.log("Hit handle click with :" + product)
-        const product_data = { ...product }
+        const product_data = { 
+            ...product,
+            productIndex: index
+        }
+        const farm_data = {
+            ...this.props.location.state.farm,
+            myFarm: this.props.location.state.myFarm
+        }
 
-        this.props.produceProfile(product_data, this.props.history)
+        this.props.produceProfile(product_data, farm_data, this.props.history)
     }
 
     render() {
-        const listProducts = this.props.auth.produce.map((product) =>
-            <Grid item xs={10} key={product._id} data={product._id} onClick={() => this.handleClick(product)}>
-                <Paper>
-                    <div className="farm-header">
-                        {product.title}
-                    </div>
-                    <div className="farm-subheader">
-                        ${product.price}
-                    </div>
-                </Paper>
-            </Grid>
-        )
+        const farmId = this.props.location.state.farm._id
+        const listProducts = this.props.auth.produce
+            .filter(product => product.farm === farmId)
+            .map((product, index) => {
+                return <Grid item xs={10} key={product._id} data={product._id} onClick={() => this.handleClick(product, index)}>
+                    <Paper>
+                        <div className="farm-header">
+                            {product.title}
+                        </div>
+                        <div className="farm-subheader">
+                            ${product.price}
+                        </div>
+                    </Paper>
+                </Grid>
+            })
 
         return (
             <ThemeProvider theme={theme}>

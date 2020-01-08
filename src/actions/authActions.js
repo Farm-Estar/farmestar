@@ -93,35 +93,35 @@ export const loginUser = userData => dispatch => {
 //Guest Login
 export const loginGuest = () => dispatch => {
     axios
-    .post("/api/users/guestLogin")
-    .then(res => {
-        //Set token to LocalStorage
-        const token = res.data.token
-        const _farms = res.data.farms
-        const _reviews = res.data.reviews
-        const _produce = res.data.produce
-        const _profiles = res.data.profiles
+        .post("/api/users/guestLogin")
+        .then(res => {
+            //Set token to LocalStorage
+            const token = res.data.token
+            const _farms = res.data.farms
+            const _reviews = res.data.reviews
+            const _produce = res.data.produce
+            const _profiles = res.data.profiles
 
-        localStorage.setItem("jwtToken", token)
-        //Set token to header
-        setAuthToken(token)
-        //Decode token
-        const payload = {
-            user: jwt_decode(token),
-            farms: _farms,
-            reviews: _reviews,
-            produce: _produce,
-            profiles: _profiles
-        }
-        //Set User
-        dispatch(setGuestUser(payload))
-    })
-    .catch(err =>
-        dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
+            localStorage.setItem("jwtToken", token)
+            //Set token to header
+            setAuthToken(token)
+            //Decode token
+            const payload = {
+                user: jwt_decode(token),
+                farms: _farms,
+                reviews: _reviews,
+                produce: _produce,
+                profiles: _profiles
+            }
+            //Set User
+            dispatch(setGuestUser(payload))
         })
-    )
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        )
 }
 
 //Dashboard
@@ -158,7 +158,7 @@ export const setGuestUser = decoded => {
 //Clear Guest User
 export const clearGuestUser = decoded => {
     return {
-        type:CLEAR_GUEST_USER,
+        type: CLEAR_GUEST_USER,
         payload: decoded
     }
 }
@@ -222,18 +222,20 @@ export const support = (history) => dispatch => {
 //Farm Profile
 export const farmProfile = (farm_data, history) => dispatch => {
     const payload = {
-        farm_id: farm_data.farm_id,
+        farm_id: farm_data._id,
+        farm: farm_data,
         isFarmer: farm_data.isFarmer
     }
 
     axios
         .post("api/farm/farmProfile", payload)
         .then(res => {
+            console.log(res.data)
             const farm_data = {
                 displayName: res.data.displayName,
                 description: res.data.description,
                 isFarmer: payload.isFarmer,
-                farm: payload.farm_id,
+                farm: payload.farm,
                 imageUrl: res.data.imageUrl
             }
 
@@ -242,17 +244,20 @@ export const farmProfile = (farm_data, history) => dispatch => {
                 payload: farm_data
             })
 
-            
+
             history.push({
                 pathname: '/farmProfile',
-                state: {...farm_data}
-              })
+                state: { ...farm_data }
+            })
         })
-        .catch(err => 
-           dispatch({
-               type: GET_ERRORS,
-               payload: err.response.data
-           }) 
+        .catch(err => {
+            console.log(err)
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        }
+
         )
 }
 
@@ -260,14 +265,14 @@ export const farmProfile = (farm_data, history) => dispatch => {
 export const toProduce = (farm_data, history) => dispatch => {
     history.push({
         pathname: '/addProduce',
-        state: {...farm_data}
+        state: { ...farm_data }
     })
 }
 
 export const toEditProduct = (data, history) => dispatch => {
     history.push({
         pathname: '/editProduct',
-        state: {...data}
+        state: { ...data }
     })
 }
 
@@ -285,11 +290,11 @@ export const addProduce = (produce_data, history) => dispatch => {
         .then(res => {
             console.log(JSON.stringify(res.data))
             mapping_produce._id = res.data._id,
-            mapping_produce.farm = res.data.farm,
-            mapping_produce.title = res.data.title,
-            mapping_produce.description = res.data.description,
-            mapping_produce.price = res.data.price,
-            mapping_produce.sku = res.data.sku
+                mapping_produce.farm = res.data.farm,
+                mapping_produce.title = res.data.title,
+                mapping_produce.description = res.data.description,
+                mapping_produce.price = res.data.price,
+                mapping_produce.sku = res.data.sku
 
             payload.produce.push(mapping_produce)
 
@@ -303,7 +308,7 @@ export const addProduce = (produce_data, history) => dispatch => {
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
-            })    
+            })
         )
 }
 
@@ -319,11 +324,11 @@ export const editProduct = (product_data, history) => dispatch => {
         .then(res => {
             console.log(JSON.stringify(res.data))
             payload.mapping_produce._id = res.data._id,
-            payload.mapping_produce.farm = res.data.farm,
-            payload.mapping_produce.title = res.data.title,
-            payload.mapping_produce.description = res.data.description,
-            payload.mapping_produce.price = res.data.price,
-            payload.mapping_produce.sku = res.data.sku
+                payload.mapping_produce.farm = res.data.farm,
+                payload.mapping_produce.title = res.data.title,
+                payload.mapping_produce.description = res.data.description,
+                payload.mapping_produce.price = res.data.price,
+                payload.mapping_produce.sku = res.data.sku
 
             dispatch({
                 type: EDIT_PRODUCT,
@@ -335,7 +340,7 @@ export const editProduct = (product_data, history) => dispatch => {
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
-            })    
+            })
         )
 }
 
@@ -367,19 +372,19 @@ export const toListProduce = (farm_data, history) => dispatch => {
     //Take farm Id and map it against produce data to return only that farms
     history.push({
         pathname: '/listProduce',
-        state: {...farm_data}
+        state: { ...farm_data }
     })
 }
 
 //Produce Profile
-export const produceProfile = (produce_data,farm_data, history) => dispatch => {
+export const produceProfile = (produce_data, farm_data, history) => dispatch => {
 
     console.log("Hit Produce Profile Action with Payload :" + JSON.stringify(produce_data))
 
-            history.push({
-                pathname: '/produceProfile',
-                state: {produce_data: produce_data, farm_data: farm_data}
-              })
+    history.push({
+        pathname: '/produceProfile',
+        state: { produce_data: produce_data, farm_data: farm_data }
+    })
 }
 
 //Nav to Checkout
@@ -402,13 +407,13 @@ export const chargeCard = (token_data, history) => dispatch => {
             if (res.status == 200) {
                 //Success
                 history.push("/dashboard")
-            }else {
+            } else {
                 //Failed
             }
         })
         .catch(err =>
             dispatch({
-                type:GET_ERRORS,
+                type: GET_ERRORS,
                 payload: err.response.data
             })
         )

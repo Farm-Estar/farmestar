@@ -78,8 +78,8 @@ class FarmProfile extends Component {
         super(props)
         this.state = {
             center: {
-                lat: 59.95,
-                lng: 30.33
+                lat: this.props.location.state.farm.farm_data.location.coordinates[0],
+                lng: this.props.location.state.farm.farm_data.location.coordinates[1]
             },
             zoom: 11,
             isFarmer: props.auth.user.isFarmer,
@@ -180,8 +180,8 @@ class FarmProfile extends Component {
                         defaultZoom={this.state.zoom}
                     >
                         <Marker
-                            lat={59.955413}
-                            lng={30.337844}
+                            lat={this.state.center.lat}
+                            lng={this.state.center.lng}
                             text="Farm Marker"
                         />
                     </GoogleMapReact>

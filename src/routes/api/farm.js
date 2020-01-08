@@ -5,6 +5,7 @@ import crypto from 'crypto'
 import mailer from 'nodemailer'
 import transport from 'nodemailer-sendgrid-transport'
 import keys from '../../config/keys'
+import NodeGeocoder from 'node-geocoder'
 
 
 //Validation
@@ -22,25 +23,54 @@ var farms = express.Router()
 // @access Public
 farms.post("/add", (req, res) => {
     //Perform Validation Here
+    let response = ""
 
-    const farm = new Farm({
-        farmer: req.body.farmer,
-        farmName: req.body.farmName,
+    var options = {
+        provider: 'google',
+        httpAdaptor: 'https',
+        apiKey: 'AIzaSyDzPWbAxZiZwpnen7giLpjhiKPHaFa48D4',
+        formatter: null
+    }
+
+    const geocoder = NodeGeocoder(options)
+
+    geocoder.geocode({
         address: req.body.address,
-        city: req.body.city,
-        zipcode: req.body.zipcode,
-        state: req.body.state,
-        imageUrl: req.body.imageUrl,
-        farmerType: req.body.farmerType
+        country: "United States",
+        zipcode: req.body.zipcode
+    }, function (err, res) {
+        const lat = res[0].latitude
+        const long = res[0].longitude
+
+
+        //Define Farm to Map to DB
+        const farm = new Farm({
+            farmer: req.body.farmer,
+            farmName: req.body.farmName,
+            address: req.body.address,
+            city: req.body.city,
+            zipcode: req.body.zipcode,
+            state: req.body.state,
+            imageUrl: req.body.imageUrl,
+            farmerType: req.body.farmerType,
+            location: {
+                type: "Point",
+                coordinates: [lat, long]
+            }
+        })
+
+        //Save new farm to the DB
+        farm
+            .save()
+            .then(farm => {
+                response = "Farm has been posted"
+            })
+            .catch(err => {
+                response = "Error in posting new farm, error: " + err
+            })
     })
 
-    //Save new farm to the DB
-    farm
-        .save()
-        .then(farm => {
-            res.json(farm)
-        })
-        .catch(err => res.json(err))
+    res.json(response)
 })
 
 // @route POST api/farm/addProfile

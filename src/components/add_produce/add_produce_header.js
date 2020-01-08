@@ -31,7 +31,7 @@ function AddProduceHeader() {
                 </Button>
             </div>
             <div className="container signup_header">
-                Produce
+                Product
             </div>
 
         </ThemeProvider>

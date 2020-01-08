@@ -8,7 +8,8 @@ import {
     SET_FARM_PROFILE,
     ADD_PRODUCE,
     ADD_TO_CART,
-    REMOVE_PRODUCT
+    REMOVE_PRODUCT,
+    EDIT_PRODUCT
 } from '../actions/types'
 import {REHYDRATE, PERSIST} from 'redux-persist/es/constants'
 
@@ -77,18 +78,32 @@ export default function(state = initialState, action) {
                 ...state,
                 produce: [...state.produce, action.payload],
                 loading:true
-            } 
-        case REMOVE_PRODUCT:
+            }
+        case EDIT_PRODUCT:
             // eslint-disable-next-line no-case-declarations
             const index = action.payload.product_index
-            // const id = action.payload.productId
-            
-            console.log("REMOVE PRODUCT " + index)
+            return {
+                ...state,
+                produce: state.produce.map((product, i) => {
+                    if (i === index) {
+                        product._id = action.payload.mapping_produce._id
+                        product.farm = action.payload.mapping_produce.farm
+                        product.title = action.payload.mapping_produce.title
+                        product.description = action.payload.mapping_produce.description
+                        product.price = action.payload.mapping_produce.price
+                        product.sku = action.payload.mapping_produce.sku
+                    }
+                }),
+                loading: true
+            }     
+        case REMOVE_PRODUCT:
+            // eslint-disable-next-line no-case-declarations
+            const rmindex = action.payload.product_index
             return {
                 ...state,
                 produce: [
-                    ...state.produce.slice(0, index + 1),
-                    ...state.produce.slice(index + 1)
+                    ...state.produce.slice(0, rmindex + 1),
+                    ...state.produce.slice(rmindex + 1)
                 ],
                 loading: true
             }                       

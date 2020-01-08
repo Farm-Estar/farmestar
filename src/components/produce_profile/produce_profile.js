@@ -14,7 +14,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 
 //Import Actions
-import { addToCart, deleteProduct } from '../../actions/authActions'
+import { addToCart, deleteProduct, toEditProduct } from '../../actions/authActions'
 
 
 const theme = createMuiTheme({
@@ -110,7 +110,12 @@ class ProduceProfile extends Component {
     }
 
     editProduct = () => {
+        const payload = {
+            farm_data: {...this.state.farm_details},
+            product_details: {...this.state.product_details}
+        }
 
+        this.props.toEditProduct(payload, this.props.history)
     }
 
     roundTotal = (total) => {
@@ -233,7 +238,8 @@ class ProduceProfile extends Component {
 
 ProduceProfile.propTypes = {
     addToCart: propTypes.func.isRequired,
-    deleteProduct: propTypes.func.isRequired
+    deleteProduct: propTypes.func.isRequired,
+    toEditProduct: propTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -242,4 +248,4 @@ const mapStateToProps = state => ({
 })
 
 
-export default connect(mapStateToProps, { addToCart, deleteProduct })(ProduceProfile)
+export default connect(mapStateToProps, { addToCart, deleteProduct, toEditProduct })(ProduceProfile)

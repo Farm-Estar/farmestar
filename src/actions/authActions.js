@@ -13,7 +13,8 @@ import {
     SET_FARM_PROFILE,
     ADD_PRODUCE,
     ADD_TO_CART,
-    REMOVE_PRODUCT
+    REMOVE_PRODUCT,
+    EDIT_PRODUCT
 } from './types'
 import { get } from 'http'
 import { persistCombineReducers } from 'redux-persist'
@@ -263,6 +264,13 @@ export const toProduce = (farm_data, history) => dispatch => {
     })
 }
 
+export const toEditProduct = (data, history) => dispatch => {
+    history.push({
+        pathname: '/editProduct',
+        state: {...data}
+    })
+}
+
 // Add Produce
 export const addProduce = (produce_data, history) => dispatch => {
     const payload = {
@@ -288,6 +296,38 @@ export const addProduce = (produce_data, history) => dispatch => {
             dispatch({
                 type: ADD_PRODUCE,
                 payload: payload.mapping_produce
+            })
+            history.push("/dashboard")
+        })
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })    
+        )
+}
+
+// Edit Produce
+export const editProduct = (product_data, history) => dispatch => {
+    const payload = {
+        product_index: product_data.product_index,
+        mapping_produce: {}
+    }
+
+    axios
+        .post("api/farm/editProduct", product_data)
+        .then(res => {
+            console.log(JSON.stringify(res.data))
+            payload.mapping_produce._id = res.data._id,
+            payload.mapping_produce.farm = res.data.farm,
+            payload.mapping_produce.title = res.data.title,
+            payload.mapping_produce.description = res.data.description,
+            payload.mapping_produce.price = res.data.price,
+            payload.mapping_produce.sku = res.data.sku
+
+            dispatch({
+                type: EDIT_PRODUCT,
+                payload: payload
             })
             history.push("/dashboard")
         })

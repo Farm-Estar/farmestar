@@ -42,6 +42,7 @@ import Checkout from './components/checkout/checkout'
 import NotFound from './components/notfound/notfound';
 import PrivateRoute from './components/private-route/private-route'
 import Terms from './components/term_policies/terms';
+import EditProduct from './components/edit_product/edit_product'
 
 
 //Firebase Configuration
@@ -114,6 +115,7 @@ const routing = (
                                     <Checkout />
                                 </Elements>
                             </Route>
+                            <Route exact path="/editProduct" component={EditProduct} />
                             <Route component={NotFound} />
                         </Switch>
                     </div>

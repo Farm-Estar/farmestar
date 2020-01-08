@@ -82,7 +82,20 @@ class FarmProfile extends Component {
                 lng: 30.33
             },
             zoom: 11,
-            isFarmer: props.auth.user.isFarmer
+            isFarmer: props.auth.user.isFarmer,
+            myFarm: false
+        }
+    }
+
+    componentDidMount = () => {
+        //Check if Is current users farm
+        const farmerId = this.props.auth.user.id
+        const farmsFarmer = this.props.location.state.farm.farmer
+
+        if(farmerId === farmsFarmer){
+            this.setState({
+                myFarm: true
+            })
         }
     }
 
@@ -96,7 +109,7 @@ class FarmProfile extends Component {
     }
 
     addProduct = () => {
-        const farm_data = { ...this.props.location.state }
+        const farm_data = {...this.props.location.state}
         this.props.toProduce(farm_data, this.props.history)
     }
 
@@ -108,8 +121,10 @@ class FarmProfile extends Component {
     render() {
         let produceButton
 
-        if (convertToBoolean(this.state.isFarmer)) {
-            console.log("User Is Farmer")
+        //Filter Product Button to only Current Farmer
+
+
+        if (convertToBoolean(this.state.isFarmer) && this.state.myFarm) {
             produceButton = <Button
                 style={{
                     width: "30%",
@@ -125,7 +140,6 @@ class FarmProfile extends Component {
                 onClick={this.addProduct}
             ><LibraryAddIcon /></Button>
         } else {
-            console.log("User Is NOT Farmer")
             produceButton = null
         }
 

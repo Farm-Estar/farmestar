@@ -308,13 +308,13 @@ export const toListProduce = (farm_data, history) => dispatch => {
 }
 
 //Produce Profile
-export const produceProfile = (produce_data, history) => dispatch => {
+export const produceProfile = (produce_data,farm_data, history) => dispatch => {
 
     console.log("Hit Produce Profile Action with Payload :" + JSON.stringify(produce_data))
 
             history.push({
                 pathname: '/produceProfile',
-                state: {...produce_data}
+                state: {produce_data: produce_data, farm_data: farm_data}
               })
 }
 

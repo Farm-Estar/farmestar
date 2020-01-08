@@ -74,9 +74,10 @@ class ProduceProfile extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            produce: { ...this.props.location.state },
+            product_details: { ...this.props.location.state.produce_data },
+            farm_details: {...this.props.location.state.farm_data},
             qty: 1,
-            total: this.props.location.state.price
+            total: this.props.location.state.produce_data.price
         }
     }
 
@@ -110,10 +111,10 @@ class ProduceProfile extends Component {
                     </div>
                     <div className="product-detail-container">
                         <div className="product-name-container">
-                            {this.state.produce.title}
+                            {this.state.product_details.title}
                         </div>
                         <div className="product-price-container">
-                            ${this.roundTotal(this.state.produce.price)}
+                            ${this.roundTotal(this.state.product_details.price)}
                         </div>
                     </div>
                     <div className="product-qty-main-container">

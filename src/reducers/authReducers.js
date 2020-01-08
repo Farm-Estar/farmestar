@@ -7,7 +7,8 @@ import {
     SET_REVIEWS,
     SET_FARM_PROFILE,
     ADD_PRODUCE,
-    ADD_TO_CART
+    ADD_TO_CART,
+    REMOVE_PRODUCT
 } from '../actions/types'
 import {REHYDRATE, PERSIST} from 'redux-persist/es/constants'
 
@@ -74,9 +75,23 @@ export default function(state = initialState, action) {
         case ADD_PRODUCE:
             return {
                 ...state,
-                produce: action.payload,
+                produce: [...state.produce, action.payload],
                 loading:true
-            }                    
+            } 
+        case REMOVE_PRODUCT:
+            // eslint-disable-next-line no-case-declarations
+            const index = action.payload.product_index
+            // const id = action.payload.productId
+            
+            console.log("REMOVE PRODUCT " + index)
+            return {
+                ...state,
+                produce: [
+                    ...state.produce.slice(0, index + 1),
+                    ...state.produce.slice(index + 1)
+                ],
+                loading: true
+            }                       
         default:
             return state        
     }

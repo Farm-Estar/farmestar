@@ -119,4 +119,18 @@ farms.post("/addProduce", (req, res) => {
         .catch(err => res.json(err))
 })
 
+// @route POST api/farm/deleteProduct
+// @desc delete product from farm
+// @access Public
+farms.post("/deleteProduct", (req, res) => {
+    const productId = req.body.productId
+    
+
+    //Delete Product from Farm
+    Produce.findByIdAndDelete(productId, function(err){
+        if (err) res.json(err)
+        res.json({"message":"Successfully deleted item: " + productId})
+    })
+})
+
 export { farms }

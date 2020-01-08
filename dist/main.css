@@ -413,6 +413,20 @@ a {
     justify-content: center;
     align-content: center;
 }
+
+.product-operations-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.edit-button {
+    color: grey;
+}
+
+.delete-button {
+    color: red;
+}
 .list-products-list-container {
     margin-left: 5%;
 }

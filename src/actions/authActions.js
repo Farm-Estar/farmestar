@@ -12,7 +12,8 @@ import {
     SET_REVIEWS,
     SET_FARM_PROFILE,
     ADD_PRODUCE,
-    ADD_TO_CART
+    ADD_TO_CART,
+    REMOVE_PRODUCT
 } from './types'
 import { get } from 'http'
 import { persistCombineReducers } from 'redux-persist'
@@ -286,7 +287,7 @@ export const addProduce = (produce_data, history) => dispatch => {
 
             dispatch({
                 type: ADD_PRODUCE,
-                payload: payload.produce
+                payload: payload.mapping_produce
             })
             history.push("/dashboard")
         })
@@ -296,6 +297,29 @@ export const addProduce = (produce_data, history) => dispatch => {
                 payload: err.response.data
             })    
         )
+}
+
+//Delete Product
+export const deleteProduct = (product_data, history) => dispatch => {
+    const payload = {
+        productId: product_data.product_id,
+        product_index: product_data.product_index
+    }
+
+    console.log(payload.product_id)
+    console.log(payload.product_index)
+
+    axios
+        .post("api/farm/deleteProduct", payload)
+        .then(res => {
+            console.log(JSON.stringify(res.data))
+            //Dispatch to remove by id
+            dispatch({
+                type: REMOVE_PRODUCT,
+                payload: payload
+            })
+            history.push("/dashboard")
+        })
 }
 
 //Produce List

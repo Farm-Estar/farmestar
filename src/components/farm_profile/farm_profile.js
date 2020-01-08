@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import propTypes from 'prop-types'
 import { connect } from 'react-redux'
 import './farm_profile.css'
-import {convertToBoolean} from '../../utils/setAuthToken'
+import { convertToBoolean } from '../../utils/setAuthToken'
 import Button from '@material-ui/core/Button'
 import GoogleMapReact from 'google-map-react'
 import classnames from 'classnames'
@@ -92,7 +92,7 @@ class FarmProfile extends Component {
         const farmerId = this.props.auth.user.id
         const farmsFarmer = this.props.location.state.farm.farmer
 
-        if(farmerId === farmsFarmer){
+        if (farmerId === farmsFarmer) {
             this.setState({
                 myFarm: true
             })
@@ -109,12 +109,15 @@ class FarmProfile extends Component {
     }
 
     addProduct = () => {
-        const farm_data = {...this.props.location.state}
+        const farm_data = { ...this.props.location.state }
         this.props.toProduce(farm_data, this.props.history)
     }
 
     viewMenu = () => {
-        const farm_data = { ...this.props.location.state }
+        const farm_data = {
+            ...this.props.location.state,
+            myFarm: this.state.myFarm
+        }
         this.props.toListProduce(farm_data, this.props.history)
     }
 
@@ -122,8 +125,6 @@ class FarmProfile extends Component {
         let produceButton
 
         //Filter Product Button to only Current Farmer
-
-
         if (convertToBoolean(this.state.isFarmer) && this.state.myFarm) {
             produceButton = <Button
                 style={{

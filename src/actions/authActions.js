@@ -222,11 +222,10 @@ export const support = (history) => dispatch => {
 //Farm Profile
 export const farmProfile = (farm_data, history) => dispatch => {
     const payload = {
-        farm_id: farm_data._id,
-        farm: farm_data,
+        farm: {...farm_data},
         isFarmer: farm_data.isFarmer
     }
-
+    
     axios
         .post("api/farm/farmProfile", payload)
         .then(res => {

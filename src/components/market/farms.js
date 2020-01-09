@@ -38,9 +38,11 @@ class Farms extends Component {
     handleClick = (farm) => {
         const isFarmer = this.props.auth.user.isFarmer
         const farm_data = {
-            farm_data: farm,
+            ...farm,
             isFarmer: isFarmer
         }
+
+        console.log(farm_data)
         // eslint-disable-next-line react/prop-types
         this.props.selectedFarm(farm_data, this.props.history)
     }

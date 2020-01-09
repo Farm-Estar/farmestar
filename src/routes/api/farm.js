@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { response } from 'express'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import crypto from 'crypto'
@@ -21,9 +21,9 @@ var farms = express.Router()
 // @route POST api/farm/add
 // @desc Add a new Farm
 // @access Public
-farms.post("/add", (req, res) => {
+farms.post("/add", (req, response) => {
     //Perform Validation Here
-    let response = ""
+    // let response 
 
     var options = {
         provider: 'google',
@@ -63,14 +63,12 @@ farms.post("/add", (req, res) => {
         farm
             .save()
             .then(farm => {
-                response = "Farm has been posted"
+                response.json(farm)
             })
             .catch(err => {
-                response = "Error in posting new farm, error: " + err
+                response.json(err)
             })
     })
-
-    res.json(response)
 })
 
 // @route POST api/farm/addProfile
@@ -119,7 +117,8 @@ farms.get("/farms", (req, res) => {
 // @desc Get a farm profile
 // @access Public
 farms.post("/farmProfile", (req, res) => {
-    const farm_id = req.body.farm_id
+    const farm_id = req.body.farm._id
+    console.log(farm_id)
 
     //find farm profile from farm id
     FarmProfile.findOne({ 'farm': farm_id }, function (err, profile) {

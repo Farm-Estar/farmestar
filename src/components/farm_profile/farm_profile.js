@@ -78,8 +78,8 @@ class FarmProfile extends Component {
         super(props)
         this.state = {
             center: {
-                lat: this.props.location.state.farm.farm_data.location.coordinates[0],
-                lng: this.props.location.state.farm.farm_data.location.coordinates[1]
+                lat: this.props.location.state.farm.location.coordinates[0],
+                lng: this.props.location.state.farm.location.coordinates[1]
             },
             zoom: 11,
             isFarmer: props.auth.user.isFarmer,

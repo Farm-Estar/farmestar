@@ -74,6 +74,7 @@ export default function(state = initialState, action) {
                 loading: true
             }
         case ADD_PRODUCE:
+            console.log(action.payload)
             return {
                 ...state,
                 produce: [...state.produce, action.payload],

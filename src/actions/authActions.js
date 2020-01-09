@@ -280,26 +280,24 @@ export const addProduce = (produce_data, history) => dispatch => {
     const payload = {
         produce: []
     }
-    const mapping_produce = {
-
-    }
-
     axios
         .post("api/farm/addProduce", produce_data)
         .then(res => {
             console.log(JSON.stringify(res.data))
-            mapping_produce._id = res.data._id,
-                mapping_produce.farm = res.data.farm,
-                mapping_produce.title = res.data.title,
-                mapping_produce.description = res.data.description,
-                mapping_produce.price = res.data.price,
-                mapping_produce.sku = res.data.sku
-
+            const mapping_produce = {
+                _id: res.data._id,
+                farm: res.data.farm,
+                title: res.data.title,
+                description: res.data.description,
+                price: res.data.price,
+                sku: res.data.sku
+            }
+                
             payload.produce.push(mapping_produce)
 
             dispatch({
                 type: ADD_PRODUCE,
-                payload: payload.mapping_produce
+                payload: mapping_produce
             })
             history.push("/dashboard")
         })

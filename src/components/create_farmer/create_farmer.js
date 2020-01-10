@@ -13,6 +13,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import PersonIcon from '@material-ui/icons/Person';
 import LockIcon from '@material-ui/icons/Lock';
 import EmailIcon from '@material-ui/icons/Email';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import { registerFarmer } from '../../actions/farmActions'
 
 //Import Components
@@ -80,6 +82,7 @@ class CreateFarmer extends React.Component {
             email: "",
             password: "",
             password2: "",
+            isLegalVerified: false,
             errors: {}
         }
     }
@@ -110,6 +113,7 @@ class CreateFarmer extends React.Component {
             name: this.state.name,
             lastName: this.state.lastName,
             email: this.state.email,
+            isLegalVerified: this.state.isLegalVerified,
             isFarmer: true,
             password: this.state.password,
             password2: this.state.password2
@@ -228,7 +232,15 @@ class CreateFarmer extends React.Component {
                             />
                             <span style={{ color: theme.palette.error.main }}>{errors.password2}</span>
                         </div>
-                        <div className="signup_button" style={{ paddingLeft: "11.250px" }}>
+                        <div className="is-legal">
+                            <FormControlLabel
+                                control={
+                                    <Checkbox id="isLegalVerified" checked={this.state.isLegalVerified} onChange={this.onChange} value={true} />
+                                }
+                            />
+                            I agree to follow all required state and federal laws
+                        </div>
+                        <div className="" style={{ paddingLeft: "11.250px" }}>
                             <Button
                                 style={{
                                     width: "90%",
@@ -262,4 +274,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 })
 
-export default connect(mapStateToProps, {registerFarmer})(withRouter(CreateFarmer))
+export default connect(mapStateToProps, { registerFarmer })(withRouter(CreateFarmer))

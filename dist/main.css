@@ -310,7 +310,9 @@ a {
     font: bold 2em Arial, Helvetica, sans-serif;
 }
 
-
+.is-legal {
+    font-size: 1.1em;
+}
 
 
 .featured_farm_header_container {

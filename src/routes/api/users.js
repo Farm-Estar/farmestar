@@ -54,6 +54,7 @@ users.post("/register", (req, res) => {
                     lastName: req.body.lastName,
                     email: req.body.email,
                     isFarmer: req.body.isFarmer,
+                    isLegalVerified: req.body.isLegalVerified,
                     password: req.body.password
                 })
 

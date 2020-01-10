@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: false
     },
+    isLegalVerified: {
+        type: String,
+        default: false
+    },
     date: {
         type: Date,
         default: Date.now

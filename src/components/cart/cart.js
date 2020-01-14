@@ -103,7 +103,7 @@ class Cart extends Component {
             <div>
                 <CartHeader total={this.state.cartTotal} />
                 <div className="cart-map-container">
-                    <CartMap />
+                    <CartMap {...this.props}/>
                 </div>
                 <div className="cart-list-container">
                     <CartProducts {...this.props}/>

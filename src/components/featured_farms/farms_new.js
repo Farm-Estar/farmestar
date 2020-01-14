@@ -12,6 +12,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import SearchIcon from '@material-ui/icons/Search';
 import { grey } from '@material-ui/core/colors';
 
+
 const styles = theme => ({
     paper: {
         height: 100,
@@ -34,10 +35,10 @@ class Farms extends Component {
     }
 
     handleClick = (farm) => {
-        console.log(farm)
+        // console.log(farm)
         const isFarmer = this.props.auth.user.isFarmer
         const farm_data = {
-            farm_id: farm,
+            ...farm,
             isFarmer: isFarmer
         }
         // eslint-disable-next-line react/prop-types

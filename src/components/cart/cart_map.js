@@ -8,6 +8,7 @@ class CartMap extends Component {
     constructor(props){
         super(props)
         this.state = {
+            displayMap: (this.props.auth.cart.length >= 0) ? true : false,
             center: {
                 lat: 59.95,
                 lng: 30.33
@@ -16,7 +17,18 @@ class CartMap extends Component {
         }
     }
 
-    render() {
+    componentDidMount = () => {
+        if (this.state.displayMap) {
+            this.setState({
+                center:{
+                    lat: this.props.auth.cart[0].farm_details.location.coordinates[0],
+                    lng: this.props.auth.cart[0].farm_details.location.coordinates[1]
+                } 
+            })
+        }
+    }
+
+    render() {  
         return (
             <div style={{height: '178px', width: '100%' }}>
                 <GoogleMapReact
@@ -25,20 +37,11 @@ class CartMap extends Component {
                     defaultZoom={this.state.zoom}
                 >
                     <Marker
-                        lat={59.955413}
-                        lng={30.337844}
+                        lat={this.state.center.lat}
+                        lng={this.state.center.lng}
                         text="Farm Marker"
                     />
                 </GoogleMapReact>
-                <div className="farm-address">
-                    <img />
-                    <div>
-                        123 Farm Address
-                    </div>
-                    <div>
-                        CA, 95673
-                    </div>
-                </div>
             </div>
         )
     }

@@ -100,13 +100,17 @@ export default function(state = initialState, action) {
         case REMOVE_PRODUCT:
             // eslint-disable-next-line no-case-declarations
             const rmindex = action.payload.product_index
+            // eslint-disable-next-line no-case-declarations
+            let newProduce = [...state.produce]
+            newProduce.splice(rmindex, 1)
             return {
                 ...state,
-                produce: [
-                    ...state.produce.slice(0, rmindex + 1),
-                    ...state.produce.slice(rmindex + 1)
-                ],
+               produce: newProduce,
                 loading: true
+                 // produce: [
+                //     ...state.produce.slice(0, rmindex + 1),
+                //     ...state.produce.slice(rmindex + 1)
+                // ],
             }                       
         default:
             return state        

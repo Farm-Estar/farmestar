@@ -10,7 +10,7 @@ import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 
 //Import Actions
-// import { featureFarmsFetch } from '../../actions/authActions'
+// import { farmProfile } from '../../actions/authActions'
 
 //Import Components
 import FeatureFarmsHome from './feature_farms'

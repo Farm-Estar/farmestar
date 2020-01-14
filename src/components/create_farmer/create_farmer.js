@@ -252,6 +252,7 @@ class CreateFarmer extends React.Component {
                                 type="submit"
                                 variant="contained"
                                 color="primary"
+                                disabled={this.state.isLegalVerified === false}
                             >CONTINUE</Button>
                         </div>
                     </form>

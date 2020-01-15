@@ -15,6 +15,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import EmailIcon from '@material-ui/icons/Email';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Modal from 'react-responsive-modal'
 import { registerFarmer } from '../../actions/farmActions'
 
 //Import Components
@@ -83,6 +84,7 @@ class CreateFarmer extends React.Component {
             password: "",
             password2: "",
             isLegalVerified: false,
+            modalOpen: false,
             errors: {}
         }
     }
@@ -106,8 +108,7 @@ class CreateFarmer extends React.Component {
         this.setState({ [e.target.id]: e.target.value })
     }
 
-    onSubmit = e => {
-        e.preventDefault()
+    onSubmit = () => {
 
         const newUser = {
             name: this.state.name,
@@ -122,6 +123,15 @@ class CreateFarmer extends React.Component {
         this.props.registerFarmer(newUser, this.props.history)
     }
 
+    onOpenModal = e => {
+        e.preventDefault()
+        this.setState({ modalOpen: true });
+    }
+
+    onCloseModal = () => {
+        this.setState({ modalOpen: false });
+        this.onSubmit()
+    }
 
     render() {
         const { errors } = this.state
@@ -129,7 +139,8 @@ class CreateFarmer extends React.Component {
             <ThemeProvider theme={theme}>
                 <CreateFarmerHeader />
                 <div className="container">
-                    <form noValidate onSubmit={this.onSubmit}>
+                    {/* <form noValidate onSubmit={this.onSubmit}> */}
+                    <form noValidate onSubmit={this.onOpenModal}>
                         <div>
                             <TextField
                                 required
@@ -257,6 +268,9 @@ class CreateFarmer extends React.Component {
                         </div>
                     </form>
                 </div>
+                <Modal open={this.state.modalOpen} onClose={this.onCloseModal} center>
+                    <h2>by continuing, I hereby agree to a 10% transaction handling fee</h2>
+                </Modal>
                 <CreateFarmerFooter />
             </ThemeProvider>
         )

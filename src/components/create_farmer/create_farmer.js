@@ -139,7 +139,6 @@ class CreateFarmer extends React.Component {
             <ThemeProvider theme={theme}>
                 <CreateFarmerHeader />
                 <div className="container">
-                    {/* <form noValidate onSubmit={this.onSubmit}> */}
                     <form noValidate onSubmit={this.onOpenModal}>
                         <div>
                             <TextField

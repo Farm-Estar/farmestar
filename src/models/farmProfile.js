@@ -20,6 +20,50 @@ const farmProfileSchema = new mongoose.Schema({
     imageUrl: {
         type: String
     },
+    hours: {
+        monOpen:{
+            type: String
+        },
+        monClose:{
+            type: String
+        },
+        tuesOpen:{
+            type: String
+        },
+        tuesClose:{
+            type: String
+        },
+        wedOpen: {
+            type: String
+        },
+        wedClose: {
+            type: String
+        },
+        thursOpen: {
+            type: String
+        },
+        thursClose: {
+            type: String
+        },
+        friOpen: {
+            type: String
+        },
+        friClose: {
+            type: String
+        },
+        satOpen: {
+            type: String
+        },
+        satClose: {
+            type: String
+        },
+        sunOpen:{
+            type: String
+        },
+        sunClose:{
+            type: String
+        }
+    },
     date: {
         type: Date,
         default: Date.now

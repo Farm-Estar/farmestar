@@ -31,6 +31,7 @@ import CreateFarmProfile from './components/create_farm_profile/create_farm_prof
 import AddFarm from './components/add_farm/add_farm'
 import FeaturedFarms from './components/featured_farms/featured_farms'
 import FarmProfile from './components/farm_profile/farm_profile'
+import FarmHours from './components/farm_hours/farm_hours'
 import AddProduce from './components/add_produce/add_produce'
 import ProduceProfile from './components/produce_profile/produce_profile'
 import ListProduce from './components/list_produce/list_produce'
@@ -102,6 +103,7 @@ const routing = (
                             <PrivateRoute exact path="/dashboard" component={dashboard} />
                             <Route exact path="/featuredFarms" component={FeaturedFarms} />
                             <Route exact path="/farmProfile" component={FarmProfile} />
+                            <Route exact path="/farmHours" component={FarmHours} />
                             <Route exact path="/addProduce" component={AddProduce} />
                             <Route exact path="/produceProfile" component={ProduceProfile} />
                             <Route exact path="/listProduce" component={ListProduce} />

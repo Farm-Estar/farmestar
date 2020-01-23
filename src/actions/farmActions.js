@@ -50,11 +50,23 @@ export const addFarm = (farmData, history) => dispatch => {
 export const addProfile = (profileData, history) => dispatch => {
     axios
         .post("/api/farm/addFarmProfile", profileData)
-        .then(res => history.push("/login"))
+        .then(res => history.push({
+            pathname: "/farmHours",
+            state: {
+                farmId: res.data.farm
+            }
+        }))
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
             })
         )
+}
+
+//Set Farm Hours
+export const setHours = (data, history) => dispatch => {
+    //Pass hours to the farmId passed in data and update it
+    console.log(data)
+    history.push("/login")
 }

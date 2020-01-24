@@ -77,46 +77,72 @@ class FarmHours extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            monOpen: "",
-            monClose: "",
-            tuesOpen: "",
-            tuesClose: "",
-            wedOpen: "",
-            wedClose: "",
-            thurOpen: "",
-            thurClose: "",
-            friOpen: "",
-            friClose: "",
-            satOpen: "",
-            satClose: "",
-            sunOpen: "",
-            sunClose: "",
+            mon:{
+                open:"",
+                close: ""
+            },
+            tues:{
+                open:"",
+                close:""
+            },
+            wed:{
+                open:"",
+                close:""
+            },
+            thur:{
+                open:"",
+                close:""
+            },
+            fri:{
+                open:"",
+                close:""
+            },
+            sat:{
+                open:"",
+                close:""
+            },
+            sun:{
+                open:"",
+                close:""
+            },
             hoursSet: false
         }
     }
 
     setMonOpen = time => {
-        this.setState({ monOpen: time })
+        this.setState({ mon:{
+            open: time
+        }})
     }
 
     setMonClose = time => {
-        this.setState({ monClose: time })
+        this.setState({ mon:{
+            close: time
+        }})
     }
 
     setTuesOpen = time => {
-        this.setState({ tuesOpen: time })
+        this.setState({ tues:{
+            open: time
+        }})
     }
 
     setTuesClose = time => {
-        this.setState({ tuesClose: time })
+        this.setState({ tues:{
+            close: time
+        }})
     }
 
     setWedOpen = time => {
-        this.setState({ wedOpen: time })
+        this.setState({ wed:{
+            close: time
+        }})
     }
 
     setWedClose = time => {
-        this.setState({ wedClose: time })
+        this.setState({ wed:{
+            close: time
+        }})
     }
 
     setThurOpen = time => {

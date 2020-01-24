@@ -8,7 +8,7 @@ class CartMap extends Component {
     constructor(props){
         super(props)
         this.state = {
-            displayMap: (this.props.auth.cart.length >= 0) ? true : false,
+            displayMap: (this.props.auth.cart.length > 0) ? true : false,
             center: {
                 lat: 59.95,
                 lng: 30.33
@@ -18,7 +18,7 @@ class CartMap extends Component {
     }
 
     componentDidMount = () => {
-        if (this.state.displayMap) {
+        if (this.state.displayMap && this.props.auth.cart[0].farm_details) {
             this.setState({
                 center:{
                     lat: this.props.auth.cart[0].farm_details.location.coordinates[0],

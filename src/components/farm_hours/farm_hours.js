@@ -111,71 +111,101 @@ class FarmHours extends Component {
 
     setMonOpen = time => {
         this.setState({ mon:{
-            open: time
+            open: time,
+            close: this.state.mon.close
         }})
     }
 
     setMonClose = time => {
         this.setState({ mon:{
+            open: this.state.mon.open,
             close: time
         }})
     }
 
     setTuesOpen = time => {
         this.setState({ tues:{
-            open: time
+            open: time,
+            close: this.state.tues.close
         }})
     }
 
     setTuesClose = time => {
         this.setState({ tues:{
+            open: this.state.tues.open,
             close: time
         }})
     }
 
     setWedOpen = time => {
         this.setState({ wed:{
-            close: time
+            open: time,
+            close: this.state.wed.close
         }})
     }
 
     setWedClose = time => {
         this.setState({ wed:{
+            open: this.state.wed.open,
             close: time
         }})
     }
 
     setThurOpen = time => {
-        this.setState({ thurOpen: time })
+        this.setState({ thur:{
+            open: time,
+            close: this.state.thur.close
+        }})
     }
 
     setThurClose = time => {
-        this.setState({ thurClose: time })
+        this.setState({ thur:{
+            open: this.state.thur.open,
+            close: time
+        }})
     }
 
     setFriOpen = time => {
-        this.setState({ friOpen: time })
+        this.setState({ fri:{
+            open: time,
+            close: this.state.fri.close
+        }})
     }
 
     setFriClose = time => {
-        this.setState({ friClose: time })
+        this.setState({ fri:{
+            open:this.state.fri.open,
+            close: time
+        }})
     }
 
     setSatOpen = time => {
-        this.setState({ satOpen: time })
+        this.setState({ sat:{
+            open: time,
+            close: this.state.sat.close
+        }})
     }
 
     setSatClose = time => {
-        this.setState({ satClose: time })
+        this.setState({ sat:{
+            open: this.state.sat.open,
+            close: time
+        }})
     }
 
     setSunOpen = time => {
-        this.setState({ sunOpen: time })
+        this.setState({ sun:{
+            open: time,
+            close: this.state.sun.close
+        }})
     }
 
     setSunClose = time => {
         this.setState({ 
-            sunClose: time,
+            sun:{
+                open: this.state.sun.open,
+                close: time
+            },
             hoursSet: true
          })
     }
@@ -201,14 +231,14 @@ class FarmHours extends Component {
                         className="picker"
                         format="HH:mm a"
                         onChange={this.setMonOpen}
-                        value={this.state.monOpen}
+                        value={this.state.mon.open}
                     />
                     <TimePicker
                         label="Close"
                         className="picker"
                         format="HH:mm a"
                         onChange={this.setMonClose}
-                        value={this.state.monClose}
+                        value={this.state.mon.close}
                     />
                 </div>
                 <div className="day_header">Tuesday</div>
@@ -217,14 +247,14 @@ class FarmHours extends Component {
                         className="picker"
                         format="HH:mm a"
                         onChange={this.setTuesOpen}
-                        value={this.state.tuesOpen}
+                        value={this.state.tues.open}
                     />
                     <TimePicker
                         label="Close"
                         className="picker"
                         format="HH:mm a"
                         onChange={this.setTuesClose}
-                        value={this.state.TuesClose}
+                        value={this.state.tues.close}
                     />
                 </div>
                 <div className="day_header">Wednesday</div>
@@ -233,14 +263,14 @@ class FarmHours extends Component {
                         className="picker"
                         format="HH:mm a"
                         onChange={this.setWedOpen}
-                        value={this.state.wedOpen}
+                        value={this.state.wed.open}
                     />
                     <TimePicker
                         label="Close"
                         className="picker"
                         format="HH:mm a"
                         onChange={this.setWedClose}
-                        value={this.state.wedClose}
+                        value={this.state.wed.close}
                     />
                 </div>
                 <div className="day_header">Thursday</div>
@@ -249,14 +279,14 @@ class FarmHours extends Component {
                         className="picker"
                         format="HH:mm a"
                         onChange={this.setThurOpen}
-                        value={this.state.thurOpen}
+                        value={this.state.thur.open}
                     />
                     <TimePicker
                         label="Close"
                         className="picker"
                         format="HH:mm a"
                         onChange={this.setThurClose}
-                        value={this.state.thurClose}
+                        value={this.state.thur.close}
                     />
                 </div>
                 <div className="day_header">Friday</div>
@@ -265,14 +295,14 @@ class FarmHours extends Component {
                         className="picker"
                         format="HH:mm a"
                         onChange={this.setFriOpen}
-                        value={this.state.friOpen}
+                        value={this.state.fri.open}
                     />
                     <TimePicker
                         label="Close"
                         className="picker"
                         format="HH:mm a"
                         onChange={this.setFriClose}
-                        value={this.state.friClose}
+                        value={this.state.fri.close}
                     />
                 </div>
                 <div className="day_header">Saturday</div>
@@ -281,14 +311,14 @@ class FarmHours extends Component {
                         className="picker"
                         format="HH:mm a"
                         onChange={this.setSatOpen}
-                        value={this.state.satOpen}
+                        value={this.state.sat.open}
                     />
                     <TimePicker
                         label="Close"
                         className="picker"
                         format="HH:mm a"
                         onChange={this.setSatClose}
-                        value={this.state.satClose}
+                        value={this.state.sat.close}
                     />
                 </div>
                 <div className="day_header">Sunday</div>
@@ -297,14 +327,14 @@ class FarmHours extends Component {
                         className="picker"
                         format="HH:mm a"
                         onChange={this.setSunOpen}
-                        value={this.state.sunOpen}
+                        value={this.state.sun.open}
                     />
                     <TimePicker
                         label="Close"
                         className="picker"
                         format="HH:mm a"
                         onChange={this.setSunClose}
-                        value={this.state.sunClose}
+                        value={this.state.sun.close}
                     />
                 </div>
                 <div className="hours_button">

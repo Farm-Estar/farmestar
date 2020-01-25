@@ -7,9 +7,11 @@ import { convertToBoolean } from '../../utils/setAuthToken'
 import Button from '@material-ui/core/Button'
 import GoogleMapReact from 'google-map-react'
 import classnames from 'classnames'
+import Modal from 'react-responsive-modal'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
-import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
+import LibraryAddIcon from '@material-ui/icons/LibraryAdd'
+import AccessTimeIcon from '@material-ui/icons/AccessTime'
 
 //Import Actions
 import { toProduce, toListProduce } from '../../actions/authActions'
@@ -76,6 +78,7 @@ import FarmProfileHeader from './farm_profile_header'
 class FarmProfile extends Component {
     constructor(props) {
         super(props)
+        const date = new Date()
         this.state = {
             center: {
                 lat: this.props.location.state.farm.location.coordinates[0],
@@ -83,7 +86,39 @@ class FarmProfile extends Component {
             },
             zoom: 11,
             isFarmer: props.auth.user.isFarmer,
-            myFarm: false
+            myFarm: false,
+            showHoursModal: false,
+            currentDay: date.getDay(),
+            mon:{
+                open: this.props.location.state.hours.monOpen,
+                close: this.props.location.state.hours.monClose
+            },
+            tues:{
+                open: this.props.location.state.hours.tuesOpen,
+                close: this.props.location.state.hours.tuesClose
+            },
+            wed:{
+                open: this.props.location.state.hours.wedOpen,
+                close: this.props.location.state.hours.wedClose
+            },
+            thur:{
+                open: this.props.location.state.hours.thursOpen,
+                close: this.props.location.state.hours.thursClose
+            },
+            fri:{
+                open: this.props.location.state.hours.friOpen,
+                close: this.props.location.state.hours.friClose
+            },
+            sat:{
+                open: this.props.location.state.hours.satOpen,
+                close: this.props.location.state.hours.satClose
+            },
+            sun:{
+                open: this.props.location.state.hours.sunOpen,
+                close: this.props.location.state.hours.sunClose
+            },
+            todayOpen:"",
+            todayClose: ""
         }
     }
 
@@ -97,6 +132,8 @@ class FarmProfile extends Component {
                 myFarm: true
             })
         }
+
+        this.mapDayToSchedule
     }
 
     updateFarmerState = () => {
@@ -121,6 +158,101 @@ class FarmProfile extends Component {
         this.props.toListProduce(farm_data, this.props.history)
     }
 
+    viewSchedule = () => {
+        this.setState({
+            showHoursModal: true
+        })
+    }
+
+    onCloseModal = () => {
+        this.setState({
+            showHoursModal: false
+        })
+    }
+
+    getCurrentDay = (value) => {
+        switch (new Date().getDay()) {
+            case 0:
+              return "Sunday"
+            case 1:
+              return "Monday"
+            case 2:
+               return "Tuesday"
+            case 3:
+              return "Wednesday"
+            case 4:
+              return "Thursday"
+            case 5:
+              return "Friday"
+            case 6:
+              return "Saturday"
+            default:
+                return "Error"  
+          }
+    }
+
+    mapDayToSchedule = () => {
+        const day = this.getCurrentDay(this.state.currentDay)
+
+        switch (day) {
+            case "Sunday":
+              this.setState({
+                  todayOpen: this.state.sun.open,
+                  todayClose: this.state.sun.close
+              })
+              break
+            case "Monday":
+                this.setState({
+                    todayOpen: this.state.mon.open,
+                    todayClose: this.state.mon.close
+                })
+                break
+            case "Tuesday":
+                this.setState({
+                    todayOpen: this.state.tues.open,
+                    todayClose: this.state.tues.close
+                })
+                break
+            case "Wednesday":
+                this.setState({
+                    todayOpen: this.state.wed.open,
+                    todayClose: this.state.wed.close
+                })
+                break
+            case "Thursday":
+                this.setState({
+                    todayOpen: this.state.thur.open,
+                    todayClose: this.state.thur.close
+                })
+                break
+            case "Friday":
+                this.setState({
+                    todayOpen: this.state.fri.open,
+                    todayClose: this.state.fri.close
+                })
+                break
+            case "Saturday":
+                this.setState({
+                    todayOpen: this.state.sat.open,
+                    todayClose: this.state.sat.close
+                })
+                break
+            default:
+                this.setState({
+                    todayOpen: "00:00",
+                    todayClose: "00:00"
+                })
+                break 
+          }
+
+    }
+
+    // setScheduleLabel = () => {
+    //     this.mapDayToSchedule
+
+    //     return <div>{this.getCurrentDay(this.state.currentDay)} {this.state.todayOpen} - {this.state.todayClose}</div>
+    // }
+
     render() {
         let produceButton
 
@@ -141,8 +273,23 @@ class FarmProfile extends Component {
                 onClick={this.addProduct}
             ><LibraryAddIcon /></Button>
         } else {
-            produceButton = null
+            produceButton = <Button
+            style={{
+                width: "30%",
+                height: "48pt",
+                borderRadius: "3px",
+                letterSpacing: "1.5px",
+                marginTop: "1rem",
+                marginLeft: "13px"
+            }}
+            type="submit"
+            variant="contained"
+            color="primary"
+            onClick={this.viewSchedule}
+        >View Hours <AccessTimeIcon /></Button>
         }
+
+        let scheduleLable = <div>{this.getCurrentDay(this.state.currentDay)} {this.state.todayOpen} AM - {this.state.todayClose} PM</div>
 
         return (
             <ThemeProvider theme={theme}>
@@ -155,6 +302,9 @@ class FarmProfile extends Component {
                     </div>
                     <div className="farm-profile-description">
                         {this.props.location.state.description}
+                    </div>
+                    <div className="farm-hours-container">
+                        {scheduleLable}
                     </div>
                     <div className="farm-profile-menu-button">
                         <Button
@@ -186,6 +336,16 @@ class FarmProfile extends Component {
                         />
                     </GoogleMapReact>
                 </div>
+                <Modal open={this.state.showHoursModal} onClose={this.onCloseModal} center>
+                    <div className="hours-modal-title">Hours</div>
+                    <table>
+                            <tr><th>Sunday</th><td>Closed</td></tr>
+                            <tr><th>Monday</th><td>9am - 5pm</td></tr>
+                            <tr><th>Tuesday</th><td>9am - 5pm</td></tr>
+                            <tr><th>Wednesday</th><td>9am - 5pm</td></tr>
+                            <tr><th>Thursday</th><td>9am - 5pm</td></tr>
+                        </table>
+                </Modal>
             </ThemeProvider>
         )
     }

@@ -36,3 +36,17 @@
     bottom: auto;
 }
 
+.hours-modal-title {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 1.5em;
+}
+
+.farm-hours-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 1em;
+}
+

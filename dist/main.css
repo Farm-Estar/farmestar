@@ -356,6 +356,13 @@ a {
     bottom: auto;
 }
 
+.hours-modal-title{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 1.5em;
+}
+
 
 .time_container{
     display: flex;

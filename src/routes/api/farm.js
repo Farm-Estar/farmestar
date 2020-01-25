@@ -187,4 +187,41 @@ farms.post("/deleteProduct", (req, res) => {
     })
 })
 
+
+// @route POST api/farm/addHours
+// @desc add hours to farm
+// @access Public
+farms.post("/addHours", (req, res) => {
+    const farm_id = req.body.farm_id
+
+    //Edit Product with mapping to the farm
+    FarmProfile.findOneAndUpdate({ farm: farm_id },
+        {
+            $set:
+            {
+                hours: {
+                    monOpen: req.body.hours.monOpen,
+                    monClose: req.body.hours.monClose,
+                    tuesOpen: req.body.hours.tuesOpen,
+                    tuesClose: req.body.hours.tuesClose,
+                    wedOpen: req.body.hours.wedOpen,
+                    wedClose: req.body.hours.wedClose,
+                    thursOpen: req.body.hours.thurOpen,
+                    thursClose: req.body.hours.thurClose,
+                    friOpen: req.body.hours.friOpen,
+                    friClose: req.body.hours.friClose,
+                    satOpen: req.body.hours.satOpen,
+                    satClose: req.body.hours.satClose,
+                    sunOpen: req.body.hours.sunOpen,
+                    sunClose: req.body.hours.sunClose
+                }
+            }
+        }, { new: true }, (err, farm_profile) => {
+            if (err) {
+                res.json(err)
+            }
+            res.json("Hours Updated Succesfully: " + JSON.stringify(farm_profile));
+        })
+})
+
 export { farms }

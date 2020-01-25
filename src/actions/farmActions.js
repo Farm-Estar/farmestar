@@ -66,7 +66,34 @@ export const addProfile = (profileData, history) => dispatch => {
 
 //Set Farm Hours
 export const setHours = (data, history) => dispatch => {
-    //Pass hours to the farmId passed in data and update it
     console.log(data)
-    history.push("/login")
+    //Pass hours to the farmId passed in data and update it
+    const payload = {
+        farm_id: data.farmId,
+        hours: {
+            monOpen: data.mon.open,
+            monClose: data.mon.close,
+            tuesOpen: data.tues.open,
+            tuesClose: data.tues.close,
+            wedOpen: data.wed.open,
+            wedClose: data.wed.close,
+            thursOpen: data.thur.open,
+            thursClose: data.thur.close,
+            friOpen: data.fri.open,
+            friClose: data.fri.close,
+            satOpen: data.sat.open,
+            satClose: data.sat.close,
+            sunOpen: data.sun.open,
+            sunClose: data.sun.close
+        }
+    }
+    axios
+    .post("/api/farm/addHours", payload)
+    .then(res => history.push("/login"))
+    .catch(err =>
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        })
+    )
 }

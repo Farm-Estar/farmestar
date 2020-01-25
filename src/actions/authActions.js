@@ -235,7 +235,8 @@ export const farmProfile = (farm_data, history) => dispatch => {
                 description: res.data.description,
                 isFarmer: payload.isFarmer,
                 farm: payload.farm,
-                imageUrl: res.data.imageUrl
+                imageUrl: res.data.imageUrl,
+                hours: res.data.hours
             }
 
             dispatch({

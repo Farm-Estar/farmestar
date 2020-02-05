@@ -9,15 +9,29 @@ const setAuthToken = token => {
 }
 
 export const convertToBoolean = string => {
-    let value 
+    let value
 
     if (string == "true") {
         value = true
         return value
-    }else {
-        value = false 
+    } else {
+        value = false
         return value
     }
+}
+
+export const addZeros = num => {
+    // Convert input string to a number and store as a variable.
+    var value = Number(num);
+    // Split the input string into two arrays containing integers/decimals
+    var res = num.split(".");
+    // If there is no decimal point or only one decimal place found.
+    if (res.length == 1 || res[1].length < 3) {
+        // Set the number to two decimal places
+        value = value.toFixed(2);
+    }
+    // Return updated or original number.
+    return value;
 }
 
 export default setAuthToken

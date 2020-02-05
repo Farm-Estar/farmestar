@@ -5,8 +5,9 @@ import crypto from 'crypto'
 import mailer from 'nodemailer'
 import transport from 'nodemailer-sendgrid-transport'
 import keys from '../../config/keys'
+import {addZeros} from '../../utils/setAuthToken'
 
-const stripe = require("stripe")("sk_test_GFG8Z3zu7QO66KUwd4yQYX9B00TvN3UNJb")
+const stripe = require("stripe")("sk_live_d6N7psD28sNOevrQyvlTa53p00pyLcLvfN")
 require('babel-polyfill')
 
 //Validation
@@ -165,7 +166,7 @@ users.post("/login", (req, res) => {
 // @route POST api/users/guestLogin
 // @desc Guest Login users
 // @access Public
-users.post("/guestLogin", (req, res) =>{
+users.post("/guestLogin", (req, res) => {
     //ToDo: Add Validation so no tamper
 
     //Setup Payload for GuestUser
@@ -187,10 +188,10 @@ users.post("/guestLogin", (req, res) =>{
     }
 
     //Find and Map Guest User
-    User.findOne({email})
+    User.findOne({ email })
         .then(user => {
             if (!user) {
-                return res.status(404).json({ emailnotfound: "Guest User Not Applicable, Please create a profile or try again later." }) 
+                return res.status(404).json({ emailnotfound: "Guest User Not Applicable, Please create a profile or try again later." })
             }
 
             //Set Guest Details
@@ -316,19 +317,28 @@ users.post("/updatePassword", (req, res) => {
 // @desc Make chare to stripe
 // @Access Private
 users.post("/charge", async (req, res) => {
-    try {
-        let { status } = await stripe.charges.create({
-            amount: req.body.total,
-            currency: "usd",
-            description: "Farm Estar Purchase",
-            source: req.body.tokenId
-        });
-
-        res.json({ status });
-    } catch (err) {
-        console.log(err);
-        res.status(500).end();
+    const stripeChargeCallback = res => (stripeErr, stripeRes) => {
+        if (stripeErr) {
+            res.status(500).send({ error: stripeErr });
+        } else {
+            res.status(200).send({ success: stripeRes });
+        }
     }
+
+    const amountString = addZeros(req.body.total.toString())
+    const amount = parseFloat(parseFloat(amountString).toFixed(2))
+    const _amount = amount * 100
+
+    const payload = {
+        amount: _amount,
+        currency: "usd",
+        description: "Farm Estar Purchase",
+        source: req.body.tokenId
+    }
+
+    console.log("Backend Payload: " + JSON.stringify(payload))
+
+    stripe.charges.create(payload, stripeChargeCallback(res))
 })
 
 // @route GET api/users/dashboard

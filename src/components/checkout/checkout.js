@@ -117,11 +117,12 @@ class Checkout extends Component {
             this.props.stripe
                 .createToken()
                 .then((payload) => {
-                    console.log(JSON.stringify(payload))
+                    console.log("Stripe PayLoad: " + JSON.stringify(payload))
                     const postData = {
                         tokenId: payload.token.id,
-                        total: this.calculateTotal
+                        total: this.state.cartTotal
                     }
+                    console.log("Stripe Post Data: " + JSON.stringify(postData))
                     this.props.chargeCard(postData, this.props.history)
                 })
         }

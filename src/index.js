@@ -84,7 +84,7 @@ if (localStorage.jwtToken) {
 
 
 const routing = (
-    <StripeProvider apiKey="pk_test_ouzHjSY3RBkcUbxIhx5VdZqY00VmMG2SNL">
+    <StripeProvider apiKey="pk_live_dJ3ENsg91H5Qf5URfH0nwOzX00praVdJs7">
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <Router>

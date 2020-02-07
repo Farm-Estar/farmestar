@@ -9,7 +9,8 @@ import {
     ADD_PRODUCE,
     ADD_TO_CART,
     REMOVE_PRODUCT,
-    EDIT_PRODUCT
+    EDIT_PRODUCT,
+    CLEAR_CART
 } from '../actions/types'
 import {REHYDRATE, PERSIST} from 'redux-persist/es/constants'
 
@@ -111,7 +112,12 @@ export default function(state = initialState, action) {
                 //     ...state.produce.slice(0, rmindex + 1),
                 //     ...state.produce.slice(rmindex + 1)
                 // ],
-            }                       
+            }
+        case CLEAR_CART:
+            return  {
+                ...state,
+                cart: []
+            }                         
         default:
             return state        
     }

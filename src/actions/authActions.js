@@ -15,7 +15,8 @@ import {
     ADD_PRODUCE,
     ADD_TO_CART,
     REMOVE_PRODUCT,
-    EDIT_PRODUCT
+    EDIT_PRODUCT,
+    CLEAR_CART
 } from './types'
 import { get } from 'http'
 import { persistCombineReducers } from 'redux-persist'
@@ -472,13 +473,22 @@ export const setPhoneNumber = (chargeData, history) => dispatch => {
                     .then(res => {
                         const payload = {
                             farmer: farmer,
-                            transactionData: { ...chargeData }
+                            transactionData: { ...chargeData },
+                            farmerTotal: 0
                         }
+
+                        payload.transactionData.cart.map(function(item){
+                            if(item.farm_details.farmer === payload.farmer){
+                                payload.farmerTotal = payload.farmerTotal + item.total
+                            }
+                        })
+
                         //Make Call to Send Consumer Email
                         axios
                             .post("/api/users/sendConsumerEmail", payload)
                             .then(res => {
                                 //Navigate to Dashboard since Emails have been sent
+                                clearCart()
                                 history.push("/dashboard")
                             })
                             .catch(err =>
@@ -503,6 +513,14 @@ export const setPhoneNumber = (chargeData, history) => dispatch => {
                 payload: err.response.data
             })
         )
+}
+
+export const clearCart = () => dispatch => {
+    console.log("Cart is being cleared, transaction succesfull")
+    dispatch({
+        type: CLEAR_CART,
+        payload: ""
+    })
 }
 
 

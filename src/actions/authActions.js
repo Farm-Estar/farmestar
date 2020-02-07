@@ -473,13 +473,19 @@ export const setPhoneNumber = (chargeData, history) => dispatch => {
                     .then(res => {
                         const payload = {
                             farmer: farmer,
-                            transactionData: { ...chargeData },
-                            farmerTotal: 0
+                            transactionData: { 
+                                ...chargeData,
+                                farmerTotal: 0
+                             }
                         }
 
                         payload.transactionData.cart.map(function(item){
+                            console.log("ITEM Farmer: " + item.farm_details.farmer)
+                            console.log("PAYLOAD Farmer: " + payload.farmer)
                             if(item.farm_details.farmer === payload.farmer){
-                                payload.farmerTotal = payload.farmerTotal + item.total
+                                console.log("Inside Statement with farmTotal: " + payload.transactionData.farmerTotal)
+                                payload.transactionData.farmerTotal = payload.transactionData.farmerTotal + item.total
+                                console.log("Farmer Total After Equation: " + payload.transactionData.farmerTotal)
                             }
                         })
 
@@ -488,7 +494,6 @@ export const setPhoneNumber = (chargeData, history) => dispatch => {
                             .post("/api/users/sendConsumerEmail", payload)
                             .then(res => {
                                 //Navigate to Dashboard since Emails have been sent
-                                clearCart()
                                 history.push("/dashboard")
                             })
                             .catch(err =>
@@ -515,11 +520,11 @@ export const setPhoneNumber = (chargeData, history) => dispatch => {
         )
 }
 
-export const clearCart = () => dispatch => {
+export const clearCart = (payload) => dispatch => {
     console.log("Cart is being cleared, transaction succesfull")
     dispatch({
         type: CLEAR_CART,
-        payload: ""
+        payload: payload
     })
 }
 

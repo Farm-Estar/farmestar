@@ -12,7 +12,7 @@ import PhoneIcon from '@material-ui/icons/Phone'
 
 
 //Actions
-import { setPhoneNumber } from '../../actions/authActions'
+import { setPhoneNumber, clearCart } from '../../actions/authActions'
 
 class PaymentSuccess extends Component {
     constructor(props) {
@@ -41,6 +41,9 @@ class PaymentSuccess extends Component {
         const chargeData = {
             ...this.state
         }
+
+        //Clear Cart, Then Submit Number Update
+        this.props.clearCart(chargeData)
 
         // eslint-disable-next-line react/prop-types
         this.props.setPhoneNumber(chargeData, this.props.history)
@@ -152,11 +155,12 @@ class PaymentSuccess extends Component {
 }
 
 PaymentSuccess.propTypes = {
-    setPhoneNumber: propTypes.func.isRequired
+    setPhoneNumber: propTypes.func.isRequired,
+    clearCart: propTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps, { setPhoneNumber })(PaymentSuccess)
+export default connect(mapStateToProps, { setPhoneNumber, clearCart })(PaymentSuccess)

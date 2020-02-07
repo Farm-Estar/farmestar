@@ -44,6 +44,7 @@ import NotFound from './components/notfound/notfound';
 import PrivateRoute from './components/private-route/private-route'
 import Terms from './components/term_policies/terms';
 import EditProduct from './components/edit_product/edit_product'
+import PaymentSuccess from './components/payment_success/payment_success'
 
 
 //Firebase Configuration
@@ -84,7 +85,7 @@ if (localStorage.jwtToken) {
 
 
 const routing = (
-    <StripeProvider apiKey="pk_live_dJ3ENsg91H5Qf5URfH0nwOzX00praVdJs7">
+    <StripeProvider apiKey="pk_test_BpVAwptIyHFeh1ExoOLWW96f008hLkqWiK">
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <Router>
@@ -117,6 +118,7 @@ const routing = (
                                     <Checkout />
                                 </Elements>
                             </Route>
+                            <Route exact path="/paymentSuccess" component={PaymentSuccess} />
                             <Route exact path="/editProduct" component={EditProduct} />
                             <Route component={NotFound} />
                         </Switch>

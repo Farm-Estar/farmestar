@@ -1,6 +1,7 @@
 import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
 import jwt_decode from 'jwt-decode'
+import { removeDuplicates } from '../utils/setAuthToken'
 
 import {
     GET_ERRORS,
@@ -222,10 +223,10 @@ export const support = (history) => dispatch => {
 //Farm Profile
 export const farmProfile = (farm_data, history) => dispatch => {
     const payload = {
-        farm: {...farm_data},
+        farm: { ...farm_data },
         isFarmer: farm_data.isFarmer
     }
-    
+
     axios
         .post("api/farm/farmProfile", payload)
         .then(res => {
@@ -293,7 +294,7 @@ export const addProduce = (produce_data, history) => dispatch => {
                 price: res.data.price,
                 sku: res.data.sku
             }
-                
+
             payload.produce.push(mapping_produce)
 
             dispatch({
@@ -397,17 +398,104 @@ export const addToCart = (product_data, history) => dispatch => {
 
 //Checkout Charge Card
 export const chargeCard = (token_data, history) => dispatch => {
-    console.log(JSON.stringify(token_data))
     axios
         .post("/api/users/charge", token_data)
         .then(res => {
+            console.log("Charge Response: " + JSON.stringify(res))
             //Handle success payment
             if (res.status == 200) {
                 //Success
-                history.push("/dashboard")
+                const payload = {
+                    message: "RESPONCE MESSAGE",
+                    success: true,
+                    cart: [...token_data.cart],
+                    email: token_data.email,
+                    name: token_data.name,
+                    total: token_data.total,
+                    transactionID: res.data.success.id,
+                    lastFour: res.data.success.payment_method_details.last4,
+                    receipt_url: res.data.success.receipt_url
+                }
+                history.push({
+                    pathname: '/paymentSuccess',
+                    state: { ...payload }
+                })
             } else {
                 //Failed
+                const payload = {
+                    message: "RESPONCE MESSAGE",
+                    success: false
+                }
+                history.push({
+                    pathname: '/paymentSuccess',
+                    state: { ...payload }
+                })
             }
+        })
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        )
+}
+
+export const setPhoneNumber = (chargeData, history) => dispatch => {
+
+    const payload = {
+        email: chargeData.email,
+        phonenumber: chargeData.phone
+    }
+
+    //Make API call, then call Farmer email
+    axios
+        .post("/api/users/setPhoneNumber", payload)
+        .then(res => {
+            //Make Farmer Email
+            console.log("This is where the farmer email will go")
+            let farmers = []
+            //Iterate over all cart items and place farmer from farm_details into the farmers array
+            chargeData.cart.forEach((product) => {
+                if (product) {
+                    farmers.push(product.farm_details.farmer)
+                }
+            })
+            let farmersFinal = removeDuplicates(farmers)
+            farmersFinal.forEach((farmer) => {
+                console.log(farmer)
+                const payload = {
+                    farmer: farmer,
+                    transactionData: { ...chargeData }
+                }
+                axios
+                    .post("/api/users/sendFarmerEmail", payload)
+                    .then(res => {
+                        const payload = {
+                            farmer: farmer,
+                            transactionData: { ...chargeData }
+                        }
+                        //Make Call to Send Consumer Email
+                        axios
+                            .post("/api/users/sendConsumerEmail", payload)
+                            .then(res => {
+                                //Navigate to Dashboard since Emails have been sent
+                                history.push("/dashboard")
+                            })
+                            .catch(err =>
+                                dispatch({
+                                    type: GET_ERRORS,
+                                    payload: err.response.data
+                                })
+                            )
+                    })
+                    .catch(err =>
+                        dispatch({
+                            type: GET_ERRORS,
+                            payload: err.response.data
+                        })
+                    )
+            })
+
         })
         .catch(err =>
             dispatch({

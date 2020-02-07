@@ -82,7 +82,9 @@ class Checkout extends Component {
         super(props)
         this.state = {
             cartTotal: 0,
-            cardholdersName: ""
+            cardholdersName: "",
+            name: this.props.auth.user.name,
+            email: this.props.auth.user.email
         }
     }
 
@@ -120,7 +122,10 @@ class Checkout extends Component {
                     console.log("Stripe PayLoad: " + JSON.stringify(payload))
                     const postData = {
                         tokenId: payload.token.id,
-                        total: this.state.cartTotal
+                        total: this.state.cartTotal,
+                        cart: [...this.props.auth.cart],
+                        email: this.state.email,
+                        name: this.state.name
                     }
                     console.log("Stripe Post Data: " + JSON.stringify(postData))
                     this.props.chargeCard(postData, this.props.history)

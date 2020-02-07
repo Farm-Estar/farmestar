@@ -34,4 +34,17 @@ export const addZeros = num => {
     return value;
 }
 
+export function removeDuplicates(arr) {
+    var seen = {};
+    var ret_arr = [];
+    for (var i = 0; i < arr.length; i++) {
+        if (!(arr[i] in seen)) {
+            ret_arr.push(arr[i]);
+            seen[arr[i]] = true;
+        }
+    }
+    return ret_arr;
+
+}
+
 export default setAuthToken

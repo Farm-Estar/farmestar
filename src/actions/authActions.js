@@ -466,28 +466,29 @@ export const setPhoneNumber = (chargeData, history) => dispatch => {
                 console.log(farmer)
                 const payload = {
                     farmer: farmer,
-                    transactionData: { ...chargeData }
+                    transactionData: { ...chargeData },
+                    farmersTotal: 0
                 }
+
+                payload.transactionData.cart.map(function(item){
+                    console.log("ITEM Farmer: " + item.farm_details.farmer)
+                    console.log("PAYLOAD Farmer: " + payload.farmer)
+                    if(item.farm_details.farmer === payload.farmer){
+                        console.log("Inside Statement with farmTotal: " + payload.farmersTotal)
+                        payload.farmersTotal = payload.farmersTotal + item.total
+                        console.log("Farmer Total After Equation: " + payload.farmersTotal)
+                    }
+                })
+
                 axios
                     .post("/api/users/sendFarmerEmail", payload)
                     .then(res => {
                         const payload = {
                             farmer: farmer,
                             transactionData: { 
-                                ...chargeData,
-                                farmerTotal: 0
+                                ...chargeData
                              }
                         }
-
-                        payload.transactionData.cart.map(function(item){
-                            console.log("ITEM Farmer: " + item.farm_details.farmer)
-                            console.log("PAYLOAD Farmer: " + payload.farmer)
-                            if(item.farm_details.farmer === payload.farmer){
-                                console.log("Inside Statement with farmTotal: " + payload.transactionData.farmerTotal)
-                                payload.transactionData.farmerTotal = payload.transactionData.farmerTotal + item.total
-                                console.log("Farmer Total After Equation: " + payload.transactionData.farmerTotal)
-                            }
-                        })
 
                         //Make Call to Send Consumer Email
                         axios

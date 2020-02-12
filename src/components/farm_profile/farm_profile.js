@@ -89,35 +89,35 @@ class FarmProfile extends Component {
             myFarm: false,
             showHoursModal: false,
             currentDay: date.getDay(),
-            mon:{
+            mon: {
                 open: this.props.location.state.hours.monOpen,
                 close: this.props.location.state.hours.monClose
             },
-            tues:{
+            tues: {
                 open: this.props.location.state.hours.tuesOpen,
                 close: this.props.location.state.hours.tuesClose
             },
-            wed:{
+            wed: {
                 open: this.props.location.state.hours.wedOpen,
                 close: this.props.location.state.hours.wedClose
             },
-            thur:{
-                open: this.props.location.state.hours.thursOpen,
-                close: this.props.location.state.hours.thursClose
+            thur: {
+                open: this.props.location.state.hours.thurOpen,
+                close: this.props.location.state.hours.thurClose
             },
-            fri:{
+            fri: {
                 open: this.props.location.state.hours.friOpen,
                 close: this.props.location.state.hours.friClose
             },
-            sat:{
+            sat: {
                 open: this.props.location.state.hours.satOpen,
                 close: this.props.location.state.hours.satClose
             },
-            sun:{
+            sun: {
                 open: this.props.location.state.hours.sunOpen,
                 close: this.props.location.state.hours.sunClose
             },
-            todayOpen:"",
+            todayOpen: "",
             todayClose: ""
         }
     }
@@ -133,7 +133,7 @@ class FarmProfile extends Component {
             })
         }
 
-        this.mapDayToSchedule
+        // this.mapDayToSchedule
     }
 
     updateFarmerState = () => {
@@ -170,81 +170,218 @@ class FarmProfile extends Component {
         })
     }
 
-    getCurrentDay = (value) => {
-        switch (new Date().getDay()) {
+    getCurrentDay = () => {
+        const date = new Date().getDay()
+        console.log("Date Number: " + date)
+        switch (date) {
             case 0:
-              return "Sunday"
+                return "Sunday"
             case 1:
-              return "Monday"
+                return "Monday"
             case 2:
-               return "Tuesday"
+                return "Tuesday"
             case 3:
-              return "Wednesday"
+                return "Wednesday"
             case 4:
-              return "Thursday"
+                return "Thursday"
             case 5:
-              return "Friday"
+                return "Friday"
             case 6:
-              return "Saturday"
+                return "Saturday"
             default:
-                return "Error"  
-          }
+                return "Error"
+        }
     }
 
     mapDayToSchedule = () => {
-        const day = this.getCurrentDay(this.state.currentDay)
+        const day = this.getCurrentDay()
+        console.log("Day of the week: " + day)
+        let body
 
         switch (day) {
             case "Sunday":
-              this.setState({
-                  todayOpen: this.state.sun.open,
-                  todayClose: this.state.sun.close
-              })
-              break
+                if (this.state.sun.open === "00:00" & this.state.sun.close === "00:00" || this.state.sun.open === "" & this.state.sun.close === "") {
+                    body = "<p>We are Closed today, please try again during our normal business hours.</p>"
+                } else {
+                    body = `Sunday ${this.state.sun.open}AM - ${this.state.sun.close}PM`
+                }
+                return body
             case "Monday":
-                this.setState({
-                    todayOpen: this.state.mon.open,
-                    todayClose: this.state.mon.close
-                })
-                break
+                if (this.state.mon.open === "00:00" & this.state.mon.close === "00:00" || this.state.mon.open === "" & this.state.mon.close === "") {
+                    body = "<p>We are Closed today, please try again during our normal business hours.</p>"
+                } else {
+                    body = `Monday ${this.state.mon.open}AM - ${this.state.mon.close}PM`
+                }
+                return body
             case "Tuesday":
-                this.setState({
-                    todayOpen: this.state.tues.open,
-                    todayClose: this.state.tues.close
-                })
-                break
+                if (this.state.tues.open === "00:00" & this.state.tues.close === "00:00" || this.state.tues.open === "" & this.state.tues.close === "") {
+                    body = "<p>We are Closed today, please try again during our normal business hours.</p>"
+                } else {
+                    body = `Tuesday ${this.state.tues.open}AM - ${this.state.tues.close}PM`
+                }
+                return body
             case "Wednesday":
-                this.setState({
-                    todayOpen: this.state.wed.open,
-                    todayClose: this.state.wed.close
-                })
-                break
+                if (this.state.wed.open === "00:00" & this.state.wed.close === "00:00" || this.state.wed.open === "" & this.state.wed.close === "") {
+                    body = "<p>We are Closed today, please try again during our normal business hours.</p>"
+                } else {
+                    body = `Wednesday ${this.state.wed.open}AM - ${this.state.wed.close}PM`
+                }
+                return body
             case "Thursday":
-                this.setState({
-                    todayOpen: this.state.thur.open,
-                    todayClose: this.state.thur.close
-                })
-                break
+                if (this.state.thur.open === "00:00" & this.state.thur.close === "00:00" || this.state.thur.open === "" & this.state.thur.close === "") {
+                    body = "<p>We are Closed today, please try again during our normal business hours.</p>"
+                } else {
+                    body = `Thursday ${this.state.thur.open}AM - ${this.state.thur.close}PM`
+                }
+                return body
             case "Friday":
-                this.setState({
-                    todayOpen: this.state.fri.open,
-                    todayClose: this.state.fri.close
-                })
-                break
+                if (this.state.fri.open === "00:00" & this.state.fri.close === "00:00" || this.state.fri.open === "" & this.state.fri.close === "") {
+                    body = "<p>We are Closed today, please try again during our normal business hours.</p>"
+                } else {
+                    body = `Friday ${this.state.fri.open}AM - ${this.state.fri.close}PM`
+                }
+                return body
             case "Saturday":
-                this.setState({
-                    todayOpen: this.state.sat.open,
-                    todayClose: this.state.sat.close
-                })
-                break
+                if (this.state.sat.open === "00:00" & this.state.sat.close === "00:00" || this.state.sat.open === "" & this.state.sat.close === "") {
+                    body = "<p>We are Closed today, please try again during our normal business hours.</p>"
+                } else {
+                    body = `Saturday ${this.state.sat.open}AM - ${this.state.sat.close}PM`
+                }
+                return body
             default:
-                this.setState({
-                    todayOpen: "00:00",
-                    todayClose: "00:00"
-                })
-                break 
-          }
+                body = "<p>We are Closed today, please try again during our normal business hours.</p>"
+                return body
+        }
 
+    }
+
+
+    getHours = (day) => {
+        let body
+        switch (day) {
+            case "Sunday":
+                if (this.state.sun.open === "00:00" & this.state.sun.close === "00:00" || this.state.sun.open === "" & this.state.sun.close === "") {
+                    body = "CLOSED"
+                } else {
+                    if (this.state.sun.open === "00:00" || this.state.sun.open === "") {
+                        body = `Open - `
+                    } else {
+                        body = `${this.state.sun.open}AM - `
+                    }
+
+                    if (this.state.sun.close === "00:00" || this.state.sun.close === "") {
+                        body = body + `Close`
+                    } else {
+                        body = body + `${this.state.sun.close}PM`
+                    }
+                }
+                return body
+            case "Monday":
+                if (this.state.mon.open === "00:00" & this.state.mon.close === "00:00" || this.state.mon.open === "" & this.state.mon.close === "") {
+                    body = "CLOSED"
+                } else {
+                    if (this.state.mon.open === "00:00" || this.state.mon.open === "") {
+                        body = `Open - `
+                    } else {
+                        body = `${this.state.mon.open}AM - `
+                    }
+
+                    if (this.state.mon.close === "00:00" || this.state.mon.close === "") {
+                        body = body + `Close`
+                    } else {
+                        body = body + `${this.state.mon.close}PM`
+                    }
+                }
+                return body
+            case "Tuesday":
+                if (this.state.tues.open === "00:00" & this.state.tues.close === "00:00" || this.state.tues.open === "" & this.state.tues.close === "") {
+                    body = "CLOSED"
+                } else {
+                    if (this.state.tues.open === "00:00" || this.state.tues.open === "") {
+                        body = `Open - `
+                    } else {
+                        body = `${this.state.tues.open}AM - `
+                    }
+
+                    if (this.state.tues.close === "00:00" || this.state.tues.close === "") {
+                        body = body + `Close`
+                    } else {
+                        body = body + `${this.state.tues.close}PM`
+                    }
+                }
+                return body
+            case "Wednesday":
+                if (this.state.wed.open === "00:00" & this.state.wed.close === "00:00" || this.state.wed.open === "" & this.state.wed.close === "") {
+                    body = "CLOSED"
+                } else {
+                    if (this.state.wed.open === "00:00" || this.state.wed.open === "") {
+                        body = `Open - `
+                    } else {
+                        body = `${this.state.wed.open}AM - `
+                    }
+
+                    if (this.state.wed.close === "00:00" || this.state.wed.close === "") {
+                        body = body + `Close`
+                    } else {
+                        body = body + `${this.state.wed.close}PM`
+                    }
+                }
+                return body
+            case "Thursday":
+                if (this.state.thur.open === "00:00" & this.state.thur.close === "00:00" || this.state.thur.open === "" & this.state.thur.close === "") {
+                    body = "CLOSED"
+                } else {
+                    if (this.state.thur.open === "00:00" || this.state.thur.open === "") {
+                        body = `Open - `
+                    } else {
+                        body = `${this.state.thur.open}AM - `
+                    }
+
+                    if (this.state.thur.close === "00:00" || this.state.thur.close === "") {
+                        body = body + `Close`
+                    } else {
+                        body = body + `${this.state.thur.close}PM`
+                    }
+                }
+                return body
+            case "Friday":
+                if (this.state.fri.open === "00:00" & this.state.fri.close === "00:00" || this.state.fri.open === "" & this.state.fri.close === "") {
+                    body = "CLOSED"
+                } else {
+                    if (this.state.fri.open === "00:00" || this.state.fri.open === "") {
+                        body = `Open - `
+                    } else {
+                        body = `${this.state.fri.open}AM - `
+                    }
+
+                    if (this.state.fri.close === "00:00" || this.state.fri.close === "") {
+                        body = body + `Close`
+                    } else {
+                        body = body + `${this.state.fri.close}PM`
+                    }
+                }
+                return body
+            case "Saturday":
+                if (this.state.sat.open === "00:00" & this.state.sat.close === "00:00" || this.state.sat.open === "" & this.state.sat.close === "") {
+                    body = "CLOSED"
+                } else {
+                    if (this.state.sat.open === "00:00" || this.state.sat.open === "") {
+                        body = `Open - `
+                    } else {
+                        body = `${this.state.sat.open}AM - `
+                    }
+
+                    if (this.state.sat.close === "00:00" || this.state.sat.close === "") {
+                        body = body + `Close`
+                    } else {
+                        body = body + `${this.state.sat.close}PM`
+                    }
+                }
+                return body
+            default:
+                body = "Error"
+                return body
+        }
     }
 
     // setScheduleLabel = () => {
@@ -274,22 +411,20 @@ class FarmProfile extends Component {
             ><LibraryAddIcon /></Button>
         } else {
             produceButton = <Button
-            style={{
-                width: "30%",
-                height: "48pt",
-                borderRadius: "3px",
-                letterSpacing: "1.5px",
-                marginTop: "1rem",
-                marginLeft: "13px"
-            }}
-            type="submit"
-            variant="contained"
-            color="primary"
-            onClick={this.viewSchedule}
-        >View Hours <AccessTimeIcon /></Button>
+                style={{
+                    width: "30%",
+                    height: "48pt",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px",
+                    marginTop: "1rem",
+                    marginLeft: "13px"
+                }}
+                type="submit"
+                variant="contained"
+                color="primary"
+                onClick={this.viewSchedule}
+            >View Hours <AccessTimeIcon /></Button>
         }
-
-        let scheduleLable = <div>{this.getCurrentDay(this.state.currentDay)} {this.state.todayOpen} AM - {this.state.todayClose} PM</div>
 
         return (
             <ThemeProvider theme={theme}>
@@ -304,7 +439,7 @@ class FarmProfile extends Component {
                         {this.props.location.state.description}
                     </div>
                     <div className="farm-hours-container">
-                        {scheduleLable}
+                        {this.mapDayToSchedule()}
                     </div>
                     <div className="farm-profile-menu-button">
                         <Button
@@ -339,12 +474,12 @@ class FarmProfile extends Component {
                 <Modal open={this.state.showHoursModal} onClose={this.onCloseModal} center>
                     <div className="hours-modal-title">Hours</div>
                     <table>
-                            <tr><th>Sunday</th><td>Closed</td></tr>
-                            <tr><th>Monday</th><td>9am - 5pm</td></tr>
-                            <tr><th>Tuesday</th><td>9am - 5pm</td></tr>
-                            <tr><th>Wednesday</th><td>9am - 5pm</td></tr>
-                            <tr><th>Thursday</th><td>9am - 5pm</td></tr>
-                        </table>
+                        <tr><th>Sunday</th><td>{this.getHours("Sunday")}</td></tr>
+                        <tr><th>Monday</th><td>{this.getHours("Monday")}</td></tr>
+                        <tr><th>Tuesday</th><td>{this.getHours("Tuesday")}</td></tr>
+                        <tr><th>Wednesday</th><td>{this.getHours("Wednesday")}</td></tr>
+                        <tr><th>Thursday</th><td>{this.getHours("Thursday")}</td></tr>
+                    </table>
                 </Modal>
             </ThemeProvider>
         )

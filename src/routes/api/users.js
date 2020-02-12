@@ -448,7 +448,7 @@ function displayAddresses(cart){
 
     cart.forEach(function(item) {
         const address = item.farm_details.address + ", " + item.farm_details.city + ", " + item.farm_details.state
-        body = body + `<a href="http://maps.google.com/maps?q=${address}">Click for directions to ${item.farm_details.farmName}</a>`
+        body = body + `<a href="http://maps.google.com/maps?q=${address}">Click for directions to ${item.farm_details.farmName}</a>` + `<p style="Margin-top: 20px;Margin-bottom: 0;">&nbsp;</p>`
     })
 
     return body

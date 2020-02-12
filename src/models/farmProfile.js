@@ -39,10 +39,10 @@ const farmProfileSchema = new mongoose.Schema({
         wedClose: {
             type: String
         },
-        thursOpen: {
+        thurOpen: {
             type: String
         },
-        thursClose: {
+        thurClose: {
             type: String
         },
         friOpen: {

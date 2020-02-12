@@ -78,32 +78,32 @@ class FarmHours extends Component {
         super(props)
         this.state = {
             mon:{
-                open:"",
-                close: ""
+                open:"00:00",
+                close: "00:00"
             },
             tues:{
-                open:"",
-                close:""
+                open:"00:00",
+                close:"00:00"
             },
             wed:{
-                open:"",
-                close:""
+                open:"00:00",
+                close:"00:00"
             },
             thur:{
-                open:"",
-                close:""
+                open:"00:00",
+                close:"00:00"
             },
             fri:{
-                open:"",
-                close:""
+                open:"00:00",
+                close:"00:00"
             },
             sat:{
-                open:"",
-                close:""
+                open:"00:00",
+                close:"00:00"
             },
             sun:{
-                open:"",
-                close:""
+                open:"00:00",
+                close:"00:00"
             },
             hoursSet: false
         }

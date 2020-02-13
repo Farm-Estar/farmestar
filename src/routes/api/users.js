@@ -329,10 +329,13 @@ users.post("/charge", async (req, res) => {
     const amount = parseFloat(parseFloat(amountString).toFixed(2))
     const _amount = amount * 100
 
+    //Create Description
+    const _description = chargeDescription(req.body.cart)
+
     const payload = {
         amount: _amount,
         currency: "usd",
-        description: "Farm Estar Purchase",
+        description: _description,
         source: req.body.tokenId
     }
 
@@ -452,6 +455,17 @@ function displayAddresses(cart){
     })
 
     return body
+}
+
+function chargeDescription(cart){
+    let description = ""
+
+    cart.forEach(function(item) {
+        const itemDescription = item.product_details.title + ", QTY:" + item.qty + ", Price: " + item.product_details.price + ", Farm: " + item.farm_details.farmName + ", Address: " + item.farm_details.address + ", " + item.farm_details.city + ", " + item.farm_details.state + " | "
+        description = description + itemDescription
+    })
+
+    return description
 }
 
 

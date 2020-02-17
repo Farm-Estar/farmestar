@@ -17,6 +17,10 @@ const produceSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    measurement: {
+        type: String,
+        required: false
+    },
     sku: {
         type: String,
         required: true

@@ -201,55 +201,55 @@ class FarmProfile extends Component {
         switch (day) {
             case "Sunday":
                 if (this.state.sun.open === "00:00" & this.state.sun.close === "00:00" || this.state.sun.open === "" & this.state.sun.close === "") {
-                    body = "<p>We are Closed today, please try again during our normal business hours.</p>"
+                    body = "We are Closed today, please try again during our normal business hours."
                 } else {
                     body = `Sunday ${this.state.sun.open}AM - ${this.state.sun.close}PM`
                 }
                 return body
             case "Monday":
                 if (this.state.mon.open === "00:00" & this.state.mon.close === "00:00" || this.state.mon.open === "" & this.state.mon.close === "") {
-                    body = "<p>We are Closed today, please try again during our normal business hours.</p>"
+                    body = "We are Closed today, please try again during our normal business hours."
                 } else {
                     body = `Monday ${this.state.mon.open}AM - ${this.state.mon.close}PM`
                 }
                 return body
             case "Tuesday":
                 if (this.state.tues.open === "00:00" & this.state.tues.close === "00:00" || this.state.tues.open === "" & this.state.tues.close === "") {
-                    body = "<p>We are Closed today, please try again during our normal business hours.</p>"
+                    body = "We are Closed today, please try again during our normal business hours."
                 } else {
                     body = `Tuesday ${this.state.tues.open}AM - ${this.state.tues.close}PM`
                 }
                 return body
             case "Wednesday":
                 if (this.state.wed.open === "00:00" & this.state.wed.close === "00:00" || this.state.wed.open === "" & this.state.wed.close === "") {
-                    body = "<p>We are Closed today, please try again during our normal business hours.</p>"
+                    body = "We are Closed today, please try again during our normal business hours."
                 } else {
                     body = `Wednesday ${this.state.wed.open}AM - ${this.state.wed.close}PM`
                 }
                 return body
             case "Thursday":
                 if (this.state.thur.open === "00:00" & this.state.thur.close === "00:00" || this.state.thur.open === "" & this.state.thur.close === "") {
-                    body = "<p>We are Closed today, please try again during our normal business hours.</p>"
+                    body = "We are Closed today, please try again during our normal business hours."
                 } else {
                     body = `Thursday ${this.state.thur.open}AM - ${this.state.thur.close}PM`
                 }
                 return body
             case "Friday":
                 if (this.state.fri.open === "00:00" & this.state.fri.close === "00:00" || this.state.fri.open === "" & this.state.fri.close === "") {
-                    body = "<p>We are Closed today, please try again during our normal business hours.</p>"
+                    body = "We are Closed today, please try again during our normal business hours."
                 } else {
                     body = `Friday ${this.state.fri.open}AM - ${this.state.fri.close}PM`
                 }
                 return body
             case "Saturday":
                 if (this.state.sat.open === "00:00" & this.state.sat.close === "00:00" || this.state.sat.open === "" & this.state.sat.close === "") {
-                    body = "<p>We are Closed today, please try again during our normal business hours.</p>"
+                    body = "We are Closed today, please try again during our normal business hours."
                 } else {
                     body = `Saturday ${this.state.sat.open}AM - ${this.state.sat.close}PM`
                 }
                 return body
             default:
-                body = "<p>We are Closed today, please try again during our normal business hours.</p>"
+                body = "We are Closed today, please try again during our normal business hours."
                 return body
         }
 

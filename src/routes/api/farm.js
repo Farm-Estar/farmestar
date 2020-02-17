@@ -136,6 +136,7 @@ farms.post("/addProduce", (req, res) => {
         title: req.body.title,
         description: req.body.description,
         price: req.body.price,
+        measurement: req.body.measurement,
         sku: req.body.sku
     })
 

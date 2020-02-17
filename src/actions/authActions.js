@@ -293,6 +293,7 @@ export const addProduce = (produce_data, history) => dispatch => {
                 title: res.data.title,
                 description: res.data.description,
                 price: res.data.price,
+                measurement: res.data.measurement,
                 sku: res.data.sku
             }
 

@@ -14,9 +14,14 @@ import TitleIcon from '@material-ui/icons/Title';
 import SubtitlesIcon from '@material-ui/icons/Subtitles';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
 
 //Import Actions
-import {addProduce} from '../../actions/authActions'
+import { addProduce } from '../../actions/authActions'
 
 //Import Components
 import AddProduceHeader from './add_produce_header'
@@ -69,25 +74,46 @@ const theme = createMuiTheme({
         },
         MuiButtonLabel: {
             color: 'grey'
+        },
+        MuiPaper: {
+            root:{
+                backgroundColor: 'rgba(255, 255, 255, 1)'
+            }
         }
     }
 })
 
+const measurements = [
+    {
+        value: 'Ibs',
+        label: 'Ibs'
+    },
+    {
+        value: 'Oz',
+        label: 'Oz'
+    },
+    {
+        value: 'Ibs_Oz',
+        label: 'Ibs & Oz'
+    }
+]
+
 class AddProduce extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-            farm_data: {...this.props.location.state},
-            title:"",
+            farm_data: { ...this.props.location.state },
+            title: "",
             description: "",
             price: 0,
             sku: "",
-            errors:{}
+            measurement:"Ibs",
+            errors: {}
         }
     }
 
-    componentDidUpdate(prevProps){
-        if(prevProps !== this.props) {
+    componentDidUpdate(prevProps) {
+        if (prevProps !== this.props) {
             //Persist Errors
             if (this.state.errors !== this.props.errors) {
                 this.setState(this.props)
@@ -96,7 +122,13 @@ class AddProduce extends Component {
     }
 
     onChange = e => {
-        this.setState({ [e.target.id]: e.target.value})
+        this.setState({ [e.target.id]: e.target.value })
+    }
+
+    changeMeasurement = e => {
+        this.setState({
+            measurement: e.target.value
+        })
     }
 
     onSubmit = e => {
@@ -107,6 +139,7 @@ class AddProduce extends Component {
             title: this.state.title,
             description: this.state.description,
             price: this.state.price,
+            measurement: this.state.measurement,
             sku: this.state.sku
         }
 
@@ -121,7 +154,7 @@ class AddProduce extends Component {
             <ThemeProvider theme={theme}>
                 <AddProduceHeader />
                 <div className="container add-produce-container">
-                <form noValidate onSubmit={this.onSubmit}>
+                    <form noValidate onSubmit={this.onSubmit}>
                         <div>
                             <TextField
                                 required
@@ -202,6 +235,28 @@ class AddProduce extends Component {
                             />
                             <span style={{ color: theme.palette.error.main }}>{errors.sku}</span>
                         </div>
+                        <div>
+                            <div>
+                                <TextField
+                                    required
+                                    select
+                                    onChange={this.changeMeasurement}
+                                    id="measurment"
+                                    margin="normal"
+                                    label="Measurment"
+                                    value={this.state.measurement}
+                                    helperText="Please pick your product measurment"
+                                    className={classnames("signup_textfield", {})}
+                                >
+                                    {measurements.map(option => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+                                <span style={{ color: theme.palette.error.main }}></span>
+                            </div>
+                        </div>
                         <div className="signup_button" style={{ paddingLeft: "11.250px" }}>
                             <Button
                                 style={{
@@ -231,4 +286,4 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps, {addProduce})(AddProduce)
+export default connect(mapStateToProps, { addProduce })(AddProduce)

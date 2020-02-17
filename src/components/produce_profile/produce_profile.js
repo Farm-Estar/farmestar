@@ -64,6 +64,11 @@ const theme = createMuiTheme({
         },
         MuiButtonLabel: {
             color: 'grey'
+        },
+        MuiPaper: {
+            root:{
+                backgroundColor: 'rgba(255, 255, 255, 1)'
+            }
         }
     }
 })
@@ -79,6 +84,8 @@ class ProduceProfile extends Component {
             product_details: { ...this.props.location.state.produce_data },
             farm_details: { ...this.props.location.state.farm_data },
             qty: 1,
+            Ibs: 1,
+            Oz: 0,
             total: this.props.location.state.produce_data.price,
             myFarm: this.props.location.state.farm_data.myFarm,
             index: this.props.location.state.produce_data.productIndex
@@ -89,6 +96,19 @@ class ProduceProfile extends Component {
         this.setState({ qty: e.target.value })
         const new_total = this.state.total * e.target.value
         this.setState({ total: new_total })
+    }
+
+    handleIbs = e => {
+        this.setState({ Ibs: e.target.value })
+    }
+
+    handleOz = e => {
+        this.setState({ Oz: e.target.value })
+    }
+
+    handleIbs_Oz = e => {
+        // Need to map by splitting between two Dropdowns
+        // this.setState({ Ibs: e.target.value })
     }
 
     addToCart = () => {
@@ -124,6 +144,7 @@ class ProduceProfile extends Component {
 
     render() {
         let operationButtons
+        let measurementBody
 
         if (this.state.myFarm) {
             //Display Edit & Delete
@@ -161,6 +182,165 @@ class ProduceProfile extends Component {
             operationButtons = null
         }
 
+        switch (this.state.product_details.measurement) {
+            case "Ibs":
+                measurementBody = <div className="product-qty-main-container">
+                <div className="product-qty-text-container">
+                    Ibs:
+                </div>
+                <div classnames="product-qty-form-control-container">
+                    <FormControl className="">
+                        <Select
+                            labelId="Ibs"
+                            id="Ibs"
+                            value={this.state.Ibs}
+                            onChange={this.handleQty}
+                        >
+                            <MenuItem value={0}><em>0</em></MenuItem>
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                            <MenuItem value={5}>5</MenuItem>
+                            <MenuItem value={6}>6</MenuItem>
+                            <MenuItem value={7}>7</MenuItem>
+                            <MenuItem value={8}>8</MenuItem>
+                            <MenuItem value={9}>9</MenuItem>
+                            <MenuItem value={10}>10</MenuItem>
+                            <MenuItem value={11}>11</MenuItem>
+                            <MenuItem value={12}>12</MenuItem>
+                            <MenuItem value={13}>13</MenuItem>
+                            <MenuItem value={14}>14</MenuItem>
+                            <MenuItem value={15}>15</MenuItem>
+                            <MenuItem value={16}>16</MenuItem>
+                            <MenuItem value={17}>17</MenuItem>
+                            <MenuItem value={18}>18</MenuItem>
+                            <MenuItem value={19}>19</MenuItem>
+                            <MenuItem value={20}>20</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
+            </div>
+                break;
+            case "Oz":
+                measurementBody = <div className="product-qty-main-container">
+                <div className="product-qty-text-container">
+                    Oz:
+                </div>
+                <div classnames="product-qty-form-control-container">
+                    <FormControl className="">
+                        <Select
+                            labelId="Oz"
+                            id="Oz"
+                            value={this.state.Oz}
+                            onChange={this.handleOz}
+                        >
+                            <MenuItem value={0}><em>0</em></MenuItem>
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                            <MenuItem value={5}>5</MenuItem>
+                            <MenuItem value={6}>6</MenuItem>
+                            <MenuItem value={7}>7</MenuItem>
+                            <MenuItem value={8}>8</MenuItem>
+                            <MenuItem value={9}>9</MenuItem>
+                            <MenuItem value={10}>10</MenuItem>
+                            <MenuItem value={11}>11</MenuItem>
+                            <MenuItem value={12}>12</MenuItem>
+                            <MenuItem value={13}>13</MenuItem>
+                            <MenuItem value={14}>14</MenuItem>
+                            <MenuItem value={15}>15</MenuItem>
+                            <MenuItem value={16}>16</MenuItem>
+                            <MenuItem value={17}>17</MenuItem>
+                            <MenuItem value={18}>18</MenuItem>
+                            <MenuItem value={19}>19</MenuItem>
+                            <MenuItem value={20}>20</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
+            </div>
+                break;
+            case "Ibs_Oz":
+                measurementBody = <div className="product-qty-main-container">
+                <div className="product-qty-text-container">
+                    Ibs:
+                </div>
+                <div classnames="product-qty-form-control-container">
+                    <FormControl className="">
+                        <Select
+                            labelId="Ibs"
+                            id="Ibs"
+                            value={this.state.Ibs}
+                            onChange={this.handleIbs}
+                        >
+                            <MenuItem value={0}><em>0</em></MenuItem>
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                            <MenuItem value={5}>5</MenuItem>
+                            <MenuItem value={6}>6</MenuItem>
+                            <MenuItem value={7}>7</MenuItem>
+                            <MenuItem value={8}>8</MenuItem>
+                            <MenuItem value={9}>9</MenuItem>
+                            <MenuItem value={10}>10</MenuItem>
+                            <MenuItem value={11}>11</MenuItem>
+                            <MenuItem value={12}>12</MenuItem>
+                            <MenuItem value={13}>13</MenuItem>
+                            <MenuItem value={14}>14</MenuItem>
+                            <MenuItem value={15}>15</MenuItem>
+                            <MenuItem value={16}>16</MenuItem>
+                            <MenuItem value={17}>17</MenuItem>
+                            <MenuItem value={18}>18</MenuItem>
+                            <MenuItem value={19}>19</MenuItem>
+                            <MenuItem value={20}>20</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
+            </div>
+            measurementBody = <div className="product-qty-main-container">
+            <div className="product-qty-text-container">
+                Oz:
+            </div>
+            <div classnames="product-qty-form-control-container">
+                <FormControl className="">
+                    <Select
+                        labelId="Oz"
+                        id="Oz"
+                        value={this.state.Oz}
+                        onChange={this.handleOz}
+                    >
+                        <MenuItem value={0}><em>0</em></MenuItem>
+                        <MenuItem value={1}>1</MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={3}>3</MenuItem>
+                        <MenuItem value={4}>4</MenuItem>
+                        <MenuItem value={5}>5</MenuItem>
+                        <MenuItem value={6}>6</MenuItem>
+                        <MenuItem value={7}>7</MenuItem>
+                        <MenuItem value={8}>8</MenuItem>
+                        <MenuItem value={9}>9</MenuItem>
+                        <MenuItem value={10}>10</MenuItem>
+                        <MenuItem value={11}>11</MenuItem>
+                        <MenuItem value={12}>12</MenuItem>
+                        <MenuItem value={13}>13</MenuItem>
+                        <MenuItem value={14}>14</MenuItem>
+                        <MenuItem value={15}>15</MenuItem>
+                        <MenuItem value={16}>16</MenuItem>
+                        <MenuItem value={17}>17</MenuItem>
+                        <MenuItem value={18}>18</MenuItem>
+                        <MenuItem value={19}>19</MenuItem>
+                        <MenuItem value={20}>20</MenuItem>
+                    </Select>
+                </FormControl>
+            </div>
+        </div>
+                break;            
+            default:
+                break;
+        }
+
 
         return (
             <ThemeProvider theme={theme}>
@@ -177,6 +357,7 @@ class ProduceProfile extends Component {
                             ${this.roundTotal(this.state.product_details.price)}
                         </div>
                     </div>
+                    {measurementBody}
                     <div className="product-qty-main-container">
                         <div className="product-qty-text-container">
                             QTY:

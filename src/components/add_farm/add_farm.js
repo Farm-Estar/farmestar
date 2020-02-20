@@ -295,6 +295,7 @@ class AddFarm extends React.Component {
             zipcode: "",
             state: "",
             farmerType: "",
+            fromModal: props.location.state.fromModal,
             errors: {}
         }
     }
@@ -337,7 +338,7 @@ class AddFarm extends React.Component {
         }
 
         // eslint-disable-next-line react/prop-types
-        this.props.addFarm(newFarm, this.props.history)
+        this.props.addFarm(newFarm, this.state.fromModal, this.props.history)
     }
 
     render() {

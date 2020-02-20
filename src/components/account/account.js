@@ -5,11 +5,16 @@ import propTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import Divider from '@material-ui/core/Divider'
+import Button from '@material-ui/core/Button'
+import EditIcon from '@material-ui/icons/Edit'
+
+//Import Actions
+import { editAccount } from '../../actions/authActions'
 
 //import components
 import AccountHeader from './account_header'
@@ -73,6 +78,12 @@ class Account extends Component {
 
         }
     }
+
+    editProfile = e => {
+        e.preventDefault()
+        this.props.editAccount(this.props.auth.user, this.props.history)
+    }
+
     render() {
         return (
             <div>
@@ -84,7 +95,19 @@ class Account extends Component {
                         </ListItem>
                         <Divider />
                         <ListItem>
-                            <ListItemText primary="More features coming soon..." secondary=""></ListItemText>
+                            <Button
+                            onClick={this.editProfile}
+                                style={{
+                                    width: "90%",
+                                    height: "48pt",
+                                    borderRadius: "3px",
+                                    letterSpacing: "1.5px",
+                                    marginTop: "1rem"
+                                }}
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                            ><EditIcon /> Edit Profile</Button>
                         </ListItem>
                         <Divider />
                     </List>
@@ -95,8 +118,12 @@ class Account extends Component {
     }
 }
 
+Account.propTypes = {
+    editAccount: propTypes.func.isRequired
+}
+
 const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, {})(Account)
+export default connect(mapStateToProps, {editAccount})(Account)

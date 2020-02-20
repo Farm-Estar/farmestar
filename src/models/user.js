@@ -27,6 +27,11 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: false
     },
+    needsFarm: {
+        type: String,
+        required: true,
+        default: true
+    },
     isLegalVerified: {
         type: String,
         default: false

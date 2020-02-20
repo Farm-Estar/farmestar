@@ -216,6 +216,40 @@ export const account = (history) => dispatch => {
     history.push("/account")
 }
 
+//Edit Account Form
+export const editAccount = (userData, history) => dispatch => {
+    history.push("/editAccount")
+}
+
+export const updateAccount = (userData, history) => dispatch => {
+
+    const payload = {
+        name: userData.name,
+        email: userData.email
+    }
+    //Update with a call to the API
+    axios
+        .post("api/users/updateAccount", payload)
+        .then(res => {
+            //Remove token
+            localStorage.removeItem("jwtToken")
+            localStorage.removeItem("persist:root")
+            //Remove Header
+            setAuthToken(false)
+            //Reset User
+            dispatch(setCurrentUser({}))
+            dispatch(clearGuestUser({}))
+            history.push("/")
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        })
+}
+
 //Support
 export const support = (history) => dispatch => {
     history.push("/support")
@@ -471,10 +505,10 @@ export const setPhoneNumber = (chargeData, history) => dispatch => {
                     farmersTotal: 0
                 }
 
-                payload.transactionData.cart.map(function(item){
+                payload.transactionData.cart.map(function (item) {
                     console.log("ITEM Farmer: " + item.farm_details.farmer)
                     console.log("PAYLOAD Farmer: " + payload.farmer)
-                    if(item.farm_details.farmer === payload.farmer){
+                    if (item.farm_details.farmer === payload.farmer) {
                         console.log("Inside Statement with farmTotal: " + payload.farmersTotal)
                         payload.farmersTotal = payload.farmersTotal + item.total
                         console.log("Farmer Total After Equation: " + payload.farmersTotal)
@@ -486,9 +520,9 @@ export const setPhoneNumber = (chargeData, history) => dispatch => {
                     .then(res => {
                         const payload = {
                             farmer: farmer,
-                            transactionData: { 
+                            transactionData: {
                                 ...chargeData
-                             }
+                            }
                         }
 
                         //Make Call to Send Consumer Email
@@ -529,7 +563,6 @@ export const clearCart = (payload) => dispatch => {
         payload: payload
     })
 }
-
 
 //Checkout Continue Shopping
 export const continueShopping = (history) => dispatch => {

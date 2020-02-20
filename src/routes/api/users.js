@@ -98,6 +98,7 @@ users.post("/login", (req, res) => {
         },
         token: "",
         isFarmer: "",
+        needsFarm:"",
         success: false,
         farms: [],
         produce: [],
@@ -110,12 +111,14 @@ users.post("/login", (req, res) => {
             if (!user) {
                 return res.status(404).json({ emailnotfound: "Email not found" })
             }
+            console.log(JSON.stringify(user))
 
             //Set User Details
             payload.user.id = user.id
             payload.user.name = user.name
             payload.user.email = user.email
             payload.user.isFarmer = user.isFarmer
+            payload.user.needsFarm = user.needsFarm
 
 
             //Verify Password

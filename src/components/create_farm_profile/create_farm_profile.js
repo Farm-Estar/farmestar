@@ -86,8 +86,14 @@ class CreateFarmProfile extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            farmer: props.location.state.farmerId,
-            farm: props.location.state.farmId,
+            farmer: props.location.state.farmer,
+            farmName: props.location.state.farmName,
+            address: props.location.state.address,
+            city: props.location.state.city,
+            state: props.location.state.state,
+            zipcode: props.location.state.zipcode,
+            farmerType: props.location.state.farmerType,
+            fromModal: props.location.state.fromModal,
             displayName: "",
             description: "",
             image:"",
@@ -133,14 +139,19 @@ class CreateFarmProfile extends React.Component {
 
         const profile = {
             farmer: this.state.farmer,
-            farm: this.state.farm,
+            farmName: this.state.farmName,
+            address: this.state.address,
+            city: this.state.city,
+            state: this.state.state,
+            zipcode: this.state.zipcode,
+            farmerType: this.state.farmerType,
             displayName: this.state.displayName,
             description: this.state.description,
             imageUrl: this.state.imageUrl
         }
 
         // eslint-disable-next-line react/prop-types
-        this.props.addProfile(profile, this.props.history)
+        this.props.addProfile(profile, this.state.fromModal, this.props.history)
     }
 
 

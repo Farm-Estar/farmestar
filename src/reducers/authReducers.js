@@ -12,7 +12,7 @@ import {
     EDIT_PRODUCT,
     CLEAR_CART
 } from '../actions/types'
-import {REHYDRATE, PERSIST} from 'redux-persist/es/constants'
+import { REHYDRATE, PERSIST } from 'redux-persist/es/constants'
 
 
 const isEmpty = require("is-empty")
@@ -23,13 +23,13 @@ const initialState = {
     user: {},
     farms: [],
     reviews: [],
-    profiles:[],
-    produce:[],
+    profiles: [],
+    produce: [],
     cart: [],
     loading: false
 }
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
     switch (action.type) {
         case SET_CURRENT_USER:
             return {
@@ -40,10 +40,10 @@ export default function(state = initialState, action) {
                 produce: action.payload.produce,
                 reviews: action.payload.reviews,
                 profiles: action.payload.profiles,
-                cart:[]
+                cart: []
             }
         case SET_GUEST_USER:
-            return{
+            return {
                 ...state,
                 isAuthenticated: !isEmpty(action.payload),
                 user: action.payload.user,
@@ -51,12 +51,12 @@ export default function(state = initialState, action) {
                 farms: action.payload.farms,
                 produce: action.payload.produce,
                 profiles: action.payload.profiles,
-                cart:[]
+                cart: []
             }
         case CLEAR_GUEST_USER:
-            return{
+            return {
                 isGuest: false
-            }            
+            }
         case USER_LOADING:
             return {
                 ...state,
@@ -79,7 +79,7 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 produce: [...state.produce, action.payload],
-                loading:true
+                loading: true
             }
         case EDIT_PRODUCT:
             // eslint-disable-next-line no-case-declarations
@@ -97,28 +97,32 @@ export default function(state = initialState, action) {
                     }
                 }),
                 loading: true
-            }     
+            }
         case REMOVE_PRODUCT:
-            // eslint-disable-next-line no-case-declarations
-            const rmindex = action.payload.product_index
-            // eslint-disable-next-line no-case-declarations
-            let newProduce = [...state.produce]
-            newProduce.splice(rmindex, 1)
+            //   const { product_index } = action.payload
             return {
                 ...state,
-               produce: newProduce,
+                produce: state.produce.filter((item, index) => action.payload !== index),
                 loading: true
-                 // produce: [
-                //     ...state.produce.slice(0, rmindex + 1),
-                //     ...state.produce.slice(rmindex + 1)
-                // ],
             }
         case CLEAR_CART:
-            return  {
+            return {
                 ...state,
                 cart: []
-            }                         
+            }
         default:
-            return state        
+            return state
     }
 }
+
+// case REMOVE_PRODUCT:
+        //     // eslint-disable-next-line no-case-declarations
+        //     const rmindex = action.payload.product_index
+        //     // eslint-disable-next-line no-case-declarations
+        //     let newProduce = [...state.produce]
+        //     newProduce.splice(rmindex, 1)
+        //     return {
+        //         ...state,
+        //        produce: newProduce,
+        //        loading: true
+        //     }

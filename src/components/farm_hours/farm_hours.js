@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react'
 import './farm_hours.css'
 import TimePicker from 'react-time-picker'
@@ -105,7 +106,8 @@ class FarmHours extends Component {
                 open:"00:00",
                 close:"00:00"
             },
-            hoursSet: false
+            hoursSet: false,
+            fromModal: props.location.state.fromModal
         }
     }
 
@@ -218,7 +220,7 @@ class FarmHours extends Component {
         }
 
         // eslint-disable-next-line react/prop-types
-        this.props.setHours(payload, this.props.history)
+        this.props.setHours(payload, this.state.fromModal, this.props.history)
     }
 
     render() {
@@ -350,8 +352,8 @@ class FarmHours extends Component {
                     type="submit"
                     variant="contained"
                     color="primary"
-                    disabled={this.state.hoursSet === false}
                 >CONTINUE</Button>
+                {/* disabled={this.state.hoursSet === false} */}
                 </div>
             </ThemeProvider>
         )

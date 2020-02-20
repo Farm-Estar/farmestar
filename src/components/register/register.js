@@ -11,10 +11,10 @@ import classnames from 'classnames'
 import { withRouter } from 'react-router-dom'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
-import InputAdornment from '@material-ui/core/InputAdornment';
-import PersonIcon from '@material-ui/icons/Person';
-import LockIcon from '@material-ui/icons/Lock';
-import EmailIcon from '@material-ui/icons/Email';
+import InputAdornment from '@material-ui/core/InputAdornment'
+import PersonIcon from '@material-ui/icons/Person'
+import LockIcon from '@material-ui/icons/Lock'
+import EmailIcon from '@material-ui/icons/Email'
 
 //Import Components
 import SignupHeader from './register_header'

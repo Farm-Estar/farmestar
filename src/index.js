@@ -45,6 +45,7 @@ import PrivateRoute from './components/private-route/private-route'
 import Terms from './components/term_policies/terms';
 import EditProduct from './components/edit_product/edit_product'
 import PaymentSuccess from './components/payment_success/payment_success'
+import EditAccount from './components/editAccount/editAccount'
 
 
 //Firebase Configuration
@@ -120,6 +121,7 @@ const routing = (
                             </Route>
                             <Route exact path="/paymentSuccess" component={PaymentSuccess} />
                             <Route exact path="/editProduct" component={EditProduct} />
+                            <Route exact path="/editAccount" component={EditAccount} />
                             <Route component={NotFound} />
                         </Switch>
                     </div>

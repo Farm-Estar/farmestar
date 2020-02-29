@@ -7,7 +7,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const WorkboxPlugin = require("workbox-webpack-plugin");
 module.exports = {
   entry: {
-    main: './src/index.js',
+    main: ['babel-polyfill', './src/index.js'],
     'OneSignalSDKUpdaterWorker': path.resolve('./src/OneSignalSDKUpdaterWorker.js'),
     'OneSignalSDKWorker': path.resolve('./src/OneSignalSDKWorker.js')
   },
@@ -15,6 +15,11 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
     filename: '[name].js'
+  },
+  resolve: {
+    alias: {
+      Assets: path.resolve(__dirname, 'src/assets/images/')
+    }
   },
   target: 'web',
   devtool: 'source-map',
@@ -44,11 +49,11 @@ module.exports = {
       }
     },
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true // set to true if you want JS source maps
-      }),
+      // new UglifyJsPlugin({
+      //   cache: true,
+      //   parallel: true,
+      //   sourceMap: true // set to true if you want JS source maps
+      // }),
       new OptimizeCSSAssetsPlugin({})
     ]
   },
@@ -71,20 +76,17 @@ module.exports = {
         ]
       },
       {
-        test: /\.jpg$/,
-        use: [{ loader: "url-loader" }]
-      },
-      {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
+      { test: /\.(png|svg|jpg|gif)$/, use: ['file-loader'] }
     ]
   },
   plugins: [
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html",
-      favicon: "./src/favicon.ico"
+      favicon: "./src/assets/images/favicon.ico"
     }),
     new WorkboxPlugin.GenerateSW({
       clientsClaim: true,
@@ -95,9 +97,9 @@ module.exports = {
       chunkFilename: "[id].css"
     }),
     new WebpackPwaManifest({
-      name: 'App Name',
-      short_name: 'App Short Name',
-      description: 'Your Description Here',
+      name: 'Farmestar',
+      short_name: 'Farmestar',
+      description: 'Bringing farmers and consumers together.',
       start_url: '/',
       background_color: '#ffffff',
       theme_color: '#ffffff',

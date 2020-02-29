@@ -8,6 +8,8 @@ var passport = require("passport")
 
 //APi Imports
 import { users } from "../routes/api/users";
+import { version } from "../routes/api/app";
+import { farms } from "../routes/api/farm";
 
 const __dirname = './dist/';
 // const db = require("../config/keys").mongoURI;
@@ -17,15 +19,13 @@ const _appAuthKey = require("../config/keys").appAuthKey;
 const _appId = require("../config/keys").appId;
 
 //Setup Database
-mongoose.connect(mongoURI, { useNewUrlParser: true, autoIndex: false, useUnifiedTopology: true})
-.then(() => console.log("MongoDB Successfully Connected"))
-.catch(err => console.log(err));
+mongoose.connect(mongoURI, { useNewUrlParser: true, autoIndex: false, useUnifiedTopology: true })
+    .then(() => console.log("MongoDB Successfully Connected"))
+    .catch(err => console.log(err));
 
-const app = express(),
-            DIST_DIR = __dirname,
-            HTML_FILE = path.join(DIST_DIR, 'index.html')
+const app = express()
 
-app.use(express.static(DIST_DIR))
+app.use(express.static(__dirname))
 
 //Cookie Parser Middleware
 app.use(cookieParser())
@@ -38,11 +38,18 @@ app.use(bodyParser())
 //OneSignal Client
 var notificationClient = new OneSignal.Client({
     userAuthKey: _userAuthKey,
-    app: { appAuthKey: _appAuthKey, appId: _appId}
+    app: { appAuthKey: _appAuthKey, appId: _appId }
 })
 
-app.get('*', (req, res) => {
-    res.sendFile(HTML_FILE)
+
+//Igedla API Routes
+app.use('/api/users', users)
+app.use('/api/app', version)
+app.use('/api/farm', farms)
+
+
+app.all('*', (req, res) => {
+    res.sendFile('/index.html', { root: __dirname })
 })
 
 const PORT = process.env.PORT || 8080
@@ -50,8 +57,7 @@ app.listen(PORT, () => {
     console.log(`***Server running on Port:${PORT}***`)
 })
 
-//Igedla API Routes
-app.use('/api/users', users)
+
 
 //OneSignal Test Function
 function testNotification() {
@@ -64,10 +70,10 @@ function testNotification() {
     })
 
     notificationClient.sendNotification(test)
-    .then((response) => {
-        console.log(response.data, response.httpResponse.statusCode)
-    })
-    .catch((err) => {
-        console.log('Something went wrong...', err)
-    })
+        .then((response) => {
+            console.log(response.data, response.httpResponse.statusCode)
+        })
+        .catch((err) => {
+            console.log('Something went wrong...', err)
+        })
 }

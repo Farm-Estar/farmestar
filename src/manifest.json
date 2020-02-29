@@ -1,6 +1,6 @@
 {
-  "short_name": "app short name",
-  "name": "App Name",
+  "short_name": "Farmestar",
+  "name": "Farmestar",
   "icons": [
     {
       "src": "./src/favicon.ico",

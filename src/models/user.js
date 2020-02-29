@@ -1,17 +1,40 @@
 import mongoose from 'mongoose'
+import uniqueValidator from 'mongoose-unique-validator'
 
-const userShema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
     },
+    lastName: {
+        type: String,
+        required: false
+    },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
+    },
+    phone: {
+        type: String,
     },
     password: {
         type: String,
         required: true
+    },
+    isFarmer: {
+        type: String,
+        required: true,
+        default: false
+    },
+    needsFarm: {
+        type: String,
+        required: true,
+        default: true
+    },
+    isLegalVerified: {
+        type: String,
+        default: false
     },
     date: {
         type: Date,
@@ -19,4 +42,6 @@ const userShema = new mongoose.Schema({
     }
 });
 
-export const User = mongoose.model('users', userShema);
+userSchema.plugin(uniqueValidator)
+
+export const User = mongoose.model('users', userSchema);
